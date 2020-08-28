@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>添加css类和删除</title>
+    <script src="../jquery-3.0.0.min.js"></script>
+  </head>
+  <style></style>
+  <body>
+    <button>通过css()方法设置属性</button>
+    <i>啦啦啦啦</i>
+    <p>我是一段文本哎呀呀呀呀</p>
+    <p>我是另外一段文本噢噢噢噢</p>
+  </body>
+  <script>
+    $("button").click(function () {
+      //返回color属性,这里只返回了第一个p的颜色
+      alert($("p").css("color"));
+      //设置bgcolor属性
+      $("p").css("background-color", "pink");
+      //也可设置多个属性
+      //p的父级的第三个子元素为p的
+      $("p:nth-child(3)").css("font-size", "2em", "font-wight", "700");
+      //用nth-child()过于麻烦，可以使用eq(N) N为索引 从0开始
+      $("p").eq(1).css("font-size", "1.2em");
+    });
+  </script>
+</html>

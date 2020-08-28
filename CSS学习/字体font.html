@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font 字体设置</title>
+</head>
+<style>
+    body{
+       /*  font-size: 100%; 对应 1em=16px */
+        font-size: 62.5%; /* 对应 1em=10px; 方便后面px到em的换算 */
+    }
+</style>
+<body>
+    <h3 style="font-size: 4em;">字体大小，用em来设置,在body中设置了1em=10px</h3>
+    <p style="font-size: 3em;">这是一段话 3em</p>    <!-- 30px -->
+    <p style="font-size: 2em;">这是一段话 2em</p>    <!-- 20px -->
+    <p style="font-size: 1em;">这是一段话 1em</p>    
+
+    <div style="font-size: 3em; width: 1000px; background-color: rosybrown;">
+    <p style="font-size: 1em;">此段文字设置的font-size=1em.这段话的父级是div，div设置了font-size是3em。所以这段文字设置的1em=30px</p>
+      <!-- em会继承父级元素字体大小，所以 上面的p的字体大小1em是30px; 要注意-->
+    </div>  <hr />
+
+    <h3 style="font-size: 4em;">文本字体系列 字体样式 粗细 字体的转变</h3>
+    <p style="font-size: 2em;font-family: Arial, Helvetica, sans-serif;">文本字体是宋体</p>
+    <p style="font-style: italic; font-weight: bold;font-size: 2em;">文本是斜体加粗</p>
+    <p style="font-size: 2em;">this is a apple.</p>
+    <p style="font-variant: small-caps;font-size: 2em;" >英文变成小型大写  this is a apple.</p>
+
+
+</body>
+</html>

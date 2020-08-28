@@ -1,0 +1,8 @@
+@font-face{
+    font-family:名称
+    src:url() 文件url
+    font-stretch:定义如何拉伸
+    font-weight:粗细
+    font-style:样式
+    unicode-range:unicode字体范围
+}

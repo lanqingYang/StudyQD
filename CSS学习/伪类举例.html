@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伪类选择器</title>
+</head>
+<style>
+    p:first-child{/* 所有p为第一个子元素的  这里1，2，8 */
+        color: rgb(235, 223, 98);
+    }
+    p:last-child{   /* 所有p为最后一个子元素的 这里5，8  */
+        color: rgb(94, 247, 94);
+    }
+
+    p:first-of-type{/* 所有p为第一个子元素的  1，2，8      和first-child类似*/
+        border:1px solid plum;
+    }
+    p:last-of-type{/* 所有p为最后子元素的 5，8      和last-child类似*/
+        border:1px solid sandybrown;
+    }
+
+    p:nth-child(3){    /* p的父级 body div article的第三个子元素，且子元素要为p才能被选中   4，6   */
+        background-color: slateblue;
+    }
+    p:nth-last-child(4){ /* p的父级 body div article的倒数第三个子元素，且元素要为p，这里body的倒数第四个是div 所以不选中   2   */
+        background-color: tomato;
+    }
+    p:nth-of-type(3){/*p的父级 body div article的第三个p元素  4，7   */
+        outline:2px dashed turquoise;
+    }
+    p:only-of-type{/* 仅有一个子元素为p的元素 */
+        outline: 2px dashed steelblue;
+    }
+</style>
+<body>
+    <p>第1个p</p>
+    <div style="width: 200px ;height:200px ;border:1px solid black;">
+        <p>div中第一个p  2</p>
+        <p>div中第二个p  3</p>
+        <p>div中第三个p  4</p>
+        <p>div中第四个p  5</p>
+    </div>
+    <p>第三个p  6</p>
+    <p>第四个p  7</p>
+    <article><p>article中的p 8</p></article>
+</body>
+</html>

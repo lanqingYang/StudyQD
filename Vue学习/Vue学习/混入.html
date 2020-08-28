@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>混入</title>
+  </head>
+  <body>
+    <p>
+      混入mixins定义了一部分可复用的方法或计算属性。混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被混入该组件本身的选项
+    </p>
+    <br />
+    <hr />
+    <!-- 一个简单实例 -->
+    <div id="app1"></div>
+    <!-- 组件和混入对象含有同名选项，会以恰当的方式混合 -->
+    <div id="app2">
+      <p>如果methods中有同名函数，vue实例优先级更高</p>
+    </div>
+    <!-- 全局混入 -->
+  </body>
+  <!-- 全局混入 -->
+  <script>
+    //options。它是一个对象。可以选择如下选项：
+
+    //   data函数成员
+
+    // methods对象成员
+
+    // 模板template
+
+    // 挂载元素el
+
+    // 生命周期钩子
+
+    // props属性声明
+
+    // computed计算成员
+
+    // watch监视成员
+    Vue.mixin({
+      created: function () {
+        // console.log(this.$options);
+        var myOption = this.$options.myOption;
+        if (myOption) {
+          document.write(myOption + "<br />");
+        }
+      },
+    });
+    //为自定义选项myOption注入上述的处理器
+    new Vue({
+      myOption: "hello",
+    });
+  </script>
+  <!-- 2.选项合并 -->
+  <script>
+    //创建一个混入对象
+    var mixin = {
+      created: function () {
+        document.write("混入调用" + "<br />");
+      },
+      methods: {
+        helloworld: function () {
+          document.write("hello,world!" + "<br/>");
+        },
+        samemethod: function () {
+          document.write("minxin相同方法名" + "<br />");
+        },
+      },
+    };
+    var vm1 = new Vue({
+      //   el: "#app1",
+      mixins: [mixin],
+      created: function () {
+        document.write("组件调用" + "<br/>");
+      },
+      methods: {
+        samemethod: function () {
+          document.write("vue实例相同方法名" + "<br />");
+        },
+      },
+    });
+
+    vm1.helloworld();
+    vm1.samemethod();
+  </script>
+  <script>
+    //简单实例
+    var vm = new Vue({
+      el: "#app1",
+      data: {},
+      methods: {},
+    });
+    //定义一个混入对象
+    var myMinxin = {
+      created: function () {
+        this.startmixin();
+      },
+      methods: {
+        startmixin: function () {
+          document.write("欢迎进入混入实例");
+        },
+      },
+    };
+    var Component = Vue.extend({
+      mixins: [myMinxin],
+    });
+    var component = new Component();
+  </script>
+</html>

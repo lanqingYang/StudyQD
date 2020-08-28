@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按钮样式</title>
+</head>
+<style>
+    .button{
+        display: inline-block;
+        width: 100px;
+        height: 3em;
+        background-color:tomato;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        line-height: 3em;
+    }
+    .disabled{
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    .two,.three{
+        border-radius: 6px;
+        border: 1px solid chocolate;
+        width: 120px;
+        font-size: 1.2em;
+        position: relative;
+    }
+
+    .two span{
+        position: relative;
+        transition: all 1s;
+    }
+    .two span:after{
+        content: '》';
+        opacity: 0;
+        position: absolute;
+        right: -26px;
+        top: -0.8em;
+    }
+    .two:hover span{
+        margin-left: -10px;
+    }
+    .two:hover span:after{
+        opacity: 1;
+    }
+    .three{
+        box-shadow: 2px 2px 4px gray;
+    }
+    .three:active{
+        transform: translateY(2px);
+        background-color: rgb(216, 71, 45);
+    }
+</style>
+<body>
+    <button>正常按钮</button>
+    <input type="button" value="input按钮" >
+    <a href="" class="button">a链接按钮</a>
+
+
+    <a href="#" class="button one disabled">禁用按钮</a>
+    <hr />
+    <h3>按钮动画</h3>
+    <a href="#" class="button two"> <span> Hover </span></a>
+    <hr />
+    <h3>按压效果</h3>
+    <a href="#" class="button three"> <span> Hover </span></a>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件冒泡</title>
+    <script src="../jquery-3.0.0.min.js"></script>
+  </head>
+  <style>
+    div {
+      background: sandybrown;
+      height: 50px;
+    }
+    p {
+      background: seagreen;
+    }
+    span {
+      background: steelblue;
+    }
+    hr {
+      margin-top: 20px;
+    }
+  </style>
+  <body>
+    <h2>事件冒泡</h2>
+    <div>
+      这是div里面的内容
+      <p>这是p标签里的内容<span>这是span标签里的内容</span></p>
+    </div>
+    <hr />
+    <!-- 阻止事件冒泡 -->
+    <h2>阻止事件冒泡</h2>
+    <div class="two">
+      这是div里面的内容
+      <p>这是p标签里的内容<span>这是span标签里的内容</span></p>
+    </div>
+    <hr />
+  </body>
+  <!-- 事件冒泡 点击span， p，div也会被点击 -->
+  <script>
+    $(function () {
+      //div:first 所有div的第一个div元素
+      $("div:first").click(function () {
+        alert("点击了div");
+      });
+      //p:first-child p的父级之下的第一个p元素
+      $("p:first").click(function () {
+        alert("点击了p");
+      });
+      //span:first-child(1) span的父级之下的第一个span元素
+      $("span:first").click(function () {
+        alert("点击了span");
+      });
+    });
+  </script>
+  <!-- 阻止事件冒泡 -->
+  <script>
+    $(function () {
+      $(".two").click(function () {
+        alert("点击了div");
+      });
+
+      $(".two p").click(function (event) {
+        event.stopPropagation();
+        alert("点击了p");
+      });
+
+      $(".two span").click(function (event) {
+        //阻止冒泡函数
+        event.stopPropagation();
+        console.log("1");
+        alert("点击了span");
+      });
+    });
+  </script>
+</html>

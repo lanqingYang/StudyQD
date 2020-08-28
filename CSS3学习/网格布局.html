@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网格布局12列</title>
+</head>
+<style>
+    .col-1{width:8.33%}
+    .col-2{width:16.66%}
+    .col-3{width:25%}
+    .col-4{width:33.33%}
+    .col-5{width:41.66%}
+    .col-6{width:50%}
+    .col-7{width:58.33%}
+    .col-8{width:66.66%}
+    .col-9{width:75%}
+    .col-10{width:83.33%}
+    .col-11{width:91.66%}
+    .col-12{width:100%}
+
+    *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    [class*="col-"]{
+        float: left;
+/*         border:2px solid gray;
+ */    padding:15px;
+ }
+    
+    .head{
+        background-color: pink;
+        padding: 10px;
+    }
+    .head h1{
+        color: white;
+    }
+
+    .row{
+        background-color: rgb(179, 175, 175);
+    }
+
+    .menu ul{
+        list-style-type: none;
+    }
+    .menu li{
+        padding: 20px;/* 不用设置宽高，用pading来撑起来 */
+        background-color: gray;
+        margin-bottom: 8px;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+    .menu li:hover{
+        background-color:rgb(94, 94, 94);
+    }
+    .article p{
+        margin-top: 20px;
+    }
+
+</style>
+
+<body>
+    <header class="head">
+        <h1>小说</h1>
+    </header>
+    <div class="row">
+        <div class="col-3 menu">
+            <ul>
+                <li>玄幻</li>
+                <li>游戏</li>
+                <li>架空</li>
+                <li>悬疑</li>
+            </ul>
+        </div>
+        <div class="col-9 article">
+            <h1>详情描述</h1>
+            <p>Youth小可爱Youth小可爱Youth小可爱Youth小可爱Youth小可爱Youth小可爱
+                Youth小可爱Youth小可爱Youth小可爱Youth小可爱Youth小可爱Youth小可爱
+                Youth小可爱Youth小可爱Youth小可爱Youth小可爱Youth小可爱Youth小可爱
+            </p>
+            <p>
+                祁醉又不当人了祁醉又不当人了祁醉又不当人了祁醉又不当人了祁醉又不当人了
+                祁醉又不当人了祁醉又不当人了祁醉又不当人了祁醉又不当人了祁醉又不当人了
+            </p>
+        </div>
+    </div>
+</body>
+</html>

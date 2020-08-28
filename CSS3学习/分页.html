@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分页</title>
+</head>
+<style>
+    a{
+        text-decoration: none;
+    }
+    .fenye-ul{
+        list-style-type: none;
+    }
+    .fenye-ul li{
+        float: left;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+    }
+    .active a{
+        background-color: rgb(255, 128, 43);
+        color: white;
+        border-radius: 4px;
+    }
+
+    .fenye-ul li a{
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        color: black;
+        border-radius: 4px;
+        transition: 0.5s;
+    }
+    .fenye-ul li a:hover{
+        background-color: gray;
+        color: white;
+
+    }
+
+
+    .fenye-ul.two li a{
+        border: 1px solid gray;
+        border-radius: 0;
+    }
+    .fenye-ul.two li a.active-a{             /* 这种写法才能去掉边框!!! */
+        border: 1px solid rgb(255, 128, 43);  
+    }
+    .fenye-ul.two li{
+        margin-right: 4px;
+    }
+</style>
+<body>
+    <h3>分页+圆角</h3>
+    <ul class="fenye-ul">
+        <li> <a href="#">&lt&lt</a></li>
+        <li> <a href="#" >1</a></li>
+        <li class="active"> <a href="#" >2</a></li>
+        <li> <a href="#">3</a></li>
+        <li> <a href="#">4</a></li>
+        <li> <a href="#">5</a></li>
+        <li> <a href="#">6</a></li>
+        <li> <a href="#">7</a></li>
+        <li> <a href="#">&gt&gt</a></li>
+    </ul>
+    <hr style="clear: both;"/>
+
+    <h3>带边框分页</h3>
+    <ul class="fenye-ul two">
+        <li> <a href="#">&lt&lt</a></li>
+        <li> <a href="#" >1</a></li>
+        <li class="active two"> <a href="#" class="active-a" >2</a></li>
+        <li > <a href="#">3</a></li>
+        <li> <a href="#">4</a></li>
+        <li> <a href="#">5</a></li>
+        <li> <a href="#">6</a></li>
+        <li> <a href="#">7</a></li>
+        <li> <a href="#">&gt&gt</a></li>
+    </ul>
+</body>
+</html>

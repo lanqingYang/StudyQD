@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>自定义组件的v-model</title>
+  </head>
+  <body>
+    <!-- @input 一般用于监听事件只要输入的值变化了就会触发input -->
+    <!-- 更改子组件的值能实时更新父组件的值 -->
+    <p>组件上的v-model默认利用名为value的prop和名为input的事件@input</p>
+    <hr />
+    <!-- 1.文本框 -->
+    <div id="app">
+      <runoob-input v-model="num"></runoob-input>
+      <p>输入的数字为{{num}}</p>
+    </div>
+
+    <!-- 2.单选框、复选框 -->
+    <p>
+      v-model默认传的是value，不是checked，所以对单选框和复选框的组件，需要使用model选项，指定当前事件类型和传入的props
+    </p>
+
+    <div id="app2">
+      <base-checkbox v-model="lovingVue"></base-checkbox>
+      <div v-show="lovingVue">点击后显示</div>
+    </div>
+  </body>
+
+  <!-- 2.单、复选框 -->
+  <script>
+    Vue.component("base-checkbox", {
+      model: {
+        prop: "checked", //绑定数据为checked
+        event: "change", //onchange事件
+      },
+      props: {
+        checked: Boolean, //定制prop的验证方式，为props中的值提供带有验证需求的对象，而不是字符串数组，多个可以用[String，Number，...]这种数组形式
+      },
+      template: `
+      <input type="checkbox" v-bind:checked="checked" v-on:change="$emit('change',$event.target.checked)">
+      `,
+    });
+    new Vue({
+      el: "#app2",
+      data: {
+        lovingVue: true,
+      },
+    });
+  </script>
+
+  <!-- 文本框 -->
+  <script>
+    Vue.component("runoob-input", {
+      template:
+        //   ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。
+        // 如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例：
+        `<p><input ref="input" :value="value" @input="$emit('input',$event.target.value)"></p>`,
+      props: ["value"],
+    });
+    new Vue({
+      el: "#app",
+      data: {
+        num: 100,
+      },
+    });
+  </script>
+</html>

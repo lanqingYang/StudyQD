@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>循环语句</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ol>
+        <!-- 源数据是数组 -->
+        <li v-for="a in sites">{{a.name}}</li>
+      </ol>
+
+      <!-- 源数据是对象 -->
+      <ol>
+        <li v-for="value in object">{{value}}</li>
+      </ol>
+
+      <!-- 源数据是对象，key，value，索引  -->
+      <ol>
+        <li v-for="(value,key,index) in object">
+          {{index}}.{{key}}:{{value}}
+        </li>
+      </ol>
+      <!-- 循环整数 -->
+      <ol>
+        <li v-for="i in 5">{{i}}</li>
+      </ol>
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        sites: [{ name: "Runoob" }, { name: "Goole" }, { name: "Taobao" }],
+        object: {
+          name: "baidu",
+          url: "www.baidu.com",
+          slogan: "百度一下，你就知道",
+        },
+      },
+    });
+  </script>
+</html>

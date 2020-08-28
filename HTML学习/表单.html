@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单</title>
+</head>
+<body>
+    <h3>登陆</h3>
+    <form action="get">
+        username：<input type="text" > <br />
+        password:  <input type="password"> <br />
+        <input type="submit">
+        <input type="reset">
+    </form>
+
+    <h3>单选按钮</h3>
+    <p>您的性别是：</p>
+    <form action="get">
+        <input type="radio" checked>男
+        <input type="radio">女
+    </form>
+
+    <h3>复选框</h3>
+    <p>您的爱好是：</p>
+    <form action="get">
+        <input type="checkbox" checked>画画
+        <input type="checkbox">拍摄
+        <input type="checkbox">跳舞
+    </form>
+
+    <h3>下拉列单</h3>
+    <p>您所在的学校是</p>
+    <select name="shool" id="">
+        <option value="工商大学">工商大学</option>
+        <option value="邮电大学" selected> 邮电大学</option>
+        <option value="重庆大学">重庆大学</option>
+    </select>
+
+    <h3>文本域</h3>
+    <p>个人介绍</p>
+    <textarea name="" id="" cols="30" rows="10">个人介绍</textarea>
+
+    <h3>普通按钮</h3>
+    <input type="button" value="input设置的按钮" style="border-radius:30%">
+    <button style="border-radius:5px">button设置的按钮</button>
+    <abbr title="this is abbr">abbr</abbr>
+</body>
+</html>

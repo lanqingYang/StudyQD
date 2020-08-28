@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新表单属性</title>
+</head>
+<body>
+    <h3>自动聚焦，palceholder，required,list,formnovalidate，formaction</h3>
+    <form action="1">
+        姓名：<input type="text" placeholder="李华" required autofocus>  <!-- 不允许为空，自动聚焦 -->
+        年龄：<input type="text" min="18" require placeholder="年龄在18以上">
+        学校：<input type="text" list="schools" placeholder="重庆理工大学">
+             <datalist id="schools">
+                <option value="重庆邮电大学"></option>
+                <option value="重庆理工大学"></option>
+                <option value="重庆工商大学"></option>
+             </datalist> 
+             最喜欢喜欢的英文字母：<input type="text" pattern="[A-Za-z]{1}">
+        <input type="submit" value="正常提交"><!-- 提交到1中 -->
+        <input type="submit" value="不验证提交" novalidate formaction="2"><!-- 提交到2中 -->
+    </form>
+
+    
+</body>
+</html>

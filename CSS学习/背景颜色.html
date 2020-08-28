@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>背景设置</title>
+</head>
+<style>
+    body{
+        background-image:url(../practise-pic/chicken.jpg);
+    }
+    div{
+        height: 400px;
+        width: 600px;
+        background-image: url(../practise-pic/chicken.jpg);
+
+    }
+    .div1{
+        background-repeat: no-repeat;
+    }
+    .div2{
+        background-repeat: repeat-x;
+    }
+    .div3{
+        background-repeat: repeat-y;             
+    }
+    .div4{
+        background-position:top right;
+        background-repeat: no-repeat;
+    }
+
+</style>
+
+<body>
+    <h3>不平铺</h3>   
+    <div class="div1"></div><hr />
+
+    <h3>水平平铺与垂直平铺</h3>
+    <p>水平：</p><div class="div2"></div>
+    <hr />
+    <p>垂直：</p><div class="div3"></div><hr />
+
+    <h3>改变图像位置</h3>
+    <div class="div4"></div>
+</body>
+</html>

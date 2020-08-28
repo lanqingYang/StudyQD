@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web 存储</title>
+</head>
+<body>
+    <h3>使用localStorage(长久)，sessionStorage（临时）</h3>
+
+    <button onclick="clickCounter1()">计数器1-LS，点我</button>
+    <div id="result1"></div>
+    <p>点击按钮，查看点击次数</p>
+    <p>关闭窗口再打开，计数器1继续计数</p>
+    <script>
+        function clickCounter1(){
+            if( typeof(Storage!="undefined")){
+                if(localStorage.clickcount){
+                    localStorage.clickcount=Number(localStorage.clickcount)+1;
+                 }else{
+                    localStorage.clickcount=1;
+                }
+            document.getElementById("result1").innerHTML="你已经点击了计数器1"+localStorage.clickcount+"次";
+            } else{
+                document.getElementById("result1").innerHTML="对不起，你的浏览器不支持web存储";
+            }
+        }
+        
+    </script>
+    
+
+    <button onclick="clickCounter2()">计数器2-SS</button>
+    <div id="result2"></div>
+    <p>关闭页面再打开，将计数器2将重新计数</p>
+    <script>
+        function clickCounter2(){
+            if(Storage!=="undifined"){
+                if(sessionStorage.clickcount){
+                    sessionStorage.clickcount=Number(sessionStorage.clickcount)+1;
+                }else{
+                    sessionStorage.clickcount=1;
+               }
+               document.getElementById("result2").innerHTML="你已经点击了计数器2"+sessionStorage.clickcount+"次";
+             }else{
+                 document.getElementById("result2").innerHTML="对不起，你的浏览器不支持web存储";
+             }
+        }
+    </script>
+
+    <h3>Web Storage一个简单的网站列表程序</h3>
+    <div style="width: 300px; height: 200px; border: 2px dashed #cccccc; text-align: center;">
+        <label for="webname">网站名(key):</label>
+        <input type="text" id="webname"><br/> 
+        <label for="webvalue">网址(value):</label>
+        <input type="text" id="webvalue"><br/>
+        <input type="submit" value="新增记录" onclick="insert()">
+        <hr/><!-- 水平线 -->
+        <label for="search_webname">输入网站名:</label>
+        <input type="text" id="search_webname">
+        <input type="submit" value="查找网站" onclick="search()">
+        <p id="find_result"></p>
+    </div> 
+    <h2>创建表单来显示存储的键值对(localStorage对象的键值对list)</h2>
+    <div id="list"></div>
+    <h2>创建表单来显示存储的键值对(sessionStorage对象的键值对list)</h2>
+    <button onclick="loadAllSessionStorage()">点击查看sessionStorage的键值对表</button>
+    <div id="lists"></div>
+    
+    <script>
+        loadAllLocalStorage();/* 载入所有存储在locaStorage的数据 */
+        function insert(){
+            var key=document.getElementById("webname").value;/* 存储的时候，存的是键值对的值 而不是对象 */
+            var value=document.getElementById("webvalue").value;
+            localStorage.setItem(key,value);
+            alert("添加成功");
+        }
+        function search(){
+            var searchkey=document.getElementById("search_webname").value; /* 这里要取值的，不是把对象拿出来 */
+            var searchvalue=localStorage.getItem(searchkey);
+            var result=document.getElementById("find_result");
+            result.innerHTML=searchkey+"的网址是"+searchvalue;
+        }
+        function  loadAllLocalStorage(){
+            var list=document.getElementById("list");
+            if(localStorage.length>0){
+                var result="<table border=1>"/* 创建表单*/
+                result+="<tr><td>key</td><td>value</td></tr>";
+                for(var i=0;i<localStorage.length;i++){
+                    var resultkey=localStorage.key(i);
+                    var resultvalue=localStorage.getItem(resultkey);
+                    result+="<tr><td>"+resultkey+"</td><td>"+resultvalue+"</td></tr>";
+                }
+                result+="</table>";
+                list.innerHTML=result;
+            }else{
+                list.innerHTML="数据为空";
+            }
+        }
+        function loadAllSessionStorage(){
+            var lists=document.getElementById("lists");
+            if(sessionStorage.length>0){
+                var results="<table border=1>";
+                results+="<tr><td>sessionKey</td><td>sessionValue</td></tr>";
+                for(var k=0;k<sessionStorage.length;k++){
+                    var sessionKey=sessionStorage.key(k);
+                    var sessionValue=sessionStorage.getItem(sessionKey);
+                    results+="<tr><td>"+sessionKey+"</td><td>"+sessionValue+"</td></tr>";
+                }
+                results+="</table>";
+                lists.innerHTML=results;
+            }else{
+                lists.innerHTML="数据为空";
+            }
+        }
+    </script>
+
+</body>
+</html>

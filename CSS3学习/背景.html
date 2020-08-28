@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>背景属性</title>
+</head>
+<style>
+    .one1{
+        width: 300px;
+        height: 200px;
+        background-image: url(../practise-pic/chicken.jpg),url(../practise-pic/wenli1.jpg);
+        background-size: 100%;
+        background-position: bottom left,top right;
+    }
+/*     .origin-one{
+        width: 300px;
+        height: 200px;
+        padding: 20px;
+        border: 20px solid pink;
+        background: lightskyblue url(../practise-pic/wifi-rabit.jpg) no-repeat;
+        background-size: 100% 100%;
+        background-origin: content-box;
+        float: left;
+    } */
+
+    .origin{
+        float: left;
+        width: 300px;
+        height: 200px;
+        padding: 10px;
+        margin-left: 20px;
+        border: 20px dashed rgba(253, 194, 204,0.5);  /* 显示的时候会变颜色，因为背景颜色会与border颜色叠加 背景颜色包含了border */
+        background-color: rgba(144, 207, 247,0.5);
+    }
+    .origin.one{
+        background-image: url(../practise-pic/wifi-rabit.jpg) ;
+        background-repeat: no-repeat;
+        background-size: 50% 50%;
+        background-origin: content-box;
+    }
+    .origin.two{
+        background-image: url(../practise-pic/wifi-rabit.jpg) ;
+        background-repeat: no-repeat;
+        background-size: 50% 50%;
+        background-origin: padding-box;
+    }
+    .origin.three{
+        background-image: url(../practise-pic/wifi-rabit.jpg) ;
+        background-repeat: no-repeat;
+        background-size: 50% 50%;
+        background-origin: border-box;
+    }
+
+    .clip{
+        width: 200px;
+        height: 200px;
+        background-color: tomato;
+        border: 10px dashed turquoise;
+        float: left;
+        margin-left: 30px;
+        padding: 20px;
+    }
+    .clip.one{
+        background-clip: content-box;
+    }
+    .clip.two{
+        background-clip: padding-box;
+    }
+    .clip.three{
+        background-clip: border-box;
+    }
+
+</style>
+<body>
+    <div class="one1">添加多个背景图片,先加入的图片在最顶层</div><hr />
+    <div style="width: 100px;height: 100px;background-color: rgba(253, 194, 204,0.5) ;"></div>
+    <h3>background-origin:content-box padding-box border-box</h3>
+    <div class="origin one">定位背景图片在content-box</div>
+    <div class="origin two">padding-box</div>
+    <div class="origin three">border-box</div>
+    <div style="clear: both;"></div> <hr />
+
+    <h3>规定背景的绘制区域 background-clip</h3>
+    <div class="clip one">content-box</div>
+    <div class="clip two">padding-box</div>
+    <div class="clip three">border-box</div>
+</body>
+</html>

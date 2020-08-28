@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>样式绑定</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <style lang="en">
+    .active{
+        width: 200px;
+        height: 200px;
+        background-color: coral;
+        color: white;
+        font-size: 1em;
+    }
+    .font{
+        width: 300px;
+        height: 300px;
+        color: black;
+        font-size: 1.4em;
+    }
+
+    .font3{
+        background-color: burlywood;
+    }
+    .error{
+        background-color: gray;
+        color: red;
+    }
+  </style>
+  <body>
+    <!-- 第二个样式会覆盖第一个里面出现的样式 -->
+    <!-- 对象中传入属性 -->
+    <div id="app1" v-bind:class="{'active':isActive,'font':'is-Font'}">
+      div里面的文本呀 class改变
+    </div>
+    <br />
+
+    <!-- 第二种写法，传入对象 -->
+    <div id="app2" v-bind:class="object">
+      第二个div里面的文本呀class改变
+    </div>
+    <br />
+
+    <!-- 传入数组 -->
+    <div id="app3" v-bind:class="[activeClass,fontClass]">
+      第三个div里的文本呀class改变
+    </div>
+    <br />
+
+    <!-- 绑定对象的计算属性! 重点!!!!!!!!!!!! -->
+    <div id="app4" v-bind:class="classObject">
+      第四个div里面的文本呀class改变 (这里用了computed)
+    </div>
+    <br />
+
+    <!-- 内联样式 -->
+    <div
+      id="app5"
+      v-bind:style="{color:activeColor,fontSize:Size+'px',backgroundColor:backgroundColor}"
+    >
+      第5个div里的文本 内联样式style
+    </div>
+    <br />
+
+    <!-- 内联样式 绑定到对象中,更清晰 -->
+    <div id="app6" v-bind:style="styleObject">
+      第6个div里的文本 内联样式style
+    </div>
+    <br />
+
+    <!-- 内联样式 数组绑定 -->
+    <div id="app7" v-bind:style="[styleObject1,styleObject2]">
+      第7个div里的文本 内联样式style
+    </div>
+    <br />
+    <!-- 动态调节 -->
+    <div id="app8" style="background-color: blanchedalmond;">
+      <div v-bind:style="{color:'red',fontSize:size+'px'}">
+        直接设置样式，可调节
+      </div>
+      <div v-bind:style="objectStyle">绑定到对象，不可动态调节</div>
+      <div v-bind:style="computedStyle">计算属性中 可动态调节</div>
+      <div v-bind:style="methodsStyle()">方法中 可动态调节</div>
+      {{size}}
+      <button @click="size++">字体放大</button>
+      <button v-on:click="size--">字体缩小</button>
+    </div>
+    <br />
+
+    <!-- 设置watch 可以让绑定到对象的和直接设置样式的进行动态调节 -->
+    <div id="app9" style="background-color: cornflowerblue;">
+      <div v-bind:style="objectStyle">绑定到对象，可动态调节</div>
+      {{size}}
+      <button @click="size++">字体放大</button>
+      <button v-on:click="size--">字体缩小</button>
+    </div>
+  </body>
+  <script>
+    var vm9 = new Vue({
+      el: "#app9",
+      data: {
+        size: 30,
+        objectStyle: {
+          color: "green",
+          fontSize: 20 + "px",
+        },
+      },
+
+      watch: {
+        size: function () {
+          this.objectStyle.fontSize = this.size + "px";
+        },
+      },
+    });
+
+    var vm8 = new Vue({
+      el: "#app8",
+      data: {
+        size: 30,
+        objectStyle: {
+          backgroundColor: "skyblue",
+          color: "green",
+        },
+      },
+      methods: {
+        methodsStyle: function () {
+          return { color: "black", fontSize: this.size + "px" };
+        },
+      },
+      computed: {
+        computedStyle: function () {
+          return {
+            color: "green",
+            fontSize: this.size + "px",
+          };
+        },
+      },
+    });
+
+    var vm1 = new Vue({
+      el: "#app1",
+      data: {
+        isActive: true,
+        //注意：当有链接符号的时候，要用引号‘’引起来
+        "is-Font": true,
+      },
+    });
+
+    var vm2 = new Vue({
+      el: "#app2",
+      data: {
+        object: {
+          active: true,
+
+          font: true,
+        },
+      },
+    });
+
+    var vm3 = new Vue({
+      el: "#app3",
+      data: {
+        activeClass: "active",
+        fontClass: "font3",
+      },
+    });
+
+    var vm4 = new Vue({
+      el: "#app4",
+      data: {
+        isActive: true,
+        error: {
+          value: true,
+          type: "fatal",
+        },
+      },
+      computed: {
+        classObject: function () {
+          return {
+            //绑定属性为 active和font3
+            active: true,
+            font: this.isActive && !this.error.value,
+            error: this.error.value && this.error.type === "fatal",
+          };
+        },
+      },
+    });
+
+    var vm5 = new Vue({
+      el: "#app5",
+      data: {
+        activeColor: "green",
+        Size: 50,
+        backgroundColor: "skyblue",
+      },
+    });
+
+    var vm6 = new Vue({
+      el: "#app6",
+      data: {
+        styleObject: {
+          //里面要写style中的属性名称 有连接符就用引号 不要连接符就第二个字母大写
+          color: "green",
+          fontSize: "20px",
+          backgroundColor: "skyblue",
+          "font-weight": "700",
+        },
+      },
+    });
+
+    var vm7 = new Vue({
+      el: "#app7",
+      data: {
+        styleObject1: {
+          //里面要写style中的属性名称 有连接符就用引号 不要连接符就第二个字母大写
+          color: "white",
+          fontSize: "30px",
+        },
+        styleObject2: {
+          backgroundColor: "black",
+          "font-weight": "700",
+        },
+      },
+    });
+  </script>
+</html>

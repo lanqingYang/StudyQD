@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>overflow和光标cursor</title>
+</head>
+<style>
+    .hidden{
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border:2px solid tan;
+    }
+    .visible{
+        width: 100px;
+        height: 100px;
+        overflow: visible;
+        border:2px solid  sienna;
+    }
+    .scroll{
+        width: 100px;
+        height: 100px;
+        overflow: scroll;
+        border:2px solid  slategrey;
+    }
+    .auto{
+        width: 100px;
+        height: 100px;
+        overflow: auto;
+        border:2px solid  palevioletred;
+    }
+/*     .nodisplay{
+        width: 100px;
+        height: 100px;
+        overflow-y:no-display;
+        border:2px solid  slateblue;
+    }
+ */</style>
+<body>
+    <h4>hidden</h4>
+    <div class="hidden">超出部分隐藏。超出部分隐藏。超出部分隐藏。超出部分隐藏。超出部分隐藏。超出部分隐藏。超出部分隐藏。超出部分隐藏。超出部分隐藏。</div>
+   
+    <h4>visible</h4>
+    <div class="visible">超出部分呈现在元素框外。超出部分呈现在元素框外。超出部分呈现在元素框外。</div>
+       
+    <h4>scroll</h4>
+    <div class="scroll">超出部分滚动条查看。超出部分滚动条查看。超出部分滚动条查看。超出部分滚动条查看。超出部分滚动条查看。</div>
+       
+    <h4>auto</h4>
+    <div class="auto">如果超出了，显示滚动条查看。如果超出了，显示滚动条查看。如果超出了，显示滚动条查看。如果超出了，显示滚动条查看。如果超出了，显示滚动条查看。</div>
+
+    <!-- 好像下面的属性用不了 -->
+<!--     <h4>overflow-y的多的两个属性 no-display no-content</h4>
+    <h5>·no-display</h5>
+    <div class="nodisplay">  
+        超出了内容框，则删除整个内容框。
+        超出了内容框，则删除整个内容框。
+        超出了内容框，则删除整个内容框。
+        超出了内容框，则删除整个内容框。
+    </div> -->
+</body>
+</html>

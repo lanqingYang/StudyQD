@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas画布</title>
+</head>
+<body>
+    <!-- 创建画布 -->
+    <h3>画布创建</h3>
+    <canvas height="100px" width="100px" style="border: 1px solid #000000;">浏览器不支持canvas标签（此句话只有在不支持时才显示）</canvas>
+    
+    <h3>运用javscript绘图</h3>
+    <canvas height="100px" width="200px" style="border: 1px solid #000000;" id="mycanvas1"></canvas>
+    <script>
+        var c1=document.getElementById("mycanvas1");
+        var ctx1=c1.getContext("2d"); /* 创建context对象  二维网格*/
+        ctx1.style="#cccccc";
+        ctx1.fillRect(0,0,150,75)  /* 填充矩形 x，y，宽，高 */
+    </script>
+
+    <h3>canvas 路径</h3>
+    <canvas id="mycanvas2"  width="200px" height="100px" style="border: 1px solid #000000;" ></canvas>
+    <script>
+        var c2=document.getElementById("mycanvas2");
+        var ctx2=c2.getContext("2d");
+        ctx2.moveTo(0,0);/* 定义开始坐标 */
+        ctx2.lineTo(200,100); /* 线条结束坐标 */
+        ctx2.stroke()/* 线条绘制 */
+    </script>
+
+    <h3>canvas 绘制圆形</h3>
+    <canvas id="mycanvas3" width="200px" height="100px" style="border:1px solid #000000;"></canvas>
+    <script>
+        var c3=document.getElementById("mycanvas3");
+        var ctx3=c3.getContext("2d");
+        ctx3.arc(95,50,40,0,2*Math.PI);/* arc(x,y,start,stop) */
+        ctx3.stroke();
+    </script>
+
+    <h3>canvas 文本</h3>
+    <canvas id="mycanvas4" width="200px" height="100px" style="border: 1px solid #000000;"></canvas>
+    <script>
+        var c4=document.getElementById("mycanvas4");
+        var ctx4=c4.getContext("2d");
+        ctx4.font="30px Arial";
+        ctx4.fillText("Hello World",10,50); 
+        /* 换成strokeText方法 就是镂空字体 */
+    </script>
+
+    <h3>canvas 插入图片</h3>
+    <img src="/前端/practise-pic/chicken.JPG" alt="chicken" id="chicken" ><!-- img是内联元素 -->
+    <canvas id="mycanvas5" width="350px" height="300px" style="border: 1px solid #000000;"></canvas>
+    <script>
+        var c5=document.getElementById("mycanvas5");
+        var ctx5=c5.getContext("2d");
+        var img=document.getElementById("chicken");
+
+        img.onload=function(){
+            ctx5.drawImage(img,0,0);
+        }
+    </script>
+
+    <h3>canvas 渐变</h3>
+    <canvas width="200px" height="100px" id="mycanvas6" style="border:1px solid #000000;"></canvas>
+    <script>
+        var c6=document.getElementById("mycanvas6");
+        var ctx6=c6.getContext("2d");
+
+        /* 创建线条渐变 */
+        var grb=ctx6.createLinearGradient(0,0,200,0); /* x,y,x1,y1 */
+        grb.addColorStop(0,"blue");
+        grb.addColorStop(0.5,"white");
+        grb.addColorStop(1,"pink");
+
+        /* 填充渐变 */
+        ctx6.fillStyle=grb;
+        ctx6.fillRect(0,0,200,100);
+    </script>
+
+    <canvas width="200px" height="100px" id="mycanvas7" style="border:1px solid #000000;"></canvas>
+    <script>
+        var c7=document.getElementById("mycanvas7");
+        var ctx7=c7.getContext("2d");
+
+        /* 创建径向/圆渐变 */
+        var grb=ctx7.createRadialGradient(75,50,5,90,60,100); /* x,y,r,x1,y1,r1 */
+        grb.addColorStop(0,"pink");
+        grb.addColorStop(0.5,"white");
+        grb.addColorStop(1,"blue");
+ 
+        /* 填充渐变 */
+        ctx7.fillStyle=grb;
+        ctx7.fillRect(10,10,150,80);
+    </script>
+</body>
+</html>

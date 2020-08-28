@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>响应式图片相册</title>
+</head>
+<style>
+    @keyframes mymove1{
+        0%{transform: rotate(-30deg);left:4%;} 
+        100%{transform: rotate(30deg);left:50%;}
+    }
+    .card{
+        border:2px solid gray;
+        width: 20%;
+        height: auto;
+        text-align: center;
+        box-shadow:3px 3px 6px gray;
+        background-color:white;
+        position: relative;
+        float: left;
+        margin-top: 50px;
+    }
+    .card img{
+        width: 90%;
+        height:70%;
+        margin-top: 6%;
+    }
+    .card{
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        animation-duration: 2s;
+        animation-name: mymove1;
+        animation-fill-mode: both;  /* forwards 动画结束后的显示值  backwords：动画延迟时的显示 */
+        animation-delay: 2s;
+
+    }
+    .card.one{
+        animation-direction: alternate;
+        animation-iteration-count: 6;
+    }
+    .card.two{
+        animation-direction: alternate-reverse;
+        animation-iteration-count: 6;
+
+    }
+
+    @media screen and (max-width:600px){
+        .card{
+            width: 80%;
+            animation: none;
+            margin:0;
+            left: 10%;  /* left50%-自身一半40%=居中10% */
+            margin-bottom: 20px;
+         }
+    }
+
+
+ </style>
+<body>
+    <h3>缩小后变为图片廊 不显示动画</h3>
+    <div class="card one"> 
+        <img src="../practise-pic/flower.JPG" alt="flower"> 
+        <p>氧气初夏</p>
+    </div>
+    <div class="card two"> 
+        <img src="../practise-pic/sunshine1.JPG" alt="sunshine1"> 
+        <p>氧气初夏</p>
+    </div>
+
+</body>
+</html>

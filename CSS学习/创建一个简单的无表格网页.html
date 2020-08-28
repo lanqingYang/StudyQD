@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一个简单的网页</title>
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+    li{
+        text-decoration: none;
+        list-style-type: none ;
+    }
+    ul{
+        margin: 0;
+        padding: 0;
+
+    }
+    a{
+        text-decoration: none;
+    }
+    .clear-float{
+        clear:both;
+    }
+
+
+    .nav{
+        width: 70%;
+        height: 50px;
+        background-color: rgb(104, 103, 103);
+        margin: auto;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .nav-ul{
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    .nav-li{
+        float: left;
+        width: 15%;
+        line-height: 50px;      /* 注意要和nav的高度一样 */
+    }
+    .nav-li.one{
+        background-color: rgb(32, 151, 32);
+    }
+    .nav-li a{
+        display:inline-block;
+        width: 100%;
+        height: 100% ; /* 相对父级li 来设置百分比 */
+        color: white;
+    }
+    .nav-li a:hover{
+        background-color: rgb(37, 37, 37);/* a标签所在的li不能直接被hover 所以要设置a为内联块级元素来改变背景颜色 */
+    }
+    
+
+    .content{
+        margin:auto;
+        margin-top: 0.5em;
+/*         background-color: grey;
+ */        width: 70%;
+        height: 330px;
+        font-family: Arial, Helvetica, sans-serif
+    }
+    .aside,.article{
+        float: left;   /* 两个div块浮动，（百分比的话）要给它们设置宽度，不然后面的子元素没有宽度 */
+    }
+    .aside{
+        width: 30%;
+    }
+    .article{
+        width: 70%;
+    }
+    .aside-ul{
+        margin-left: 1em;
+    }   
+    .aside-li{
+        width: 80%;
+        height: 2em;
+        text-align: center;
+        background-color: rgb(185, 184, 184);
+        margin-bottom: 1em;
+        line-height: 2em;
+    }
+    .aside-li a{
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        color: rgb(85, 85, 85);
+    }
+    .aside-li.game a{
+        background-color: rgb(36, 91, 153);
+        color: white;
+    }
+    .aside-li a:hover{
+        color: white;
+        background-color:rgb(37, 37, 37) ;
+    }
+
+
+    article{
+        overflow: hidden;
+        height:330px;
+    }
+    .artical-game{
+        width: 95%;
+        height: 100px;
+        background-color: rgb(27, 139, 245);
+        text-align: center;
+
+    }
+    .artical-game h1{
+        line-height: 100px;
+        margin: 0px;/* h1这种！！ 是自带外边距的！！！！ */
+    }
+    .ACM{
+        text-align: left;
+    }
+
+    
+    footer{
+        margin: auto;
+        width: 70%;
+        height: 4em;
+        line-height: 4em;
+        background-color:rgb(43, 43, 43);
+        color: gray;
+    }
+    footer p{
+        margin-left: 3em;
+    }
+
+</style>
+<body>
+    <nav class="nav">
+        <ul class="nav-ul">
+            <li class="nav-li one"><a href="#"> 主页</a></li>
+            <li class="nav-li two"><a href="#">小说</a></li>
+            <li class="nav-li three"><a href="#">联系我们</a></li>
+            <li class="nav-li four"><a href="#">关于我们</a></li> 
+        </ul>       
+    </nav>
+
+    <div class="clear-float"></div>
+
+    <div class="content">
+        <aside class="aside">
+            <ul class="aside-ul">
+                <li class="aside-li"><a href="#">玄幻</a></lai>
+                <li class="aside-li game"><a href="#">游戏</a></li>
+                <li class="aside-li"><a href="#">都市</a></li>
+                <li class="aside-li"><a href="#">古装</a></li>
+                <li class="aside-li"><a href="#">架空</a></li>
+                <li class="aside-li"><a href="#">耽美</a></li>
+                <li class="aside-li"><a href="#">悬疑</a></li>
+            </ul>
+        </aside>
+
+        <article class="article">
+            <div class="artical-game">
+            <h1>游 戏</h1>
+            </div>
+            <h1 class="ACM">ACM绝地求生</h1>
+            <p>Youth小可爱Youth小可爱Youth小可爱Youth小可爱Youth小可爱Youth小可爱
+            Youth小可爱Youth小可爱Youth小可爱Youth小可爱Youth小可爱Youth小可爱
+            Youth小可爱Youth小可爱Youth小可爱Youth小可爱Youth小可爱Youth小可爱
+            </p>
+            <p>
+             祁醉又不当人了祁醉又不当人了祁醉又不当人了祁醉又不当人了祁醉又不当人了
+             祁醉又不当人了祁醉又不当人了祁醉又不当人了祁醉又不当人了祁醉又不当人了
+            </p>
+        </article>
+    </div>
+
+    <div class="clear-float"></div>
+    <footer>
+        <p>footer</p>
+    </footer>
+</body>
+</html>

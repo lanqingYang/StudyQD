@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弹性盒子</title>
+</head>
+<style>
+    .clear{
+        clear: both;
+    }
+    .direction,.justify-content,.align-items,.flex-wrap,.align-content,.align-slef,.order,.margin,.flex,.diff{
+        width: 46%;
+        height: 200px;
+        float: left;
+        display: flex;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        background-color: rgb(187, 187, 187);
+    }
+    .direction div,.justify-content div,.align-items div,.flex-wrap div,.align-content div,.align-slef div,.order div,.margin div,.flex div,.diff div{
+        width: 30%;
+        height: 50px;
+        background-color:lightblue;
+        margin: 10px;
+    }
+    .direction.one{
+        flex-direction: row;
+    }
+    .direction.two{
+        flex-direction: row-reverse;
+    }
+
+    .direction.three{
+        flex-direction: column;
+    }
+
+    .direction.four{
+        flex-direction: column-reverse;
+    }
+
+
+
+    .justify-content div{
+        background-color:pink;
+    }
+    .justify-content{
+        height: auto;
+    }
+    .justify-content div,.align-items div{
+        margin: 0;
+        border: 1px solid black;
+        box-sizing: border-box;
+    }
+    .justify-content.one{
+        justify-content: flex-start;
+    }
+    .justify-content.two{
+        justify-content: center;
+    }
+    .justify-content.three{
+        justify-content: flex-end;
+    }
+
+    .justify-content.four{
+        justify-content: space-between;
+    }
+    .justify-content.five{
+        justify-content: space-around;
+    }
+
+
+    .align-items div{
+        background-color:lightsalmon;
+    }
+    .align-items.one{
+        align-items: flex-start;
+    }
+    .align-items.two{
+        align-items: center;
+        justify-content: center;
+    }
+    .align-items.three{
+        align-items: flex-end;
+    }
+    .align-items.four{
+        align-items: baseline;
+    }
+    .align-items.five{
+        align-items: stretch;
+    }
+    .align-items.six{
+        align-items: stretch;
+    }
+    .align-items.five div{
+        height: auto;
+    }
+    .align-items.six div{
+        height: auto;
+        max-height: 150px;
+    }
+
+
+
+    .flex-wrap div{
+        background-color:lightyellow;
+    }
+    .flex-wrap.one{
+        flex-wrap: nowrap;
+    }
+    .flex-wrap.two{
+        flex-wrap: wrap;
+    }
+    .flex-wrap.three{
+        flex-wrap: wrap-reverse;
+    }
+
+    .align-content{
+        flex-wrap: wrap;         /* 设置能换行，设置各个行的对齐才有意义 */
+    }
+    .align-content.one{
+        align-content: flex-start;
+    }
+    .align-content.two{
+        align-content: center;
+        justify-content: center;   /* 与justify-content连用 可以居中 */
+    }
+    .align-content.three{
+        align-content: flex-end;
+    }
+    .align-content.four{
+        align-content: space-between;
+    }
+    .align-content.five{
+        align-content: space-around;
+    }
+
+    .align-slef {
+        width: 80%;
+    }
+    .align-slef div{
+        background-color: lightpink;
+        width: 12%;
+    }
+    .align-slef.one{
+        align-self: flex-start;    
+    }
+    .align-slef.two{
+        align-self: center;    
+    }
+    .align-slef.three{
+        align-self: flex-end;    
+    }
+    .align-slef.four{
+        align-self: baseline;    
+    }
+    .align-slef.five{
+        height: auto;
+        align-self: stretch;    
+    }
+    .align-slef.six{
+        align-self: auto;   
+        height: auto; 
+        max-height:150px ;
+    }
+
+
+    .order{
+        height: 100px;
+    }
+    .order.two{
+        order:-1;  /* 数值越小在前面 */
+    }
+
+
+    .margin div{
+        background-color: lightslategray;
+        width: 100px;
+        height: 100px;
+    }
+    .margin.one{
+        margin-right: auto;
+    }
+    .margin.four{
+        margin: auto;  /* 完美居中 */
+    }
+
+    .flex div{
+        background-color: lightsteelblue;
+        width: 0px;
+
+    }
+    .flex.one{
+        flex-grow: 1; 
+    }
+    .flex.two{
+        flex-grow: 3; 
+    }
+    .flex.three{
+        flex-grow: 1; 
+    }
+    
+    .flex.shrink div{
+        flex-basis: 400px; /* 确定宽度 */
+
+    }
+    .flex.shrink.one{
+        flex-shrink: 1; 
+    }
+    .flex.shrink.two{
+        flex-shrink: 2; 
+    }
+    .flex.shrink.three{
+        flex-shrink: 1; 
+    }
+
+
+
+    .diff div{
+        background-color: cornflowerblue;
+    }
+    .diff{
+        flex-wrap: wrap;
+    }
+    .diff.one{
+        justify-content: center;
+        align-items: center;
+    }
+    .diff.two{
+        justify-content: center;
+        align-content: center;
+    }
+</style>
+<body>
+    <h3>显示方向flex-direction:row、row-reverse、column、column-reverse</h3>
+    <div class="direction one">
+        <div>1 左到右</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <div class="direction two">
+        <div>1 右到左</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <div class="direction three">
+        <div>1 纵 最后一项在最后</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <div class="direction four">
+        <div>1最后一项在最前</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+
+    <hr class="clear" />
+    <h3>在横轴对齐方式justify-content:flex-start、center、flex-end、space-bettwen、space-around</h3>
+    <div class="justify-content one">
+        <div>1 与行头紧挨填充</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <div class="justify-content two">
+        <div>1 中间紧挨</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <div class="justify-content three">
+        <div>1 行尾紧挨</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <div class="justify-content four">
+        <div>1 平均分布</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <div class="justify-content five">
+        <div>1 平均分，两端占间距一半</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+
+    <hr class="clear"  />
+    <h3>在纵轴对齐方式align-items:flex-start、center、flex-end、baseline、streach
+    <br />可与justify-content一起用</h3>
+    <div class="align-items one">
+        <div>1 与行头紧挨填充</div>
+        <div>2 </div>
+        <div>3</div>
+    </div>
+    <div class="align-items two">
+        <div>1 中间紧挨</div>
+        <div>2 与justify-content一起用</div>
+        <div>3</div>
+    </div>
+    <div class="align-items three">
+        <div>1 行尾紧挨</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <div class="align-items four">
+        <div>1 与基线对齐</div> <!-- 行内轴与纵轴为一条线 则于flex-start等效 -->
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <div class="align-items five">
+        <div>1 stretch 元素高度auto,会尽量接近行高度，若设定max-height则不超过</div>    
+        <div>2</div>
+        <div>3</div>
+    </div>
+    <div class="align-items six">
+        <div>1 stretch 元素高度auto,设定max-height为150px</div>
+        <div>2</div>
+        <div>3</div>
+    </div>
+
+
+    <hr class="clear"  />
+    <h3>是否换行flex-wrap:no-wrap、wrap、wrap-reserve</h3>
+    <div class="flex-wrap one">
+        <div>1 no-wrap不换行 width将被压缩</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <div class="flex-wrap two">
+        <div>1 wrap 换行</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <div class="flex-wrap three">
+        <div>1 wrap-reverse 换行,但是以相反的顺序</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+
+
+
+    <hr class="clear"  />
+    <h3>修改flex-wrap属性的行为，设置各行的对齐align-content:flex-start、center、flex-end、space-bettwen、space-around
+        <br>相当于垂直方向的justify-content
+    </h3>
+    <div class="align-content one">
+        <div>1 与行头紧挨填充</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <div class="align-content two">
+        <div>1 中间紧挨 ，与justify-content：center一起用</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <div class="align-content three">
+        <div>1 行尾紧挨</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <div class="align-content four">
+        <div>1 平均分布</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+    <div class="align-content five">
+        <div>1 平均分，两端占间距一半</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+
+
+    <hr class="clear"  />
+    <h3>设置弹性元素自身在纵轴方向上对齐方式align-slef:flex-start、center、flex-end、baseline、stretch、auto
+        <br>此属性与在父元素上设置align-items效果相同
+    </h3>
+    <div class="align-slef">
+        <div class="align-slef one">1 align-slef:flex-start</div>
+        <div class="align-slef two">2 center</div>
+        <div class="align-slef three">3 flex-end</div>
+        <div class="align-slef four">4 baseline</div>
+        <div class="align-slef five">5 stretch</div>
+        <div class="align-slef six">6 auto</div><!-- 自身auto，则看父元素的align-items值 若无则值stretch -->
+    </div>
+
+
+    <hr class="clear"  />
+    <h3>排序语法 order: 数值
+    </h3>
+    <div class="order">
+        <div class="order one">1 </div>
+        <div class="order two">2 在前面</div>
+        <div class="order three">3 </div>
+    </div>
+
+    <hr class="clear"  />
+    <h3>对齐 margin：auto 自动获取容器中的剩余空间
+    </h3>
+    <div class="margin">
+        <div class="margin one">1 margin-right：aoto 1获取了右边剩余空间</div>
+        <div class="margin two">2 </div>
+        <div class="margin three">3 </div>
+    </div>
+    <div class="margin">
+        <div class="margin four">完美居中 marin：aoto </div>
+    </div>
+
+    <hr class="clear"  />
+    <h3>flex 指定弹性子元素分配空间  flex-grow扩展比例 flex-shrink收缩比例 flex-basis默认基准值
+    </h3>
+    <div class="flex">
+        <div class="flex one">1 占2份</div>
+        <div class="flex two">2 占了3份(grow,这里把行分成了6份，边框也算在内) </div>
+        <div class="flex three">3 占1份</div>   
+    </div>
+    <p ><strong>flex-grow：</strong>注意:如果设定了确定的宽，那么所占最小份不会小过宽度，其他部分尽量被填满而显示出比例</p>
+    <div class="clear" ></div>
+    <div class="flex shrink">
+        <div class="flex shrink one">1 占1份</div>
+        <div class="flex shrink two">2 占了2份</div>
+        <div class="flex shirink three">3 占1份</div>    
+    </div>
+    <p ><strong>flex-shrink：</strong>注意：<strong>flex-basis</strong> 确定了起始子元素宽度，shrink用法: 现子元素宽度-(溢出宽度)/总份数*对应子元素份数=最终子元素宽度
+        <br>溢出宽度=子元素总宽度-父元素宽度
+    </p>
+
+
+    <hr class="clear"  />
+    <h3>align-items与align-content(这个只用于多行)区别</h3>
+    <div class="diff one">
+        <div >align-items:center </div>
+        <div >先把整个高度给每行分</div>
+        <div >在每行中把每行中元素居中</div>
+        <div >4 </div>
+    </div>
+    <div class="diff two">
+        <div >类似justify-content：center </div>
+        <div ></div>
+        <div >多行内容整体居中 </div>
+        <div >空白两端高度分 </div>
+    </div>
+
+</body>
+</html>

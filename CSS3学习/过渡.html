@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过渡</title>
+</head>
+<style>
+    div{
+        width: 150px;
+        height: 50px;
+        background-color: pink;
+        border:2px solid  plum;
+        margin: 10px 0 0 20px;
+        transition: all 2s ease-in-out;   /* 放在！！！外面的div里面有淡入淡出效果！！  放在hover只有淡入效果 */
+    }
+    div:hover{
+        width: 280px;
+        height: 80px;
+    }
+    div:nth-of-type(1):hover{
+        background-image: linear-gradient(90deg,pink,lightblue); 
+/*         transition: height 2s ease 0s;
+ */        transition: width 2s ease 0s,height 2s ease 0s;/* 过渡属性、持续时间、时间曲线、何时开始 */
+}
+    div:nth-of-type(2):hover{
+        background-image: linear-gradient(90deg,pink,rgb(114, 174, 253)); 
+        transition-property: width,height;
+        transition-duration: 2s;
+        transition-timing-function: linear; /* 同速开始与结束 */
+        transition-delay: 1s;/* 1s后开始变化 */
+    }
+    div:nth-of-type(3):hover{
+        background-image:linear-gradient(plum,lightblue) ;
+        transition: width,height,2s ease-in 0s;
+    }
+    div:nth-of-type(4):hover{
+        background-image:linear-gradient(45deg,plum,lightblue) ;
+        transition: width,height,2s ease-out 0s;
+    }
+    div:nth-of-type(5):hover{
+        background-image:linear-gradient(-45deg,plum,lightblue) ;
+        transition: width,height,2s ease-in-out;
+    }
+    div:nth-of-type(6):hover{
+        background-image:linear-gradient(-90deg,plum,lightblue) ;
+        transition: width,height,2s cubic-bezier(0.55, 0.055, 0.675, 0.19)  0s;
+    }
+    div:nth-of-type(7):hover{
+        transform: translateX(20px) translateY(20px) scale(0.5,0.5) rotate(360deg);
+        background-image:linear-gradient(-90deg,pink,lightblue) ;
+        transition: all 2s;
+    }
+    span{
+        background-color: black;
+        transition: all 1s ;
+
+    }
+    span:nth-of-type(1):hover{
+       color: white;
+       cursor: pointer;
+    }
+</style>
+<body>
+    <h3>鼠标放到div上会有过渡效果</h3>
+    <div>时间变化曲线 ease 慢到快 </div>
+    <div>linear 线性变化 1s后才开始变化</div>
+    <div>ease-in 慢速开始</div>
+    <div>ease-out 慢速结束</div>
+    <div>ease-in-out 慢速开始和结束</div>
+    <div>自定义 时间曲线 cubic-bezier(n,n,n,n)</div><!-- 贝兹曲线 x1,y1,x2,y2 -->
+
+    <div>结合2D转换的过渡</div>
+    <p>点黑色部分打开<span>隐藏的</span>文字</p>
+</body>
+</html>

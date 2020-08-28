@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script
+      type="text/javascript"
+      src="http://api.map.baidu.com/api?v=2.0&ak=6mrUxtrtYxTopSt9rcKbBNEDjmss9nLg"
+    ></script>
+
+    <table>
+      <tr>
+        <td>百度地图</td>
+      </tr>
+    </table>
+    <div id="MyMap" style="width: 50%; height: 400px;"></div>
+
+    <script type="text/javascript">
+      // 百度地图API功能
+      var map = new BMap.Map("MyMap"); // 创建Map实例
+      var point = new BMap.Point(116.404, 39.915);
+      var marker = new BMap.Marker(point); // 创建标注
+      map.addOverlay(marker); // 将标注添加到地图中
+      map.centerAndZoom(point, 10); // 初始化地图,设置中心点坐标和地图级别
+      //1. 添加地图类型控件！！！！！！！！！！！！！
+
+      //创建多个标记
+      let points = [
+        //改小数点后两位就行了，不然跨度太大
+        { title: "花花幼儿园", pointy: 116.494, pointx: 39.628 },
+        { title: "向日葵幼儿园", pointy: 116.44, pointx: 39.677 },
+      ];
+
+      for (var i = 0; i < 2; i++) {
+        map.addOverlay(
+          new BMap.Marker(new BMap.Point(points[i].pointy, points[i].pointx))
+        );
+      }
+
+      map.addControl(
+        new BMap.MapTypeControl({
+          mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP],
+        })
+      );
+      map.setCurrentCity("北京"); // 设置地图显示的城市 此项是必须设置的
+      map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+
+      //创建监听事件
+      marker.addEventListener("click", function () {
+        // 3.窗口信息
+        var opts = {
+          width: 250, // 信息窗口宽度
+          height: 100, // 信息窗口高度
+          title: "Hello", // 信息窗口标题
+        };
+        var infoWindow = new BMap.InfoWindow("World", opts); // 创建信息窗口对象
+        map.openInfoWindow(infoWindow, map.getCenter()); // 打开信息窗口
+    
+      });
+
+
+
+
+      
+
+      //marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+
+
+
+
+
+
+      // //2. 添加文本标注!!!!!!!!!!!!!
+      // var content = "label";
+      // var label = new BMap.Label(content, {
+      //   // 创建文本标注
+      //   position: point, // 设置标注的地理位置
+      //   offset: new BMap.Size(10, 20), // 设置标注的偏移量
+      // });
+      // map.addOverlay(label); // 将标注添加到地图中
+      // label.setStyle({
+      //   // 设置label的样式
+      //   color: "#000",
+      //   fontSize: "30px",
+      //   border: "2px solid #1E90FF",
+      // });
+      // //label事件监听
+      // label.addEventListener("click", function () {
+      //   alert("您点击了bale");
+      // });
+    </script>
+  </body>
+</html>

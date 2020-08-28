@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浮动</title>
+</head>
+  <style>
+        img{
+        margin: 5px;
+    }
+    li{
+      float: left;
+      list-style-type: none;
+    }
+
+    .addpic{
+      width: 400px;
+      height: 200px;
+      border: 1px solid seagreen;
+    }
+    .one{
+      width: 150px;
+      height: 100px;
+      float: right;
+      border: 1px dotted seagreen;
+      margin: 20px 10px 10px 10px;
+    }
+    span{
+      float: left;
+      font-size: 300%; /* 100% 是16px */
+      line-height: 80%;  /* 基于当前字体的尺寸设置百分比 */
+      width: 1.2em;
+    }
+  </style>
+<body>
+    <h3>浮动1</h3>
+    <li><img src="../practise-pic/flower.JPG" alt="" width="200" height="200"></li>
+    <li><img src="../practise-pic/sunshine1.JPG" alt="" width="200" height="200"></li>
+    <li><img src="../practise-pic/run1.JPG" alt="" width="200" height="200"></li>
+    <li><img src="../practise-pic/run2.JPG" alt="" width="200" height="200"></li>
+
+    <h3  style="clear:both">第二个浮动(清除了左右浮动)</h3> <!-- 清楚浮动 -->
+
+    <li><img src="../practise-pic/flower.JPG" alt="" width="200" height="200"></li>
+    <li><img src="../practise-pic/sunshine1.JPG" alt="" width="200" height="200"></li>
+    <li><img src="../practise-pic/run1.JPG" alt="" width="200" height="200"></li>
+    <li><img src="../practise-pic/run2.JPG" alt="" width="200" height="200"></li>
+  <hr style="clear: left;" /> 
+
+    <h3>在段落中加入图片</h3>
+    <div class="addpic">
+      <img src="../practise-pic/run1.JPG" alt="" class="one">
+      <p>要在这段文字中加入图片。要在这段文字中加入图片。要在这段文字中加入图片。要在这段文字中加入图片。
+        要在这段文字中加入图片。要在这段文字中加入图片。要在这段文字中加入图片。要在这段文字中加入图片。
+        要在这段文字中加入图片。要在这段文字中加入图片。要在这段文字中加入图片。
+      </p>
+    </div>
+    <hr /> 
+
+    <h3>让段落的第一个字母浮动到左侧</h3>
+    <div style="width: 400px;height: 100px;border: 1px solid rgb(219, 161, 161);">
+      <p>
+      <span>后</span>来我才知道，那并不是我的花，我只是途经了它的绽放。
+      后来我才知道，那并不是我的花，我只是途经了它的绽放。
+      来我才知道，那并不是我的花，我只是途经了它的绽放。
+      </p>
+     </div>
+</body>
+</html>

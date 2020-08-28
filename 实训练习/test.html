@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        font-family: "微软雅黑";
+      }
+      #allmap {
+        width: 800px;
+        height: 500px;
+      }
+      p {
+        margin-left: 5px;
+        font-size: 14px;
+      }
+    </style>
+    <script
+      type="text/javascript"
+      src="http://api.map.baidu.com/api?v=2.0&ak=6mrUxtrtYxTopSt9rcKbBNEDjmss9nLg"
+    ></script>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <title>给多个点添加信息窗口</title>
+  </head>
+  <body>
+    <div id="allmap"></div>
+    <p>点击标注点，可查看由纯文本构成的简单型信息窗口</p>
+  </body>
+</html>
+<script type="text/javascript">
+  // 百度地图API功能
+  map = new BMap.Map("allmap");
+  map.addControl(new BMap.NavigationControl());
+  map.centerAndZoom(new BMap.Point(-95.67629, 37.439749), 5);
+  var data_info = [
+    [
+      -118.248653,
+      34.054415,
+      "洛杉矶",
+      "https://www.juwai.com/usproperty/r-126_c-3647/",
+    ],
+    [
+      -87.617154,
+      41.877038,
+      "芝加哥",
+      " https://www.juwai.com/usproperty/r-135_c-3754/",
+    ],
+    [
+      -80.184646,
+      25.73034,
+      "迈阿密",
+      "https://www.juwai.com/usproperty/r-131_c-3732/",
+    ],
+    [
+      -95.340413,
+      29.717274,
+      "休斯敦",
+      "https://www.juwai.com/usproperty/r-165_c-3916/",
+    ],
+    [
+      -77.016705,
+      38.889511,
+      "华盛顿",
+      "https://www.juwai.com/usproperty/r-130_c-25091/",
+    ],
+    [
+      -75.103386,
+      39.945489,
+      "费城",
+      "https://www.juwai.com/usproperty/r-160_c-3882/",
+    ],
+    [
+      -87.147995,
+      32.228673,
+      "达拉斯",
+      "https://www.juwai.com/usproperty/r-165_c-3910/",
+    ],
+    [
+      -117.066599,
+      32.549667,
+      "圣地亚哥",
+      "https://www.juwai.com/usproperty/r-126_c-3670/",
+    ],
+    [
+      -71.045761,
+      42.34072,
+      "波斯顿",
+      "https://www.juwai.com/usproperty/r-143_c-3787/",
+    ],
+    [
+      -122.30063,
+      47.610844,
+      "西雅图",
+      "https://www.juwai.com/usproperty/r-168_c-3954/",
+    ],
+    [
+      -73.878945,
+      40.793337,
+      "纽约",
+      "https://www.juwai.com/usproperty/r-154_c-3824/",
+    ],
+    [
+      -84.365404,
+      33.652958,
+      "亚特兰大",
+      " https://www.juwai.com/usproperty/r-132_c-3747/",
+    ],
+    [
+      -122.43746,
+      37.740829,
+      "旧金山",
+      "https://www.juwai.com/usproperty/r-126_c-3671/",
+    ],
+    //["凤凰城",'https://www.juwai.com/usproperty/r-124_c-3601/']
+  ];
+  var opts = {
+    width: 150, // 信息窗口宽度
+    height: 50, // 信息窗口高度
+    title: "点击下方文字查看房源详情", // 信息窗口标题
+    enableMessage: true, //设置允许信息窗发送短息b
+  };
+  for (var i = 0; i < data_info.length; i++) {
+    var marker = new BMap.Marker(
+      new BMap.Point(data_info[i][0], data_info[i][1])
+    ); // 创建标注
+    var content = data_info[i][2];
+    map.addOverlay(marker); // 将标注添加到地图中
+    addClickHandler(content, marker);
+
+    var content =
+      '<a href="' + data_info[i][3] + '">' + data_info[i][2] + "</a>";
+    map.addOverlay(marker); // 将标注添加到地图中
+    addClickHandler(content, marker);
+  }
+  function addClickHandler(content, marker) {
+    marker.addEventListener("mouseover", function (e) {
+      openInfo(content, e);
+    });
+  }
+  function openInfo(content, e) {
+    var p = e.target;
+    var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+    var infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象
+    map.openInfoWindow(infoWindow, point); //开启信息窗口
+  }
+</script>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS轮廓</title>
+</head>
+<style>
+    div{
+        width: 200px;
+        
+    }
+    .outline1{
+        border: 2px solid lightblue;
+        outline: 4px dotted indianred;
+    }
+    .outline2{
+        border: 5px solid lavender;;
+        outline-style: ridge;
+        outline-color: lightpink;
+        outline-width: 6px;;
+    }
+</style>
+<body>
+    <h3>轮廓是不占用空间的，不增加额外的height和width</h3>
+    <div>
+        <p class="outline1">这是轮廓1</p>
+        <p class="outline2">这是轮廓2</p>
+    </div>      
+</body>
+</html>

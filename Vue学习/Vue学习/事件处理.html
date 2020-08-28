@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件处理</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app1">
+      <!-- 或v-on:click -->
+      <button @click="count++">+1</button>
+      <p>按钮被点击了：{{count}}次</p>
+    </div>
+
+    <!-- 调用方法 利用computed的话会在初始化的时候就会直接执行-->
+    <div id="app2">
+      不加参数的方法调用
+      <!-- 或v-on:click -->
+      <button @click="greet()">greet</button>
+    </div>
+
+    <!-- 可传参方法 -->
+    <div id="app3">
+      加参数的方法调用
+      <!-- 或v-on:click -->
+      <button @click="greet('hi')">greet</button>
+    </div>
+    <br>  
+
+    <!-- 阻止事件冒泡 -->
+    <div id="app4" style="background-color: blanchedalmond;">
+      <div>
+        div里面的内容
+        <p @click.self="doSomething">
+          <!-- .self 点击自己本身才会被执行，其他子元素不会被传递 -->
+          p里面的内容
+          <span @click.stop="doSomething">
+            <!-- .stop 阻止事件冒泡 stopPropagation的缩写-->
+            span里面的内容</span
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+  <script>
+    var count = 0;
+    var vm4 = new Vue({
+      el: "#app4",
+      data: {
+        name: "方法执行了",
+      },
+      methods: {
+        doSomething: function () {
+          count = count + 1;
+          alert(this.name + count + "次") ;
+          count=0;
+
+        },
+      },
+    });
+
+    var vm3 = new Vue({
+      el: "#app3",
+      data: {
+        name: "Vue.js ",
+      },
+      methods: {
+        greet: function (message) {
+          alert(message + " " + this.name + "!");
+        },
+      },
+    });
+
+    var vm2 = new Vue({
+      el: "#app2",
+      data: {
+        name: "Vue.js ",
+      },
+      methods: {
+        greet: function () {
+          alert("Hello " + this.name + "!");
+        },
+      },
+    });
+
+    var vm1 = new Vue({
+      el: "#app1",
+      data: {
+        count: 0,
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>监听属性</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      千米：<input type="text" v-model="kilometers" /> <br />
+      米：<input type="text" v-model="meters" />
+      <p id="info"></p>
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        kilometers: 0,
+        meters: 0,
+      },
+      methods: {},
+      computed: {},
+      watch: {
+        kilometers: function (val) {
+          this.kilometers = val;
+          this.meters = this.kilometers * 1000;
+        },
+        meters: function (val) {
+          this.kilometers = val / 1000;
+          this.meters = val;
+        },
+      },
+    });
+    //$watch是一个实例方法
+    vm.$watch("kilometers", function (newValue, oldValue) {
+      document.getElementById("info").innerHTML =
+        "千米,修改前的值为：" + oldValue + "修改后的值为：" + newValue;
+    });
+  </script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本效果</title>
+</head>
+<style>
+    p{
+        float: left;
+        margin-left: 30px;
+        margin-top: 5px;
+        width: 100px;
+        height: 100px;
+        border: 2px solid sandybrown;
+    }
+    p:first-child{
+        text-shadow: 2px 3px 2px lightcoral;
+    }
+    p:nth-child(2){
+        box-shadow: 3px 3px 4px sandybrown;
+    }
+    p:nth-child(3){
+        word-wrap: break-word ; /* 单词超出边界 换行 */
+    }
+    p:nth-of-type(4){
+        word-break: keep-all;/* 有-也会换行，过长的单词让它超出，不拆分 */
+    }
+    p:nth-of-type(5){
+        word-break:break-all;/* 拆单词 */
+    }
+    p:nth-of-type(6){
+        overflow: hidden;
+        text-overflow: clip;
+        width: 50px;
+        height: 1em;
+    }
+    p:nth-of-type(7){
+        overflow: hidden;/* 用text-overflow的时候要与over-flow一起用 */
+        text-overflow: ellipsis;/* 过长文本显示省略号 */
+        white-space: nowrap; /* 空白不换行！！！  不写这个就不会显示省略号 */
+        width: 100px;
+        height: 1em;      
+    }
+    a{
+        color: steelblue;
+    }
+    p:nth-of-type(8){
+        text-align: justify;/* 每行宽度相等，左右外边距对齐 */
+        text-align-last: center;
+    }
+    p:nth-of-type(9){
+        text-align: justify;
+        text-align-last: left;
+    }
+    p:nth-of-type(10){
+        text-align: justify;
+        text-align-last: right;
+    }
+</style>
+<body>
+    <p>文本阴影</p>
+    <p>盒子阴影</p>
+    <p>This is a apple.遇到长单词换行</p>
+    <p>This is a apple. This-is-a-apple. Thisisaapplesdfads.不拆分单词</p>
+    <p>This is a apple.拆分单词</p>
+    <div style="clear: both;"></div>
+    <hr />
+    <p>this is a apple.</p>
+    <p title="this is a apple.">this is a apple.</p>
+    <div style="clear: both;"></div>
+    <h3>卡片效果 见css学习中的 图片廊：</h3>
+    <a href="../CSS学习/图片廊.html">CSS学习中的图片廊地址</a>
+    <hr />
+    <p>最后一行居中对齐</p>
+    <p>最后一行向左对齐</p>
+    <p>最后一行向右对齐</p>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>组件</title>
+  </head>
+  <body>
+    <!-- 语法 Vue.component(tagName,options) -->
+
+    <!-- 1.一个简单的全局组件和局部 -->
+    <div id="app1">
+      <!-- 全局 -->
+      <runoob></runoob>
+      <!-- 两个局部 -->
+      <runoob2></runoob2>
+      <runoob3></runoob3>
+    </div>
+    <hr />
+
+    <!--2. Prop 子组件接受父组件传过来的数据,
+    父组件数据通过 props 把数据传给子组件,自组件显式地用props声明"prop"
+ -->
+    <div id="app2">
+      <Child message="hello!"></Child>
+    </div>
+    <hr />
+
+    <!-- 3.动态地prop -->
+    <div id="app3">
+      <div>
+        <p>prop是单项绑定,父组件属性改变将传到给子组件,但不会反过来</p>
+        <input type="text" v-model="parentMsg" />
+        <br />
+        <Child2 v-bind:message="parentMsg"></Child2>
+      </div>
+    </div>
+    <hr />
+
+    <!-- 4.使用v-bind 将todo传到重复组件中 -->
+    <div id="app4">
+      <ol>
+        <todo-item v-for="item in sites" v-bind:to="item"></todo-item>
+      </ol>
+    </div>
+  </body>
+  <!-- 4.todo -->
+  <script>
+    Vue.component("todo-item", {
+      props: ["to"],
+      template: "<li>{{to.text}}</li>",
+    });
+    new Vue({
+      el: "#app4",
+      data: {
+        sites: [{ text: "百度" }, { text: "谷歌" }],
+      },
+    });
+  </script>
+
+  <!-- 动态prop -->
+  <script>
+    Vue.component("Child2", {
+      props: ["message"],
+      template: "<p>p中的内容:{{message}}</p>",
+    });
+    new Vue({
+      el: "#app3",
+      data: {
+        parentMsg: "父组件的内容",
+      },
+    });
+  </script>
+  <!-- 子组件接收父组件数据 -->
+  <script>
+    Vue.component("Child", {
+      //声明props
+      //父组件是Child,子组件是<span>
+      props: ["message"],
+      template: "<span>span中的内容为:{{message}}</span>",
+    });
+    new Vue({
+      el: "#app2",
+    });
+  </script>
+
+  <!-- 全局组件和局部组件 -->
+  <script>
+    //注册
+    Vue.component("runoob", {
+      template: "<h1>自定义全局组件</h1>",
+    });
+    //创建实例
+
+    var Child = { template: "<h2>局部组件</h2>" };
+    new Vue({
+      el: "#app1",
+      components: {
+        runoob2: Child,
+        runoob3: { template: "<h2>局部组件</h2>" },
+      },
+    });
+  </script>
+</html>

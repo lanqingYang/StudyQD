@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>条件语句</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="type==='A'">A</div>
+      <div v-else-if="type==='B'">B</div>
+      <div v-else-if="type==='C'">C</div>
+      <div v-else>D</div>
+      <div v-show="show">内容显示</div>
+    </div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        type: "C",
+        show: true,
+      },
+    });
+  </script>
+</html>

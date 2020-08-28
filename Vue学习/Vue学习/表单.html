@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="jquery-3.0.0.min.js"></script>
+    <title>表单</title>
+  </head>
+  <body>
+    <!-- 动态反选 -->
+    <div id="app1">
+      <!-- @change=v-on:change -->
+      <p>全选<input type="checkbox" v-model="checks" @change="numList()" /></p>
+      <!-- v-for:循环 -->
+      <label v-for="(list,index) in checkList">
+        <input
+          type="checkbox"
+          v-model="checkListOn"
+          :value="list.name"
+        />{{list.name}}
+      </label>
+      <p>{{checkListOn}}</p>
+    </div>
+
+    <br />
+    <hr />
+    <!-- 一个比较完整的例子 -->
+    <div id="app2">
+      <!-- 文本框 -->
+      <label for="username">昵称：</label>
+      <!-- v-model.trim 去掉空格;v-model.number 转换为数字类型 -->
+      <input type="text" id="username" v-model.trim="username" />
+      <br />
+      <label for="age">年龄：</label>
+      <input type="text" id="age" v-model.number="age" />
+      <br />
+
+      <!-- 单选框 -->
+      <input type="radio" value="水果" v-model="picked" id="fruit" />
+      <label for="fruit">水果</label>
+      <input type="radio" value="零食" v-model="picked" id="lingshi" />
+      <label for="lingshi">零食</label>
+      <br />
+
+      <!-- 下拉选择框 -->
+      <select name="shuiguo" id="shuiguo" v-model="fruitChoose">
+        <option value="草莓">草莓</option>
+        <option value="荔枝">荔枝</option>
+        <option value="葡萄">葡萄</option>
+      </select>
+      <br />
+
+      <!-- 多选框 -->
+      <p>
+        全选<input type="checkbox" v-model="allcheck" @change="allCheckOn()" />
+      </p>
+      <label for="milk">旺仔牛奶</label>
+      <input
+        type="checkbox"
+        v-model="checkedThings"
+        value="旺仔牛奶"
+        id="milk"
+        name="lingshi"
+      />
+      <label for="chocolate">巧克力</label>
+      <input
+        type="checkbox"
+        v-model="checkedThings"
+        value="巧克力"
+        id="chocolate"
+        name="lingshi"
+      />
+      <label for="candy">糖果</label>
+      <input
+        type="checkbox"
+        v-model="checkedThings"
+        value="糖果"
+        id="candy"
+        name="lingshi"
+      />
+
+      <hr />
+      <p>昵称：{{username}}</p>
+      <p>年龄：{{age}}</p>
+      <p>偏爱：{{picked}}</p>
+      <p>水果：{{fruitChoose}}</p>
+      <p>零食{{checkedThings}}</p>
+    </div>
+  </body>
+
+  <!-- 一个比较完整的例子 -->
+  <script>
+    var app2 = new Vue({
+      el: "#app2",
+      data: {
+        //这些赋值字符串的内容都可以写为空字符串
+        username: "鹿柴呀",
+        age: 21,
+        picked: "水果",
+        fruitChoose: "荔枝",
+        allcheck: false,
+        checkedThings: [],
+        flag: false, //是否有list被勾选
+      },
+      methods: {
+        allCheckOn: function () {
+          if (this.allcheck == true) {
+            this.flag = true;
+            var array = [];
+            // console.log($("input[name=lingshi]").length);原生js怎么写????
+            for (var i = 0; i < $("input[name=lingshi]").length; i++) {
+              //   console.log($("input[name=lingshi]")[i].value);
+              // $("input[name=lingshi]")[i] 拿到的是html元素
+              array.push($("input[name=lingshi]")[i].value);
+            }
+            this.checkedThings = array;
+          } else {
+            this.flag = false;
+          }
+        },
+      },
+      watch: {
+        //   这里监听的是list数组 不是allcheck那个值!!
+        checkedThings: function () {
+          //主要是用来，当所有list都被check，那么全选也被check
+          if (this.checkedThings.length == $("input[name=lingshi]").length) {
+            this.allcheck = true;
+            this.flag = true;
+          } else {
+            this.allcheck = false;
+          }
+        },
+        flag: function () {
+          if (this.flag == false) {
+            this.checkedThings = [];
+          }
+        },
+      },
+    });
+  </script>
+  <!-- 动态反选 -->
+  <script>
+    var app1 = new Vue({
+      el: "#app1",
+      data: {
+        checks: false,
+        checkList: [
+          { id: 1, name: "草莓" },
+          { id: 2, name: "苹果" },
+          { id: 3, name: "菠萝" },
+          { id: 4, name: "山竹" },
+        ],
+        checkListOn: [], //放入被选择的元素
+        flag: false, //是否有list被勾选
+      },
+      methods: {
+        numList: function () {
+          //如果改变
+          if (this.checks == true) {
+            this.flag = true;
+            var listArray = []; //创建新数组
+            for (var i = 0; i < this.checkList.length; i++) {
+              listArray.push(this.checkList[i].name); //数组中放入选择的名字
+            }
+            this.checkListOn = listArray; //赋值
+          } else {
+            this.flag = false; //把将全选选择到不选择，数据变空的操作，放到了flag监听里面
+          }
+        },
+      },
+
+      watch: {
+        checkListOn: function () {
+          //监听 checkListOn变量，当改变的时候，checks的值也改变 当长度等于数组长度，全选为true
+          if (this.checkListOn.length == this.checkList.length) {
+            this.checks = true;
+            this.flag = true;
+          } else {
+            this.checks = false;
+          }
+        },
+        flag: function () {
+          if (this.flag == false) {
+            this.checkListOn = [];
+          }
+        },
+      },
+    });
+  </script>
+</html>
+
+<!-- 
+    问题：
+
+    1.点击全选可以全部选择，但是再次点击全选，不会改变list的选择状态
+    解决：为checks的属性增加一个flag属性（是否有list被勾选），并且对其进行监听，把取消全选，数据变空的操作放到了flag的监听中进行。
+         如果checks为false，说明没有没有list被勾选：flag=false,让checkListOn为[]空，取消各个list的选择状态；
+         checks为true,全选了，各个list也全选。
+         注意加判断条件：当还有list被选择时，flag就不该为false，全选框checks应该为false
+
+    
+
+    遗留问题：原生js写法
+    $("input[name=lingshi]").length 用原生js怎么选择？
+ -->

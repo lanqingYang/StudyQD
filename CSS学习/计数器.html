@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计数器</title>
+</head>
+<style>
+    body{
+        counter-reset: section;/* 创建一个名为section的计数器 */
+    }
+    h2::before{
+        counter-increment: section;/* section为递增变量 */
+        content: "section"counter(section)":"; /* counter(name)取计数器的值 */
+    }
+
+
+
+    body{
+        counter-reset: first-counter;
+    }
+    .new-h2{
+        counter-reset: second-counter;
+    }
+    .new-h2::before{
+        counter-increment: first-counter;
+        content: "fitsr-counter"counter(first-counter)":";
+    }
+    .new-h2::after{
+        content:counter(first-counter);
+    }
+    h3::before{
+        counter-increment: second-counter;
+        content:counter(first-counter)"." counter(second-counter)":";
+    }
+
+
+
+
+    ol{
+        counter-reset: list;
+        list-style-type: none;
+    }
+    li::before{
+        counter-increment: list;
+        content: counters(list,".")" ";  /* 多个参数 用counters() 在不同的层级中加入字符串"." */
+    }
+</style>
+<body>
+    <h1>使用css计数</h1>
+    <h2>第一个h2</h2>
+    <h2>第二个h2</h2>
+    <h2>第三个h2</h2>
+    <hr />
+
+    <h1>嵌套计数器</h1>
+
+    <h2 class="new-h2">大标题</h2>
+        <h3>假装我是不一样的文本</h3>
+        <h3>假装我是另一个不一样的文本</h3>
+    
+    <h2 class="new-h2">大标题</h2>
+        <h3>假装我是不一样的文本</h3>
+        <h3>假装我是另一个不一样的文本</h3>
+    
+    <h2 class="new-h2">大标题</h2> 
+        <h3>假装我是不一样的文本</h3>
+        <h3>假装我是另一个不一样的文本</h3>
+     
+    <hr />
+
+
+    <h1>列表中子元素自己创建</h1>
+    <ol>
+        <li>Item</li>
+        <li>Item
+            <ol>
+                <li>Item</li>
+                <li>Item</li>
+                <li>Item
+                    <ol>
+                        <li>Item</li>
+                        <li>Item</li>
+                        <li>Item</li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+        <li>Item</li>
+    </ol>
+    
+</body>
+</html>

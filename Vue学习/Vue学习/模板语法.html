@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模板语法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app1">
+      <p>{{message}}</p>
+    </div>
+
+    <!-- {{}}数据解释为普通文本，v-html输出真正的html -->
+    <div id="app2" v-html="message"></div>
+
+    <!-- v-bind可以绑定所有的属性，这里举例绑定titile -->
+    <div id="app3">
+      <!-- 可以缩写为  :title -->
+      <span v-bind:title="message">这是一段文字呀</span>
+    </div>
+
+    <!-- 表达式 -->
+    <div id="app4">
+      {{5+5}}<br />
+      {{ok ? "YES" : "NO"}}<br />
+      <!-- 这里的reverse()没有起作用 -->
+      {{message.split(" ").reverse().join(" ")}}<br />
+    </div>
+
+    <div id="app5">
+      <p v-if="ok">YES</p>
+      <!-- 这里notok为 false 所以p不会被显示出来 -->
+      <p v-if="notok">NO</p>
+    </div>
+
+    <div id="app6">
+      {{message}}
+      <!-- 可以缩写为 @click -->
+      <button v-on:click="doSomething">改变字符串信息</button>
+    </div>
+    <br />
+
+    <!-- v-model双向数据绑定 -->
+    <div id="app7">
+      <input type="text" v-model="message" />
+      <p>input中的信息为：{{message}}</p>
+    </div>
+
+    <!-- 过滤器 -->
+    <div id="app8">
+      <!-- 过滤器接收表达式的第一个值作为第一个参数 ，这里实现的是将字符串第一个字母变成大写-->
+      {{ message | captitalize1}}
+    </div>
+  </body>
+  <script>
+    var vm1 = new Vue({
+      el: "#app1",
+      data: {
+        message: "hello vue.js!",
+      },
+    });
+
+    var vm2 = new Vue({
+      el: "#app2",
+      data: {
+        message: "<h3>hello world!</h3>",
+      },
+    });
+
+    var vm3 = new Vue({
+      el: "#app3",
+      data: {
+        message: "title里面的内容",
+      },
+    });
+
+    var vm4 = new Vue({
+      el: "#app4",
+      data: {
+        ok: true,
+        message: "okkkkkk",
+      },
+    });
+
+    var vm5 = new Vue({
+      el: "#app5",
+      data: {
+        ok: true,
+        notok: false,
+      },
+    });
+
+    // 加入methods 方法的vue对象
+    var vm6 = new Vue({
+      el: "#app6",
+      data: {
+        message: "点击按钮我会变成数字",
+      },
+      methods: {
+        doSomething: function () {
+          // 记得加this 不然找不到message
+          this.message = "1234";
+        },
+      },
+    });
+
+    //v-model双向数据绑定
+    var vm7 = new Vue({
+      el: "#app7",
+      data: {
+        message: "input中的信息",
+      },
+    });
+
+    //过滤器
+    var vm8 = new Vue({
+      el: "#app8",
+      data: {
+        message: "room",
+        url: "www.baidu.com",
+      },
+      filters: {
+        captitalize1: function (value) {
+          if (!value) return "";
+          value = value.toString();
+          return value.charAt(0).toUpperCase() + value.slice(1);
+        },
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>计算属性</title>
+  </head>
+  <body>
+    <!-- computed基于依赖缓存，相关依赖发生变化才会重新取值
+    而methods在重新渲染时，函数会重新调用执行 ,执行方法记得加括号()-->
+    <div id="app">
+      <p>原始字符串: {{message}}</p>
+      <p>计算后字符串： {{reversedMessage1}}</p>
+      <p>计算后字符串：{{reversedMessage1}}</p>
+      <span
+        ><i>
+          这里count还是2
+          说明message没有发生改变，于是界面直接用这个值，不重复执行代码</i
+        ></span
+      >
+      <p>方法调用后字符串：{{reversedMessage2()}}</p>
+      <p>方法调用后字符串：{{reversedMessage2()}}</p>
+    </div>
+
+    <div id="app2">
+      <p>{{name}}</p>
+      <p>{{url}}</p>
+    </div>
+  </body>
+  <script>
+    var count = 1;
+    var nm = new Vue({
+      el: "#app",
+      data: {
+        message: "baidu",
+      },
+      computed: {
+        //默认为计算属性的getter
+        reversedMessage1: function () {
+          count++;
+          return count + this.message.split("").reverse().join("");
+        },
+      },
+      methods: {
+        reversedMessage2: function () {
+          count++;
+          return count + this.message.split("").reverse().join("");
+        },
+      },
+    });
+
+    // computed的getter和setter,计算属性默认只有getter，不过也可以提供一个setter
+    var vm2 = new Vue({
+      el: "#app2",
+      data: {
+        name: "baidu",
+        url: "www.baidu.com",
+      },
+      computed: {
+        site: {
+          get: function () {
+            return this.name + this.url;
+          },
+          //set可传参
+          set: function (newValue) {
+            var names = newValue.split(" ");
+            this.name = names[0];
+            this.url = names[names.length - 1];
+          },
+        },
+      },
+    });
+
+    vm2.site = "谷歌 www.goole.com";
+  </script>
+</html>

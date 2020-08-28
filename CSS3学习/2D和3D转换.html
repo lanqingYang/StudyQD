@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D、3D转换</title>
+</head>
+<style>
+    div{
+        width: 180px;
+        height: 100px;
+        border: 2px solid black;
+        float: left;
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+    div:nth-of-type(2){
+        background-color: burlywood;
+/*         transform: translate(10px,60px);   
+ */        transform: translateX(10px);
+        transform: translateY(60px);
+    }
+    div:nth-of-type(3){
+        background-color: cadetblue;
+        transform: rotate(30deg);  /* 符号为逆转 */
+        margin-top: 36px;
+    }
+    div:nth-of-type(4){
+        background-color: cornflowerblue;
+        transform: scale(0.8,0.8);  /* 宽高变大变小倍数 也可以分开写成下面的形式 */
+/*         transform:scaleX(0.8);
+        transform: scaleY(0.8);
+ */    }
+    div:nth-of-type(5){
+        background-color: darkcyan;
+        transform: skew(20deg,10deg); /* 水平垂直倾斜多少度 也可以写成下面注释的形式*/
+/*         transform: skewX(20deg);
+        transform: skewY(10deg);
+ */    }
+        div:nth-of-type(6){
+            background-color: darkorange;
+            transform: matrix(0.866,0.5,-0.5,0.866,0,0); /* 具体是咋样的也不是很懂。。。。 */
+            margin-top: 36px;
+        }
+
+        div:nth-of-type(8){
+            background-color: darkseagreen;
+            transform:translate3d(10px,10px,30px);  /* 别忘了是 translate3d!! */
+        }
+        div:nth-of-type(9){
+            background-color: tan;
+/*               transform:rotate3d(10,10,10,45deg);   别忘了是 translate3d!! 这个个下面三个 只能选其中一个来设定 
+ */               transform: rotateX(45deg);   /* x轴转45deg */
+/*             transform: rotateY(45deg);    x轴转45deg 
+          transform: rotateZ(45deg);     x轴转45deg         
+ */      }
+
+        div:nth-of-type(10){
+            background-color: tomato;
+            transform:scale3d(0.8,0.8,0.8);  /* 倍数增加 减小  z轴的设定好像没有什么作用 */
+/*             transform: scaleX(0.8);
+            transform: scaleY(0.8);
+            transform: scaleZ(0.8);
+ */
+        }
+
+        div:nth-of-type(14){
+            backface-visibility: hidden;
+            transform: rotateX(108deg);
+            background-color: yellowgreen;
+        }
+        div:nth-of-type(15){
+            backface-visibility: visible;
+            transform: rotateX(180deg);
+            background-color: yellowgreen;
+        }
+
+        .pic{ 
+            width: 300px;
+            height: 300px;
+            box-shadow:4px 4px 6px grey ;
+            border: 2px solid gray;
+            float:none;
+            border: none;
+            text-align: center;
+            background-color:white;
+            margin-top: 10px;
+        }
+        .pic img{
+            width: 90%;
+            height: 70%;
+            margin-top: 5%;
+        }
+        .pic p{
+            text-align: 20%;
+            margin: 0;
+            padding: 0;
+        }
+        .pic.one{
+            transform: rotate(10deg);
+        }
+        .pic.two{
+            transform:rotate(-10deg);
+        }
+</style>
+<body>
+    <h1>2D转换</h1>
+    <div style="background-color: darksalmon;">normal</div>
+    <div>translate() 右10 下60</div>
+    <div>rotate() 顺转30度</div>
+    <div>scale() 宽高变成原来的0.8倍</div>
+    <div>skew() 水平垂直倾斜20，10度</div>
+    <div>matrix()  6个参数 旋转 缩放 平移 倾斜</div>
+
+    <hr style="clear: both;" />
+    <br /><br /><br />
+    <h1>3D</h1>
+    <div style="background-color: darksalmon;">normal</div>
+    <div>translate() x10 y10 z10</div>
+    <div>对3D来说,不能X,Y,Z 都设定角度，只能设置一个，这里设定rotateX(45deg)</div>
+    <div>scale3d(0.8,0.8,0.8)</div>
+    <div>只有2D有skew</div>
+    <div>matrix是4*4数组有16个值</div>
+    <div>perspective、perspective-origin这俩属性也是不太懂. 这个右边有两个div 一个是背面可见一个不可见。</div>
+    <div>backeface-visible:hidden元素背面面向屏幕不可可见</div>
+    <div>backeface-visible:visible元素背面面向屏幕可见， 旁边空白处 是一个div 是不可见的情况</div>
+
+    <hr style="clear: both;" />
+
+
+    <h1>旋转的图片廊</h1>
+        <div class="pic one">
+            <img src="../practise-pic/run1.JPG" alt="">
+            <p>氧气初夏</p>
+        </div>
+        <div class="pic two">
+            <img src="../practise-pic/run2.JPG" alt="">
+            <p>氧气初夏</p>
+        </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>属性选择器</title>
+</head>
+<style>
+    [for]{/* 拥有for属性的 */
+        color: tomato;
+    }
+    [for=address]{/* for属性为address的 */
+        color: teal;
+    }
+    #username[placehoder~=username]{   /* palceholder属性的值包含独立的username的 */
+        color: grey;
+    }
+    #address[placeholder*=gqin]{/* palceholder属性中能拆出来gqin的就可以 */
+        background-color:rgb(149, 238, 194);
+    }
+    input[type^=sub]{/* 前几个字母是sub */
+        color: white;
+    }
+    input[type$=mit]{/* 后几个字母是mit */
+        background-color: rgb(97, 144, 231);
+    }
+    #email-aaa[id |=email]{/* id属性只能包含一个单词，单词中包含email或以"-"分隔的email */
+        background-color:paleturquoise;
+    }
+
+    
+
+</style>
+<body>
+    <form action="" method="get">
+        <label for="username">username:</label>
+        <input type="text" id="username" placeholder="in-put username"><br />
+        <label for="password">password:</label>
+        <input type="password" id="password" ><br />
+        <label for="email-aaa">e-mail:</label>
+        <input type="email" id="email-aaa" placeholder="810122753@qq.com"><br />
+        <label for="address">address:</label>
+        <input type="address" id="address" placeholder="chongqing"><br />
+        <input type="submit" value="提交">
+
+    </form>
+</body>
+</html>

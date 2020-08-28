@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../jquery-3.0.0.min.js"></script>
+    <title>添加删除元素</title>
+  </head>
+  <body>
+    <div class="one">
+      <p>我是一段文本<i>嚯嚯嚯霍霍</i></p>
+    </div>
+    <div>
+      <!-- 注意两个都是增加的节点地方的区别，在下面的script中有详细区别 -->
+      <button class="prepend">prepend文本前添加文本</button>
+      <button class="before">before文本前添加文本</button>
+      <button class="append">append文本后添加</button>
+      <button class="after">after文本后添加</button>
+    </div>
+    <div>
+      <!-- 删除元素 -->
+      <button class="empty">empty删除被选元素的子元素</button>
+      <button class="remove">remove 删除被选元素和其子元素</button>
+    </div>
+  </body>
+
+  <!-- 增加 -->
+  <script>
+    // 在开头添加元素 before()在选择元素外部嵌入,prepend()在选择元素内部嵌入;
+    $("button")
+      .first()
+      .click(function () {
+        // 在div内部嵌入
+        $(".one").prepend("<strong>用prepend新加的文本</strong>");
+      });
+
+    $(".before").click(function () {
+      //在div外部嵌入
+      $(".one").before("<i>用before新加的文本></i>");
+    });
+
+    $(".append").click(function () {
+      //在div内部嵌入
+      $(".one").append("<small>用append新增加的文本");
+    });
+
+    $(".after")
+      .last()
+      .click(function () {
+        //在div外部嵌入
+        $(".one").after("<a>用after新增的文本");
+      });
+  </script>
+  <!-- 删除 -->
+  <script>
+    $(".empty").click(function () {
+      $(".one").empty();
+    });
+
+    $(".remove").click(function () {
+      $(".one").remove();
+    });
+  </script>
+</html>

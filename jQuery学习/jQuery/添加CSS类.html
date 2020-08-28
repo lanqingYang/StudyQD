@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>添加css类和删除</title>
+    <script src="../jquery-3.0.0.min.js"></script>
+  </head>
+  <style>
+    .color {
+      color: royalblue;
+      font-size: 2em;
+    }
+  </style>
+  <body>
+    <button>添加/删除CSS类</button>
+    <p>我是一段文本哎呀呀呀呀</p>
+    <p>我是另外一段文本噢噢噢噢</p>
+  </body>
+  <script>
+    $("button").click(function () {
+      //toggleClass 包括了 addClass和removeClass
+      $("p").toggleClass("color");
+    });
+  </script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>服务器发送事件SSE</title>
+</head>
+<body>
+    <h3>服务器发送事件 Sever-Sent Events</h3>
+    <h2>接收事件通知对象 EventSource</h2>
+
+    <h1>获取服务端更新数据</h1>
+    <div id="result"></div>
+
+    <script>
+        if(typeof(EventSource)!=="undefined"){
+            var source=new EventSource("sse.php");
+            source.onmessage=function(event){
+                document.getElementById("result").innerHTML=source.data;
+            }
+        }else{
+            document.getElementById("result")="对不起，你的浏览器不支持 server-sent 事件"
+        }
+    </script>
+    
+</body>
+</html>

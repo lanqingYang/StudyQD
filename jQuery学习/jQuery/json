@@ -1,0 +1,42 @@
+
+JSON
+//键的名称也可以不加引号
+var person={"name":"张三"，"age":30}
+var person={name:"张三",age：20}
+var person=[
+    {name:"张三",age：20},
+    {name:"李四",age：20}
+]
+
+1.json数据的两种获取方式： 
+    ·person.name 不用加引号
+    ·person["name"] 需要加引号
+    ·person[0].name  数据索引
+
+
+2.JSON和JAVA对象的相互转换
+
+    *JSON解析器
+    2.1 java转为json对象   
+        2.1.1导入jackson的相关jar包
+        2.1.2创建核心对象objectMapper
+        2.1.3调用objectMapper的相关方法进行转换
+            2.1.3.1 转换方法：
+            · writeValue(参数1,obj)  
+                参数1：File:将obj转换为JSON字符串，并保存到指定文件中
+                      Writer:将obj转换为JSON字符串，并将json数据填充到字符输出流中
+                      OutputStream:将obj转换为JSON字符串，并将json数据填充到字节输出流中
+            · writeValueAsString(obj):将对象转为json字符串
+
+            2.1.3.2 注解：
+            ·@JsonIgnore：排除属性
+            ·@JsonFormat：属性值得格式化
+             *@JsonFormat(pattern ="pattern= " ") pattern规定格式，比如时间"yyyy-mm-dd"
+
+            2.2.3.3复杂java对象转换
+            ·List:数组
+            ·Map：对象格式一致
+            
+    2.2 json对象转为java
+        ·readValue(json字符串数据，Class)
+

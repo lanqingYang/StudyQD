@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../jquery-3.0.0.min.js"></script>
+    <title>捕获</title>
+  </head>
+  <body>
+    <div>
+      <a href="www.baidu.com">这是一个百度的超链接</a>
+      <button class="getLink">获取链接值</button><br />
+      <hr />
+      <input type="text" placeholder="请输入一些东西" id="one" />
+      <button class="getValue">获取表单的值</button>
+      <hr />
+      <p>满载一船星辉，在星辉斑斓里放歌 ---- <a href="#"> 再别康桥</a></p>
+      <button class="getText">获取文本</button>
+      <button class="getHtml">获取文本（包含HTML标签）</button>
+    </div>
+  </body>
+
+  <script>
+    //获取文本
+    $(".getText").click(function () {
+      let c = $("p").text();
+      alert(c);
+    });
+
+    $(".getHtml").click(function () {
+      let d = $("p").html();
+      alert(d);
+    });
+
+    //获取表单值
+    $(".getValue").click(function () {
+      // .val()可以设置/返回值 也可以写text()
+      let b = $("input").val();
+      alert(b);
+    });
+
+    //   获取属性值
+    $(".getLink").click(function () {
+      let a = $("a").attr("href");
+      alert(a);
+    });
+  </script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web Worker</title>
+</head>
+<body>
+    <h3>web Worker 后台运行的JavaScript</h3>
+    <p>计数: <output id="result"></output> </p>
+    <button onclick="startWorker()">开始计数startWorker</button>
+    <button onclick="stopWorker()">停止计数stopWorker</button>
+
+    <script>
+        var w;
+        function startWorker(){
+            if(typeof(Worker)!=="undefined"){
+                if(typeof(w=="undefined")){
+                    w=new Worker("../js/timedCount.js");  /* 这里不允许在本地浏览器直接运行，要在服务器上运行 说明一下相对地址，“.”退出当前文件 “/”进入文件 */
+                }
+                w.onmessage = function(event){
+                    document.getElementById("result").innerHTML=event.data;/* 向webworker增加一个事件监听器 */
+                };
+            }else{
+                document.getElementById("result").innerHTML="抱歉，你的浏览器不支持web workers";
+            }
+        }
+        function stopWorker(){
+            w.terminate();/* 终止web worker 释放资源 */
+            w="undefined";
+        }
+    </script>
+</body>
+</html>

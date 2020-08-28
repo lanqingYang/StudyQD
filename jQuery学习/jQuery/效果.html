@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>效果</title>
+    <script src="../jquery-3.0.0.min.js"></script>
+  </head>
+
+  <style>
+    .fade :nth-child(5) {
+      background: darkseagreen;
+      width: 100px;
+      height: 100px;
+    }
+
+    .fade :nth-child(6) {
+      background: rgb(136, 184, 231);
+      width: 100px;
+      height: 100px;
+    }
+
+    .slide div,
+    .animation1,
+    .div2 {
+      width: 200px;
+      height: 100px;
+      background-color: rgb(136, 184, 231);
+    }
+  </style>
+
+  <body>
+    <!-- 隐藏和显示 -->
+    <div>
+      <button id="hide">隐藏文本</button>
+      <button id="show">显示文本</button>
+      <p>隐藏和显示专用文本噢噢噢噢噢噢噢噢噢噢噢噢</p>
+      <button id="toggle">隐藏/显示文本</button>
+    </div>
+    <hr />
+
+    <!-- 淡入和淡出 -->
+    <div class="fade">
+      <button class="fadein">淡入</button>
+      <button class="fadeout">淡出</button>
+      <button class="fadetoggle">淡出/淡出</button>
+      <button class="fadeto">改变透明度</button>
+      <div class="div1"></div>
+      <div class="div1"></div>
+    </div>
+    <hr />
+
+    <!-- 滑上滑下 -->
+    <div class="slide">
+      <button>滑上/滑下</button>
+      <div>我是文本啊文本</div>
+    </div>
+    <hr />
+
+    <!-- 动画 -->
+    <div class="animation">
+      <button class="start">动画开始</button>
+      <button class="pause">当前动画停止</button>
+      <button class="pauseAll">停止所有动画</button>
+      <button class="finish">停止所有动画，但完成当前动作</button>
+      <div class="animation1"><p>啦啦啦</p></div>
+    </div>
+    <hr />
+
+    <!-- 链接，在相同元素上运行多条jQuery命令 -->
+    <div class="chain">
+      <button>连续的淡入淡出动画</button>
+      <div class="div2"></div>
+    </div>
+  </body>
+
+  <!-- 连续的淡入滑上滑下 -->
+  <script>
+    $(".chain button").click(function () {
+      $(".div2").slideUp(2000).slideDown(2000);
+    });
+  </script>
+
+  <!-- 动画 -->
+  <script>
+    // 动画开始
+    $(".start").click(function () {
+      //使用队列功能，逐一对animate进行调用,slow后面还可以加一个 callback方法（回调函数），他会在效果实现后再实现
+      $(".animation1").animate(
+        { height: "300px", opacity: "0.4", fontSize: "2em" },
+        "slow",
+        function () {
+          alert("动画第一部分已经完成了");
+        }
+      );
+      $(".animation1").animate({ width: "500px", opacity: "0.6" }, "slow");
+      $(".animation1").animate(
+        { height: "100px", opacity: "0.8", fontSize: "1em" },
+        "slow"
+      );
+      $(".animation1").animate({ width: "200px", opacity: "1" }, "slow");
+    });
+
+    // 当前动画暂停，接下的动画继续
+    $(".pause").click(function () {
+      $(".animation1").stop();
+      //stop中含（stopAll,goToEnd）,不带参数 默认都为false
+    });
+
+    //停止所有动画
+    $(".pauseAll").click(function () {
+      $(".animation1").stop(true);
+    });
+
+    //停止所有动画，并且完成当前动画
+    $(".finish").click(function () {
+      $(".animation1").stop(true, true);
+    });
+  </script>
+
+  <!-- 淡入和淡出 -->
+  <script>
+    $(".fadein").click(function () {
+      $(".div1").fadeIn(1000, "linear");
+    });
+
+    $(".fadeout").click(function () {
+      $(".div1").fadeOut(1000, "swing");
+    });
+
+    $(".fadetoggle").click(function () {
+      $(".div1").fadeToggle(1000);
+    });
+
+    $(".fadeto").click(function () {
+      $(".div1").fadeTo("slow", 0.4); //速度和透明度
+    });
+  </script>
+
+  <!-- 隐藏和显示 -->
+  <script>
+    $("#hide").click(function () {
+      $("p").hide(1000, "linear", function () {
+        alert("已经隐藏了噢");
+      }); //参数 speed、过渡使用函数（提供了 swing linear）、callback回调函数
+    });
+
+    $("#show").click(function () {
+      $("p").show(1000, "swing");
+    });
+
+    $("#toggle").click(function () {
+      $("p").toggle();
+    });
+  </script>
+
+  <!-- 滑上和滑下 -->
+  <script>
+    $(".slide button").click(function () {
+      $(".slide").children("div").slideToggle();
+      //slideToggle:slideUp()+slideDown()
+    });
+  </script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS表格样式</title>
+    <link rel="stylesheet" href="">
+</head>
+
+<style>
+    table,th,td{
+        border: 1px solid sandybrown;
+    }
+    table{
+        border-collapse: collapse;     /* 显示一个表的单边框 */
+        width: 400px;
+    }
+    td,th{
+        padding: 3px 4px 4px 3px;
+        vertical-align: bottom;
+
+    }
+    th{
+        background-color:burlywood;
+        color:white;
+        font-size: 20px;
+    }
+    td{
+        color: black;
+        text-align: right;
+
+    }
+    caption{
+        caption-side: bottom;
+        color:sandybrown;
+    }
+    table tr:nth-child(odd){     /* 单行td设置背景颜色  双行even */
+        background-color: wheat;
+        font-weight: bold;
+    }
+</style>
+<body>
+    <table>
+        <caption>餐食表</caption>
+        <tr>
+            <th>水果</th>
+            <th>主食</th>
+            <th>甜点</th>
+        </tr>
+        <tr>
+            <td>苹果</td>
+            <td>米饭</td>
+            <td>奶昔</td>
+        </tr>
+        <tr>
+            <td>香蕉</td>
+            <td>面</td>
+            <td>沙冰</td>
+        </tr>
+        <tr>
+            <td>橙子</td>
+            <td>火锅</td>
+            <td>奶茶</td>
+        </tr>
+        <tr>
+            <td>桃子</td>
+            <td>米线</td>
+            <td>舒芙蕾</td>
+        </tr>
+    </table>
+</body>
+</html>
