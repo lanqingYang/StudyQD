@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <title>响应接口</title>
+  </head>
+  <body>
+    <div id="app1">
+      <p style="font-size: 25px">计数器：{{count}}</p>
+      <button @click="count++" style="font-size: 25px">点击</button>
+    </div>
+    <br />
+    <hr />
+    <p>
+      不允许在一创建的实例撒谎给你动态添加新的根基响应式属性。<br />
+      所以最好的方法就是在初始化实例前声明根级响应属性，哪怕是一个空值。<br />
+      运行过程中，使用全局Vue,Vue.set、Vue.delete方法实现属性添加和删除<br />
+
+      Vue.set(target,key,value)
+      target:对象或者数组;key：字符串或者数字;value:可以是任何类型
+    </p>
+    <div id="app2">
+      <p>实例二：计数器： {{product.count}}</p>
+      <button @click="product.count++" style="font-size: 20px">点击</button>
+      <p>点击前count：{{oldval}}，点击后count：{{newval}}</p>
+    </div>
+  </body>
+  <!-- Vue.set Vue.delete-->
+  <script>
+    var myproduct = { count: 1, name: "book", price: "20.00" };
+    var vm2 = new Vue({
+      el: "#app2",
+      data: {
+        product: myproduct,
+        oldval: 0,
+        newval: 0,
+      },
+    });
+    //添加属性 ,但是不会创建get、set方法 。Vue主要在开始时，创建所有属性。
+    vm2.product.id = "1";
+    //下面的增加属性的方式，可以创建author的get、set方法 在控制台中可以查看
+    Vue.set(myproduct, "author", "Bob");
+    //Vue.delete 删除属性  Vue.delete(target,key) ,get与set方法都删除
+    Vue.delete(myproduct, "price");
+    vm2.$watch("product.count", function (nval, oval) {
+      this.oldval = oval;
+      this.newval = nval;
+    });
+  </script>
+  <script>
+    var vm = new Vue({
+      el: "#app1",
+      data: {
+        count: 1,
+      },
+    });
+    vm.$watch("count", function (nval, oval) {
+      alert("计数器变化：" + oval + "变为：" + nval);
+    });
+    //定时器，每个10s进行一次
+    setTimeout(function () {
+      vm.count += 20;
+    }, 2000);
+  </script>
+</html>
