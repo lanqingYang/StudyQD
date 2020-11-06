@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>非父子组件之间传值</title>
+  </head>
+  <body>
+    <p>
+      通过事件中心管理组件间的通信，组件A\B触发事件中心事件，事件中心监听组件A\B
+    </p>
+    <div id="app">
+      <test-tom></test-tom>
+      <test-jerry></test-jerry>
+      <button @click="handle">销毁事件</button>
+    </div>
+  </body>
+  <script>
+    //   兄弟组件之间传递数据
+    //提供事件中心
+    var hub = new Vue();
+
+    Vue.component("test-tom", {
+      data: function () {
+        return { num: 0 };
+      },
+      template: `
+      <div>
+        <div>tom:{{num}}</div>
+        <button @click='handle'>点击</button>
+        </div>
+      `,
+      methods: {
+        handle: function () {
+          //触发兄弟jerry组件的事件
+          hub.$emit("jerry-event", 2);
+        },
+      },
+      mounted: function () {
+        //事件中心监听事件
+        hub.$on("tom-event", (val) => {
+          this.num += val;
+        });
+      },
+    });
+
+    Vue.component("test-jerry", {
+      data: function () {
+        return { num: 0 };
+      },
+      template: `
+      <div>
+        <div>jerry:{{num}}</div>
+        <button @click='handle'>点击</button>
+        </div>
+      `,
+      methods: {
+        handle: function () {
+          //触发兄弟tom组件的事件
+          hub.$emit("tom-event", 1);
+        },
+      },
+      mounted: function () {
+        //事件中心监听事件
+        hub.$on("jerry-event", (val) => {
+          this.num += val;
+        });
+      },
+    });
+
+    var vm = new Vue({
+      el: "#app",
+      data: {},
+      methods: {
+        //销毁事件
+        handle: function () {
+          hub.$off("tom-event");
+          hub.$off("jerry-event");
+        },
+      },
+    });
+  </script>
+</html>

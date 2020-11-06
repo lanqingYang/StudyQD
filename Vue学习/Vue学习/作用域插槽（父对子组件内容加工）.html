@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+    <title>作用域插槽（父组件对子组件进行加工）</title>
+  </head>
+  <style>
+    .current {
+      color: orange;
+    }
+  </style>
+  <body>
+    <!-- 目标：实现单个数据高亮！ -->
+    <h3>目标：实现单个数据高亮！</h3>
+    <div id="app">
+      <!-- 通过组件绑定的方式，传值给父组件，父组件通过props接收 -->
+      <fruit-list :list="list">
+        <!-- slot-scope="slotProps": 在父组件中得到子组件中的数据，再进行加工。尽量不去改变子组件 -->
+        <template slot-scope="slotProps">
+          <!-- slot-scope 属性，后面的名字是自定义的，一般使用slotProps，通过它可以得到子组件中绑定的info属性（这个info是下面子组件中自定义的可以随意更改名字） 
+        通过它就可以得到子组件中的数据了，就可以进行加工的处理-->
+          <strong v-if="slotProps.info.id==2" class="current">
+            {{slotProps.info.name}}</strong
+          >
+          <span v-else>{{slotProps.info.name}}</span>
+        </template>
+      </fruit-list>
+      <!-- 在子组件封装好之后，尽量不要再去更改，尽量通过父组件来进行更改其他的东西，比如此例子决定哪个li进行高亮，就通过父组件来判断就好，
+    这就是作用域插槽要解决的问题 -->
+    </div>
+  </body>
+  <script>
+    Vue.component("fruit-list", {
+      //注意父组件要去接收数据！！获取值
+      props: ["list"],
+      template: `
+     <div>
+        <li v-for='item in list' :key='item.id'>
+            <slot :info='item'>{{item.name}}</slot>
+        </li>
+     </div>
+     `,
+      //要是上面父组件中没有东西，那么就会显示子组件中的slot标签部分的东西，即{{item.name}}
+    });
+
+    new Vue({
+      el: "#app",
+      data: {
+        list: [
+          {
+            id: 1,
+            name: "apple",
+          },
+          {
+            id: 2,
+            name: "peach",
+          },
+          {
+            id: 3,
+            name: "banana",
+          },
+        ],
+      },
+    });
+  </script>
+</html>

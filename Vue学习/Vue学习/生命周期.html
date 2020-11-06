@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>vue生命周期学习</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{message}}，这是在outerHtml中</h1>
+    </div>
+  </body>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        message: 10,
+      },
+
+      //创建前
+      beforeCreate: function () {
+        console.group("------beforeCreate创建前状态------");
+        console.log("%c%s", "color:red", "el     : " + this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data);
+        console.log("%c%s", "color:red", "message: " + this.message);
+      },
+      //创建后
+      created: function () {
+        console.group("------created创建完毕状态------");
+        console.log("%c%s", "color:red", "el     : " + this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data);
+        //$data在创建后就有了，数据与data进行了绑定
+        console.log("%c%s", "color:red", "message: " + this.message);
+      },
+      //挂载前，未挂载到页面，{{message}}拿不到数据，还是在js中虚拟DOM的形式存在的
+      beforeMount: function () {
+        console.group("------beforeMount挂载前状态------");
+        console.log("%c%s", "color:red", "el     : " + this.$el);
+        console.log(this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data);
+        console.log("%c%s", "color:red", "message: " + this.message);
+      },
+      //挂在后，{{message}}拿到数据10
+      mounted: function () {
+        console.group("------mounted 挂载结束状态------");
+        console.log("%c%s", "color:red", "el     : " + this.$el);
+        console.log(this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data);
+        console.log("%c%s", "color:red", "message: " + this.message);
+      },
+      //更新前
+      beforeUpdate: function () {
+        console.group("beforeUpdate 更新前状态===============》");
+        console.log("%c%s", "color:red", "el     : " + this.$el);
+        console.log(this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data);
+        console.log("%c%s", "color:red", "message: " + this.message);
+      },
+      //更新后
+      //data发生改变，会触发对应组件的重新渲染
+      updated: function () {
+        console.group("updated 更新完成状态===============》");
+        console.log("%c%s", "color:red", "el     : " + this.$el);
+        console.log(this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data);
+        console.log("%c%s", "color:red", "message: " + this.message);
+      },
+      //销毁前
+      beforeDestroy: function () {
+        console.group("beforeDestroy 销毁前状态===============》");
+        console.log("%c%s", "color:red", "el     : " + this.$el);
+        console.log(this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data);
+        console.log("%c%s", "color:red", "message: " + this.message);
+      },
+      //销毁后
+      destroyed: function () {
+        console.group("destroyed 销毁完成状态===============》");
+        console.log("%c%s", "color:red", "el     : " + this.$el);
+        console.log(this.$el);
+        console.log("%c%s", "color:red", "data   : " + this.$data);
+        console.log("%c%s", "color:red", "message: " + this.message);
+      },
+    });
+  </script>
+</html>
+<!-- template的有无对生命周期的影响
+    1.如果vue实例对象中有template参数选项，则将其作为模板，编译成rander函数
+    2.如果没有，则将外部HTML作为模板编译
+    3. 显示优先级 rander函数 > template参数 > outer HTML(包括标签) 
+    
+-->

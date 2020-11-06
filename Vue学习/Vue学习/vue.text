@@ -1,0 +1,144 @@
+1.v-bind:(href url )   用于绑定数据和元素属性   缩写:href
+2.v-on:click                                  缩写:@click
+
+3.v-bind 与 v-model区别
+`v-bind用来绑定数据和属性以及表达式,缩写为':'
+`v-model使用在表单中,实现双向数据绑定的,在表单元素外使用不起作用
+
+4.组件中的data是方法，与vue对象中的data是不一样的
+ 组件：data: function () {
+        return {
+          counter: 0,
+        };
+      },
+
+vue对象: data:{
+    counter:0,
+    age:10;
+}
+
+5.@input 一般用于监听事件只要输入的值变化了就会触发input
+ @change当输入框失焦的时候触发
+
+6.ref="input"
+ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。
+如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例：
+
+7.  function(e);
+    e : event 当前发生的事件（click、mouseover等等），保存了当前事件的信息。如鼠标点击事件，有鼠标的坐标信息。
+    function(el);
+    element
+
+8.关于=> 箭头函数
+//无形参
+var f = () => 5;
+// 等同于
+var f = function () { return 5 };
+
+//多个形参
+var sum = (num1, num2) => num1 + num2;
+// 等同于
+var sum = function(num1, num2) {
+  return num1 + num2;
+};
+
+箭头函数和匿名函数有个明显的区别：箭头函数内部的this是词法作用域，由上下文确定。
+var obj = {
+    birth: 1990,
+    getAge: function () {
+        var b = this.birth; // 1990
+        var fn = function () {
+            return new Date().getFullYear() - this.birth; // this指向window或undefined
+        };
+        return fn();
+    }
+};
+
+箭头函数完全修复了this的指向，this总是指向词法作用域，也就是外层调用者obj：
+
+var obj = {
+    birth: 1990,
+    getAge: function () {
+        var b = this.birth; // 1990
+        var fn = () => new Date().getFullYear() - this.birth; // this指向obj对象
+        return fn();
+    }
+};
+obj.getAge(); // 25
+
+
+如果要返回一个对象，就要注意，如果是单表达式，这么写的话会报错：
+
+// SyntaxError:
+x => { foo: x }
+因为和函数体的{ ... }有语法冲突，所以要改为：
+// ok:
+x => ({ foo: x })
+
+
+
+x => x * x
+上面的箭头函数相当于：
+function (x) {
+    return x * x;
+}
+
+包含多条语句的时候就不能省略掉 {}和return
+
+
+
+
+9. vue 和 vue-cli(脚手架)
+俗称 vue-cli 为脚手架，是一套大众化的前端自动化解决方案，他的核心是 webpack ，框架是vue，还有相关辅助插件组成。不怕浪费时间自己也可以按照自己的习惯搭一套，如果你有丰富的前端经验，可能构建一条合理的解决方案，不然会疏忽很多细节。grunt、gulp 时代，前端自动化规则，输入输出文件格式，文件的监听，文件的路径都是自己配置的。配置一套理想的方案也是相当耗费时间，所以 vue 就提供了一套面相大众的解决方案——vue-cli，他的输入输出规则，文件的打包路径，模块的命名基本上符合大众前端开发者的习惯，不过实际开发中需要一定的调整。
+
+
+10.vue 创建步骤
+    ·vue init webpack projectname(创建项目)
+    ·cd proje （进入项目中）
+    ·(c)npm install （创建依赖 第一次创建项目时使用）
+    ·npm run dev (启动)
+
+    在index.js 中属性 autoOpenBrowser: true, 设定启动的时候自动打开浏览器
+    ctrl+c 终止应用
+
+11.安装vue-cli 的时候报错 添加了以下语句就可以了
+·npm install -g supervisor
+  对代码的修改,每次都要重新启动服务器,使用supervisor它会监视你对代码的改动,并自动重启 Node.js。
+
+·npm config set strict-ssl false
+因为npm install走的是https协议，需要通过数字证书来保证的，这句就是取消ssl验证
+
+
+12.npm安装到最新版本语句
+npm install npm -g
+
+13.vue组件的分类 大致分为4类
+    ·接入类 比如一个容器组件，它本身只承担一个布局容器的作用
+    ·展示型 纯展示数据，它能接收数据展示出来，但是无法与用户进行交互
+    ·交互型 比如各类加强版的表单组件，通常强调复用
+    ·功能型 比如<router-view><transition>,作为扩展、抽象机制存在
+
+14.关于.vue文件
+  .vue文件，它将html，js，css整合成一个文件，和里面的template、script、style三个区域分一一对应。
+
+  <template>
+  这里写html ，template里面最外层必须是只有一个容器！
+  </template>
+  <script>
+  这里写js
+  export default{},  //即导出这个组件，外部可以使用
+  </script>
+  <style lang='less' scoped>
+  这里写css， lang指额外表示支持的语言可以让编辑器识别，scoped 指这里写的css只适用于该组件
+  </style>
+
+15.vue-router路由
+  用于设置页面跳转时的路劲设置，将组件映射到路由，然后告诉vue-router咋哪里渲染它们
+
+16.Mockjs
+   根据数据模板生成模拟数据，模拟ajax请求，生成并返回模拟数据，基于html模板生成模拟数据
+
+17.Vuex 一个专为Vue.js应用程序开发的状态管理模式 
+  用于集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
+
+· 

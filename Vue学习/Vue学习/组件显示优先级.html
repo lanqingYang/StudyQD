@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <title>组件显示优先级</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{message +"这是outerHTML"}}</h1>
+      <h1>{{message +"这是outerHTML"}}</h1>
+      <!-- 优先级第三 -->
+    </div>
+  </body>
+  <!-- 优先级：
+rander>template>outerHTML
+-->
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        message: 10,
+      },
+      //   template: '<h1>{{message + "这是template中"}}</h1>',
+      //这里将把#app里面的内容全部换成该组件的内容，所以只有一个h1
+      //html方式做渲染，但是最终还是要通过rander方式进行编译
+      //优先级第二
+
+      render(h) {
+        //优先级第一
+        // render里有一个函数h，这个h的作用是将单文件组件进行虚拟DOM的创建，然后再通过render进行解析。
+        //h就是createElement()方法：createElement(标签名称,属性配置,children)
+        //js方式做渲染
+        return h("h1", this.message + ",这是rander函数中的");
+      },
+    });
+  </script>
+</html>

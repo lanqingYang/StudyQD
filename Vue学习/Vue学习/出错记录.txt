@@ -1,0 +1,15 @@
+1. tr\td标签不能用v-for 
+原因： 只有在table中td、tr不合语义，不予显示 所以不显示
+
+
+2.子组件中拿不到父组件中的值：
+
+没有为子组件变现 props属性！！ 拿不到
+props:['父组件数据名称'] ,并且将数据放到父组件下，不是一直都#app的哪个实例下(看哪个是父组件！) ,父组件中绑定数据！
+
+  父组件绑定：<cart-title :username='username'></cart-title>
+  子组件拿到利用props拿到数据
+  var cartTitle = {
+      props: ["username"],
+      template: `  <div class="cart-title">{{username}}的购物车</div>`,
+    };

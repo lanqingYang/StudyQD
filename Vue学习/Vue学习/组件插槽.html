@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>组件插槽</title>
+  </head>
+  <body>
+    <div id="app">
+      <alert-box>父组件中的值</alert-box>
+      <hr />
+      <!-- 具名插槽例子 根据进行匹配，没有匹配的根据默认的内容显示，要有slot标签，父组件中内容才会有显示的地方且要对应slot的名字-->
+      <base-layout>
+        <p slot="header">标题信息</p>
+        <p>主要内容1</p>
+        <p>主要内容2</p>
+        <p slot="footer">底部信息</p>
+      </base-layout>
+      <!-- 利用template标签，可以简化写法。 template标签不会显然到DOM树上，检查中不会存在 -->
+      <base-layout>
+        <template slot="header">
+          <p>标题信息1</p>
+          <p>标题信息2</p>
+        </template>
+        <template>
+          <p>主要内容1</p>
+          <p>主要内容2</p>
+        </template>
+        <template slot="footer">
+          <p>底部信息1</p>
+          <p>底部信息2</p>
+        </template>
+      </base-layout>
+    </div>
+  </body>
+  <!-- 具名插槽 -->
+  <script>
+    Vue.component("base-layout", {
+      template: `
+    <div>
+        <header>
+             <slot name='header'></slot>
+        </header>
+        <main>
+             <slot></slot>
+        </main>
+        <footer>
+             <slot name='footer'></slot>
+        </footer>
+    </div>
+    `,
+    });
+  </script>
+  <!-- 组件插槽 -->
+  <script>
+    Vue.component("alert-box", {
+      template: `
+          <div>
+          <strong>Error!</strong>
+          <slot></slot>
+          </div>
+          `,
+      //   如果父组件中有值，则显示在slot标签里面，如果没有则默认显示slot标签中的值
+    });
+    new Vue({
+      el: "#app",
+    });
+  </script>
+</html>

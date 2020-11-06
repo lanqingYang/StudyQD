@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>过滤器</title>
+  </head>
+  <body>
+    <p>格式化数据、处理数据</p>
+    <div id="app">
+      <input type="text" v-model="msg" />
+      <div>通过过滤器第一个字母大写：{{msg | upper1}}</div>
+      <div>通过过滤器第一个字母大写再小写：{{msg | upper | lower}}</div>
+      <!-- lower以upper之后的数为数据参数来处理  被处理了两次 级联的用法-->
+      <!-- 应用场景：1、上面的表达式 2、下面的属性绑定 -->
+      <div :abc="msg| upper">测试数据，在DOM中查看</div>
+      <hr />
+      <div>格式化时间</div>
+      <div>{{date}}</div>
+      <div>格式化后的时间{{date| format('yyyy-MM-dd')}}</div>
+    </div>
+  </body>
+  <script>
+    //   过滤器
+    //名字 参数
+    Vue.filter("upper", function (val) {
+      return val.charAt(0).toUpperCase() + val.slice(1); //slice字符串API ，从第二个数开始截取到最后
+    });
+    Vue.filter("lower", function (val) {
+      return val.charAt(0).toLowerCase() + val.slice(1); //slice字符串API ，从第二个数开始截取到最后
+    });
+
+    // 过滤器可以带参数，但是是从第二个参数开始，value是过滤器传过来的参数s
+    Vue.filter("format", function (val, arg) {
+      if (arg == "yyyy-MM-dd") {
+        var ret = "";
+        ret +=
+          val.getFullYear() + "-" + (val.getMonth() + 1) + "-" + val.getDate();
+        return ret;
+      }
+    });
+
+   
+
+    new Vue({
+      el: "#app",
+      data: {
+        msg: "",
+        date: new Date(),
+      },
+      //局部过滤器
+      filters: {
+        //名称，规则(实现逻辑)
+        upper1: function (val) {
+          return val.charAt(0).toUpperCase() + val.slice(1);
+        },
+      },
+    });
+  </script>
+</html>

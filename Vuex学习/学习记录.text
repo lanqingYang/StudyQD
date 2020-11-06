@@ -1,0 +1,73 @@
+Vuex 一个专为Vue.js应用程序开发的状态管理模式
+
+用于集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
+vuex 核心：store（仓库），包含应用中的大部分的状态(status)
+
+·vuex和单纯的全局对象不同点:
+1.Vuex的状态存储是响应式的.当vue组件从store中读取状态时，若store中状态改变，组件也会相应变化，那么相应组件也会得到高效更新
+2.不能直接改变store中的状态。改变store值唯一途径显示的提交（commit） mutation（改变）。
+
+·state
+
+
+·getters
+在store中定义getter（可以认为是store的计算属性），getter的返回值根据他的依赖被缓存起来，且只有当他的依赖值发生了改变，才会被重新计算
+
+·mutation
+
+mutation都是同步事务。
+
+mapMutations辅助函数将组件中 methods映射为 store.commit调用（需要在根节点注入store）
+对象展开运算符 “...”
+
+
+`action
+
+actions里要传入两个参数context和playload
+调用actions的时候，使用this.$store.dispatch("actionsName",playload)
+action 类似于mutation 不同点：
+·action 提交的是mutation，而不是直接变更状态
+·action可以包含任意异步操作
+
+    mutations：{}
+    increment(state) {
+        state.count++
+    },
+    actions:{
+        increment (context){
+            context.commit('increment')
+        }
+    }
+
+    action函数接受一个与store实例具有相同方法和属性的context对象，所以可以调用context.commit提交一个mutation，
+    或者通过context.state、context.getters获取state和getters。但是 context对象并不是store实例本身。
+
+
+    参数结构简化代码：
+    actions:{
+        increment({commit}){
+            commit("increment")
+        }
+    }
+
+    分发action
+    通过store.dispatch(''),不直接分发mutation，因为mutation必须同步执行，单action不受约束，可以在action内部执行异步操作
+    组件中用this.$store.dispatch('  ')分发action，或者使用辅助函数mapActions将组件的methods映射为store.dispatch调用
+    store.dispatch 可以处理被处罚的action的处理函数返回的Promise，并且store.dispatch 仍旧返回promise
+
+
+
+    ·Module
+     由于使用单一状态树，状态集合会集中到比较大的对象，所以将store分割成模块，每个模块拥有自己的state，mutation，action，getter，action，甚至是嵌套子模块--从上至下进行同样方式的分割。
+
+
+     代码结构规则：
+     1.应用层级的状态应该集中到单个store对象中
+     2.提交mutation是更改状态的唯一方法，且过程是同步的
+     3.异步逻辑都应该封装到action中
+
+
+
+理解context:  context是和 this.$store 具有相同的方法和属性的对象。我们可以通过 context.state 和 context.getters来获取state和getters。
+
+理解dispatch: 它含有异步操作，含义可以理解为 '派发'，比如向后台提交数据，可以为 this.$store.dispatch('actions方法名', 值);

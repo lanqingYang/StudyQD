@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    #app {
+    }
+    .wrapper {
+      width: 500px;
+      height: auto;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .add {
+      width: 100%;
+      padding: 10px 0px;
+      background-color: orange;
+      border: 1px solid peachpuff;
+      border-bottom: none;
+    }
+    .add input {
+      margin-right: 10px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      height: 20px;
+      line-height: 20px;
+    }
+    thead {
+      background-color: orange;
+      border: 1px solid peachpuff;
+    }
+    tbody td {
+      border: 1px dashed peachpuff;
+    }
+    .total {
+      background-color: orange;
+      border-top: 1px solid peachpuff;
+      padding: 5px 0;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <div class="wrapper">
+        <h1>图书管理</h1>
+        <table cellspacing="0" cellpadding="16px" border="1">
+          <!-- 内外表格都需边框时，设置“border=1”   给整个表格（包括表格及每一个单元格）加上1像素的黑色边框
+         cellspacing:表示单元格与单元格之间的距离
+         cellpadding: 表示单元格(<td>)内边距到其内容之间的距离
+       -->
+          <div class="add">
+            <label for="id" v-focus>编号</label>
+            <input type="text" id="id" v-model="id" :disabled="editFlag" />
+            <label for="name">名称</label>
+            <input type="text" id="name" v-model="name" />
+            <button @click="handle()" :disabled="nameFlag">提交</button>
+          </div>
+          <div class="total">图书总数：{{total}}</div>
+          <thead>
+            <tr>
+              <th>编号</th>
+              <th>名称</th>
+              <th>时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="book in books">
+              <td>{{book.id}}</td>
+              <td>{{book.name}}</td>
+              <td>{{book.date|format('yyyy-MM-dd HH:mm:ss')}}</td>
+              <td>
+                <a href="" @click.prevent="toEdit(book.id)">修改</a>
+                <!-- .prevent阻止默认行为  ,传入id-->
+                <span>|</span>
+                <a href="" @click.prevent="del (book.id)">删除</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+  <script>
+    //自定义属性聚焦
+    Vue.directive("focus", {
+      inserted: function (el) {
+        //当绑定的元素插入到dom中，
+        //聚焦元素
+        el.focus();
+      },
+    });
+    //过滤器 时间格式化
+    Vue.filter("format", function (val, arg) {
+      function dateFormat(date, format) {
+        let o = {
+          "M+": date.getMonth() + 1,
+          "d+": date.getDate(),
+          "H+": date.getHours(),
+          "m+": date.getMinutes(),
+          "s+": date.getSeconds(),
+          "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+          "f+": date.getMilliseconds(), //毫秒
+        };
+        if (/(y+)/.test(format))
+          format = format
+            .replace(RegExp.$1, date.getFullYear() + "")
+            .substr(4 - RegExp.$1.length);
+        for (let k in o) {
+          if (new RegExp("(" + k + ")").test(format))
+            format = format.replace(
+              RegExp.$1,
+              RegExp.$1.length == 1
+                ? o[k]
+                : ("00" + o[k]).substr(("" + o[k]).length)
+            );
+        }
+        return format;
+      }
+      return dateFormat(val, arg);
+    });
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        id: "",
+        name: "",
+        editFlag: false, //监听是否是修改状态
+        nameFlag: false, //监听图书名字是否重复
+        books: [],
+      },
+      methods: {
+        handle: function () {
+          //增加图书
+          if (!this.editFlag) {
+            //增加图书
+            var book = {};
+            book.id = this.id;
+            book.name = this.name;
+            book.date = new Date();
+            this.books.push(book);
+          } else {
+            //修改图书
+            this.books.some((book) => {
+              // 这里用到了箭头函数，是因为 普通函数中的this指向的是window， 这里要获取vue实例对象中的id和name，this需要指向vue实例
+              //箭头函数中的this指向父级作用域中的this，即handle中的this即 vue实例
+              //关于.some() 判断arr中有无符合条件的数据，返回true终止遍历
+              if (book.id == this.id) {
+                book.name = this.name;
+                return true;
+              }
+            });
+            this.editFlag = false;
+          }
+          //清空表单
+          this.id = "";
+          this.name = "";
+        },
+        toEdit: function (id) {
+          //拿到id，通过id来找到对应书籍的内容
+          var book = this.books.filter(function (book) {
+            return id == book.id;
+          });
+          console.log(book);
+          //这里返回的是一个数组
+          //修改信息填充到表单中
+          this.id = book[0].id;
+          this.name = book[0].name;
+          this.date = book[0].date;
+          //修改时，编号不可被修改
+          this.editFlag = true;
+        },
+        del: function (id) {
+          var index = this.books.findIndex(function (book) {
+            //返回true不再遍历，返回索引
+            return id == book.id;
+          });
+          // console.log(index);
+          this.books.splice(index, 1);
+          //.splice 数组方法，参数（索引，个数）从索引开始，删除1个
+        },
+      },
+      computed: {
+        total: function () {
+          return this.books.length;
+        },
+      },
+      watch: {
+        //监听图书名字，如果已经有了该图书名字已存在，则不可重复提交
+        name: function (name) {
+          this.nameFlag = this.books.some(function (book) {
+            return name == book.name;
+          });
+        },
+      },
+      mounted: function () {
+        //钩子函数，在挂载的时候，加载数据，一般这个时候就是利用ajax或其他从后台去拿到数据
+        var data = [
+          {
+            id: 1,
+            name: "三国演义",
+            date: new Date(),
+          },
+          {
+            id: 2,
+            name: "水浒传",
+            date: new Date(),
+          },
+          {
+            id: 3,
+            name: "红楼梦",
+            date: new Date(),
+          },
+          {
+            id: 4,
+            name: "西游记",
+            date: new Date(),
+          },
+        ];
+        this.books = data;
+      },
+    });
+  </script>
+</html>

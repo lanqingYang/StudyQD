@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 通过Vue.set(vm.items,indexOfItem,newValue)  数组名称、索引、要处理的数组的值
+        vm.$set(vm.items,indexOfItem,newValue) 
+    这俩既可以处理数组的索引，也可以处理对象的属性，并且都是响应式的 作用相同-->
+    <div id="app">
+      <ul>
+        <li :key="index" v-for="(item,index) in list">{{item}}</li>
+      </ul>
+      <div>
+        <div>{{info.name}}</div>
+        <div>{{info.age}}</div>
+        <div>{{info.gender}}</div>
+        <div>{{info.interst}}</div>
+      </div>
+    </div>
+  </body>
+  <script>
+    vm = new Vue({
+      el: "#app",
+      data: {
+        fname: "",
+        list: ["apple", "banana", "orange"],
+        info: {
+          name: "Lihua",
+          age: 20,
+        },
+      },
+    });
+    // vm.list[1] = "lemon"; //不会进行响应式改变,不能直接改页面值不会刷新（但是后台值会改变）
+    // Vue.set(vm.list, 2, "lemon");  //与下一行的效果一样
+    vm.$set(vm.list, 1, "lemon");
+
+    //对对象中添加额外的属性
+    vm.$set(vm.info, "gender", "female");
+    Vue.set(vm.info, "interst", "sing");
+  </script>
+</html>

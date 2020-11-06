@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>自定义事件</title>
+  </head>
+  <body>
+    <p>
+      props只能将父组件数据传给子组件,如果子组件要传递数据回去,需要用自定义事件,v-on绑定自定义事件
+      <br />
+      $on(eventName) 监听事件<br />
+      $emit(eventName) 触发事件
+    </p>
+
+    <!-- 1.计数 -->
+    <div>
+      <div id="counter-event-example">
+        <p>{{total}}</p>
+        <button-counter v-on:increment="incrementTotal()"> </button-counter>
+        <button-counter v-on:increment="incrementTotal()"> </button-counter>
+      </div>
+    </div>
+  </body>
+  <!-- 1.计数 -->
+  <script>
+    var buttonCounter = {
+      counter: 0,
+    };
+    Vue.component("button-counter", {
+      template:
+        "<button v-on:click='incrementHandler'>点击了{{counter}}次</button>",
+      // 这里的data是一个函数,而不是一个对象,好处是每个被返回的对象独立拷贝,如果data是一个对象,就会影响到其他的实例
+      data: function () {
+        return {
+          counter: 0,
+        };
+      },
+      // data: function () {
+      //   //data选项是一个对象，会影响其他实例  因为返回时，引用了外部的全局对象，所有的实例都指向同一个全局对象，所以会相互受影响
+      //   return buttonCounter;
+      // },
+
+      methods: {
+        incrementHandler: function () {
+          this.counter += 1;
+          //触发 父级的@increment
+          this.$emit("increment");
+        },
+      },
+    });
+    new Vue({
+      el: "#counter-event-example",
+      data: {
+        total: 0,
+      },
+      methods: {
+        incrementTotal: function () {
+          this.total += 1;
+        },
+      },
+    });
+  </script>
+</html>
