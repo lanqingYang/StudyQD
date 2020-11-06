@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组去重</title>
+  </head>
+  <body>
+    <script>
+      /*
+        数组去重思路：
+            核心算法: 遍历旧数组，拿旧数组元素去查询新数组，如果该元素在新数组中不存在，就将该元素添加到新数组中，
+                     否则不添加。
+            判断该元素是否存在： indexOf(数组元素)，返回-1 说明没有该元素
+         */
+
+      var arr = ["c", "a", "b", "a", "c", "t"];
+      console.log("元素组为" + arr);
+      function unique(arr) {
+        var newarr = [];
+
+        for (var i = 0; i < arr.length; i++) {
+          //如果新数组中不存在该值
+          if (newarr.indexOf(arr[i]) == -1) {
+            //将该元素放入新数组中
+            newarr.push(arr[i]);
+          }
+        }
+        return newarr;
+      }
+
+      var demo = unique(arr);
+      console.log(demo);
+      console.log(demo.sort());
+    </script>
+  </body>
+</html>

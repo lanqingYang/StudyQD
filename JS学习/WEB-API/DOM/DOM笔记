@@ -1,0 +1,129 @@
+问题: 1. 什么是DOM
+      2. 怎么获取页面元素
+      3. 怎么给元素注册事件
+      4. 怎么操作DOM 元素的属性
+      5. 怎么创建元素
+      6. 怎么操作DOM节点
+
+
+
+DOM ： document object model 文档对象模型
+
+1. console.dir() 打印返回的元素对象 更好的查看里面的属性和方法
+
+2. 获取元素
+    对于getElementsByTagName 这种，返回的是一个伪数组， 如果没有查找的元素，返回的也是也个空的位数组
+    除了 document.get...() 还可以用 element.get...() 获取某个元素内部所有指定标签名的子元素。父元素必须是单个对象！ 
+
+3. 选择器  H5新增
+    .1 document.querySelector('选择器')  //返回第一个元素对象 切记里面的选择器需要加符号
+    document.querySelector('.box')  document.querySelector('#box') document.querySelector(li)
+
+    .2 document.querySelectorAll('选择器') // 返回全部所选元素对象 伪数组
+    .3 document.getElementsByClassName('') // 返回全部所选元素对象 伪数组
+
+4. 获取body html 元素
+    body: document.body;
+    html: docuemnt.documentElement
+
+5. DOM操作改变网页内容、结构、样式，改变元素里面的内容、属性等  （02.操作元素）
+    .1 改变元素内容 
+        这两个是可读写的
+        element.innerText: 起始到终止位置的内容，但除去html标签，同时空格和换行也会去掉 。不识别html标签！！
+        ！！element.innerHTML: ..,包括html标签，保留空格和换行 。 识别html标签！！
+
+    .2 修改元素属性
+        element.属性名=''   img.src='../../rabit.jpg'
+        常见的有：src、href、title、alt等
+    
+    .3 操作表单元素属性
+        type、value、disabled等
+    
+    .3 修改样式
+        element.style 行内样式操作(修改内容较少时用)   div.style.bacgroundColor='skybule' 内联样式 css权重更高
+        element.className 类名样式操作(修改内容较多、复杂)      改变类名  div.calssName='change' 
+                            注意calssName 会覆盖原来的类名
+
+6. 设置获取移除属性值
+    设置： element.属性=          //用于内置属性 
+           element.setAttribute('属性','值')  （主要设置/获取自定义属性：自己添加的属性）
+
+    获取： element.属性
+            element.getAttribute('属性')   ！！！！最主要
+            (只能获取 data- 开头的！！)对于自定义属性 新增： element.dataset.属性名 或者 element.dataset['属性名']  // !!ie11容
+
+    移除： element.removeAttribute('属性')
+
+    坑:!  
+    1. class特殊 这里写的是class 不是calssName
+      div.setAttribute("class", "footer");  包括：getAttribute()\removeAttribute()
+
+    2. 用element.dataset.属性名
+     //对于长名字 data-list-name ，有多个短横线连接的单词，需要用驼峰命名法
+      console.log(div.dataset.listName);
+
+7. 自定义属性 H5新增
+    目的： 保存并使用数据，有些数据可以保存到页面中而不用保存到数据库中。(01.12案例)
+    规定！： 
+    以 data- 开头   比如 data-index='1'
+
+8. 节点操作:(包括解决兼容性办法  03-01概述)
+    父级: parentNode
+    子节点: .childen    !!!                               //返回所有孩子元素节点(非标准)
+           .childNodes                                   //返回所有节点(包括文本和元素 通过函数判断nodeType==1 可以实现上面一个的功能)
+           .firstElementChild/lastElementChild  !!!      // 第一个/最后一个孩子元素节点 ie9+ 
+           .fistchild/lastChild                             //第一个孩子节点(包括元素和文本) ie9+
+    兄弟:   .nextElmentSibling/previousElmentSibling !!!   //下/上一个兄弟元素节点 ie9+
+            .nextSibling/previousSibling                 //下/上一个兄弟节点
+
+    创建节点: createElement('名称')
+    添加节点: node.appendChild(child)  //在node的子元素的末尾添加
+              node.insertBefore(child,添加位置)  //在任意位置添加
+    删除节点: node.removeChild()
+    复制节点:node.cloneNode(true)  !! 注意: 如果 括号参数为空或者false 为 浅拷贝 : 只克隆复制节点本身,不克隆里面的子节点(比如里面的文本)
+                            
+9. a标签不跳转
+    href属性设置为 javascript:void(0);  或者 javascript:;        
+
+10. 三种动态创建元素的方式和区别 (03-07)
+            .1 document.write   :直接将内容写入斜面的内容流,但是文档流执行完毕,则它会导致页面全部重绘(原来的内容就没有了)
+            .2 element.innerHTML : 将内容写入某个DOM元素节点,不会导致重绘, 创建多个元素效率更高(不要采取拼接字符串的方式,采用数组),结构稍微复杂
+            .3 document.createElement() : 创建多个元素效率低一点但结构更清晰
+
+11. DOM事件流 三阶段
+     事件发生时会在元素节点之间按照特定的顺序传播,这个传播过程即DOM事件流
+          三个阶段:  1.捕获阶段   2.当前目标阶段  3.冒泡阶段
+
+          注意:
+            .1 js代码中只能执行 捕获或冒泡的其中一个阶段
+            .2 onclick和attachEvent 只能得到冒泡阶段
+            .3 addEventListener(type,listener[,useCapture]) 第三个参数 false:冒泡 true:捕获阶段
+            实际开发很少使用捕获,更关注冒泡
+            没有冒泡的事件: onblur,onfocus,onmouseenter,onmouseleave
+
+12. 常用事件对象方法和属性
+           e.target             : 触发事件的对象 标准
+           e.srcElement         : 触发事件的对象 非标准 ie678
+           e.type               : 事件类型 不带on
+           e.cancelBubble       : 阻止冒泡 非标准 ie678
+           e.preventDefault()   : 阻止默认事件 标准
+           e.returnValue        : 阻止默认事件 ie678
+           e.stopPropagation()  : 阻止冒泡 标准
+
+
+13. 事件委托:
+    事件委托核心原理: 给父节点添加侦听器,利用 !事件冒泡! 影响每一个子节点
+
+14. 常用鼠标对象事件: MonseEvent
+     onclick, onmouseover(经过), onmouseout(离开), onfocus(), onbulur(失焦), 
+     onmousemove(移动), onmouseup(弹起), onmousedown(按下)
+
+15. 常用键盘事件对象:
+          onkeyup    键盘按键松开触发
+          onkeydown  键盘按键按下触发
+          onkeypress 键盘按下按下触发 不识别功能键 如 ctrl shift等
+
+          执行顺序  --  keydown-- keypress --keyup
+    常用属性 keyCode 
+      keyup和keydown 不区分大小写
+      keypress       区分大小写

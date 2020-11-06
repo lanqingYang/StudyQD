@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件委托</title>
+  </head>
+  <body>
+    <!--
+        事件委托核心原理: 给父节点添加侦听器,利用 !事件冒泡! 影响每一个子节点
+         -->
+
+    <ul>
+      <li>知否知否,应是绿肥红瘦</li>
+      <li>知否知否,应是绿肥红瘦</li>
+      <li>知否知否,应是绿肥红瘦</li>
+      <li>知否知否,应是绿肥红瘦</li>
+      <li>知否知否,应是绿肥红瘦</li>
+    </ul>
+  </body>
+  <script>
+    //给父节点ul绑定事件
+    var ul = document.querySelector("ul");
+    //第三个参数省略,默认为false 执行 冒泡
+    ul.addEventListener("click", function (e) {
+      //e.target 拿到当前点击的元素
+      e.target.style.backgroundColor = "pink";
+      alert("点击了li");
+    });
+  </script>
+</html>

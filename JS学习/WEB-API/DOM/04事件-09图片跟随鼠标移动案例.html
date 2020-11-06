@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片跟随移动</title>
+  </head>
+  <style>
+    img {
+      position: absolute;
+      width: 10%;
+    }
+  </style>
+  <body>
+    <!-- 
+          分析: 1. 鼠标不断移动,使用鼠标移动事件 mousemove
+                2. 在页面中移动, 给document注册事件
+                3. 图片要移动距离,且不占位置,使用绝对定位即可
+          核心原理:
+                每次移动鼠标都获得最新鼠标坐标,把这个xy坐标作为图片的top和left值,即可移动图片
+       -->
+    <img src="../../Pics/chicken.jpg" alt="" />
+  </body>
+  <script>
+    var img = document.querySelector("img");
+    document.addEventListener("mousemove", function (e) {
+      //不要忘记 +px
+      img.style.top = e.pageY - 30 + "px";
+      img.style.left = e.pageX - 60 + "px";
+    });
+  </script>
+</html>

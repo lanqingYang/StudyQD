@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>下拉菜单</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+    }
+    .nav {
+      width: 400px;
+      height: 40px;
+      text-align: center;
+    }
+    li {
+      list-style: none;
+    }
+    .nav > li {
+      width: 80px;
+      height: 40px;
+      float: left;
+    }
+    .nav > li > a {
+      display: block;
+      width: 100%;
+      line-height: 40px;
+      color: #333;
+    }
+    .nav > li > a:hover {
+      background-color: #eee;
+    }
+    .nav ul {
+      display: none;
+      /* position: absolute;s */
+      top: 40px;
+      left: 0;
+      /* width: 40px; */
+      border-left: 1px solid #fecc6b;
+      border-right: 1px solid #fecc6b;
+    }
+    .nav ul li {
+      border-bottom: 1px solid #fecc6b;
+    }
+    .nav ul li:hover {
+      background-color: #fff5da;
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <ul class="nav">
+      <li>
+        <a href="#">微博</a>
+        <ul>
+          <li>私信</li>
+          <li>评论</li>
+          <li>@我</li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">微博</a>
+        <ul>
+          <li>私信</li>
+          <li>评论</li>
+          <li>@我</li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">微博</a>
+        <ul>
+          <li>私信</li>
+          <li>评论</li>
+          <li>@我</li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">微博</a>
+        <ul>
+          <li>私信</li>
+          <li>评论</li>
+          <li>@我</li>
+        </ul>
+      </li>
+    </ul>
+  </body>
+  <!--   1. 循环添加鼠标经过效果,注册鼠标事件 
+         2. 经过li显示ul中的内容-->
+
+  <script>
+    var nav = document.querySelector(".nav");
+    var lis = nav.children; //得到4个小li
+    for (var i = 0; i < lis.length; i++) {
+      lis[i].onmouseover = function () {
+        this.children[1].style.display = "block";
+      };
+      lis[i].onmouseout = function () {
+        this.children[1].style.display = "none";
+      };
+    }
+  </script>
+</html>

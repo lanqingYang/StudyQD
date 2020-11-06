@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>5s后关闭广告</title>
+  </head>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background-color: pink;
+    }
+  </style>
+  <body>
+    <div>假装是广告</div>
+  </body>
+  <script>
+    //   5s后关闭广告
+    var div = document.querySelector("div");
+    var timer1 = setTimeout(function () {
+      div.style.display = "none";
+    }, 3000);
+  </script>
+</html>

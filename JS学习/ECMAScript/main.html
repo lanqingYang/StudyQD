@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主界面</title>
+    <link rel="stylesheet" href="../bootstrap/css">
+    <script src="../jquery-3.0.0.min.js"></script>
+    <script src="../bootstrap/js"></script>
+</head>
+<style>
+    *{
+      margin: 0;
+      padding:0;  
+      text-decoration: none;
+      list-style: none;
+    }
+    body{
+        background-image: url("../practise-pic/bg-green.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        min-width: 1000px;
+    }
+    .bodybox{
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height:500px;
+        
+    }
+    .header{
+        min-width: 800px;
+        background-color: rgba(200, 221, 208,0.6);
+        width: 1000px;
+        height: 80px;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    .container{
+        margin: auto;
+        width: 1000px;
+        overflow: hidden;
+        height: 100%;
+        
+    }
+
+
+    .asider{
+        float: left;
+        width: 20%;
+        height: 600px;
+        background-color:rgba(200, 221, 208,0.6);
+        min-width: 200px;
+    }
+    .mainer{
+        float: right;
+        width: 76%;
+        min-width: 690px;
+        height: 600px;
+        background-color:rgba(200, 221, 208,0.6) ;
+        margin-left: 10px;
+    }
+
+    .sInfoUl{
+        width: 100%;
+        height: 100%;
+    }
+    .sInfo{
+        width: 100%;
+        height:60px;
+        color: black;
+    }
+    .sInfo a{
+        display: block;
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
+        line-height: 60px;
+        text-align: center;
+        font-weight: bolder;
+        color: black;
+        background-color:lightyellow;
+        
+
+    }
+    .sInfo a:hover{
+        color:black;
+        background-color:lightyellow;
+    }
+
+    
+
+    .clear{
+        content: " ";
+        clear: both;
+    }
+
+
+    .operate{
+        width: 100%;
+        height: 60px;
+    }
+
+    .inFoTable{
+        width: 100%;
+        height: 400px;
+    }
+    
+
+
+</style>
+<body>
+    <div class="bodybox">
+        <header class="header">
+            <h1>学生管理系统</h1>
+        </header>
+
+        <!-- 内容 -->
+        <div class="container">
+            <aside class="asider">
+                <ul class="sInfoUl">
+                    <li class="sInfo" ><a href="#" >  学&nbsp;&nbsp;生&nbsp;&nbsp;信&nbsp;&nbsp;息</a></li>
+                </ul>
+            </aside>
+           
+            <div class="mainer">
+                <div class="operate">                </div>
+                <hr   style="background-color: blanchedalmond; "  />
+                <div class="inFoTable">
+                    <table>
+                        <tr>
+                            <td>学号</td>
+                            <td>姓名</td>
+                            <td>年龄</td>
+                            <td>性别</td>
+                            <td>专业</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="clear">
+            </div>   
+        </div>
+        
+
+    </div>
+    
+</body>
+</html>

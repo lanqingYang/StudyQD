@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>修改元素属性</title>
+  </head>
+  <body>
+    <button id="wangji">wangji</button>
+    <button id="wifi">wifi</button>
+    <img src="../../Pics/wangji-rabit.JPG" alt="" title="wangji" />
+    <script>
+      //修改元素属性 src
+      //1.获取元素
+      var wangji = document.getElementById("wangji");
+      var wifi = document.getElementById("wifi");
+      var img = document.querySelector("img");
+
+      //注册事件
+      wangji.onclick = function () {
+        img.src = "../../Pics/wangji-rabit.JPG";
+        img.title = "wangji";
+      };
+      wifi.onclick = function () {
+        img.src = "../../Pics/wifi-rabit.JPG";
+        img.title = "wifi";
+      };
+    </script>
+  </body>
+</html>

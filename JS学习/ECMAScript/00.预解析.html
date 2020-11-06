@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>预解析</title>
+  </head>
+  <body>
+    <script>
+      //例子2
+      console.log(a); //undefined
+      console.log(m); //function
+      function m() {
+        var a = 10;
+        console.log(a); //20
+        console.log(c); //99
+      }
+      var a = 20;
+      var c = 99;
+      m();
+      /* 上面代码相当于
+       function m() { 
+        var a = 10;
+        console.log(a); //20
+      }
+        var a;
+        var c;
+        console.log(a); //undefined
+        console.log(m); //function
+        a=20;
+        c=99;
+        m();
+
+        函数内部：
+            var a;
+            a=20;
+            console.log(a); //20
+            console.log(c); //99 作用域链上查找到 c为99
+ 
+       */
+
+      //例子1
+      fun(); //会报错
+      //fun是变量名，不是函数名。这是个匿名函数
+      var fun = function () {
+        console.log("a");
+      };
+
+      /* 上面代码相当于
+        var fun; 
+        fun();       //此时fun为undefined 还未被赋值为一个函数，不能()进行执行 所以会报错
+        fun=function () {
+        console.log("a");
+      };
+       */
+    </script>
+  </body>
+</html>

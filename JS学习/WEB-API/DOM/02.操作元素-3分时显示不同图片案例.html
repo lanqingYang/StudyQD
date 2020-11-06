@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>分时显示不同图片</title>
+  </head>
+  <body>
+    <img src="../../Pics/chicken.jpg" alt="" />
+    <div>上午好，好好写代码</div>
+
+    <script>
+      /* 根据不同时间，显示不同的文本和图片 */
+      var img = document.querySelector("img");
+      var div = document.querySelector("div");
+
+      var time = new Date().getHours();
+
+      if (time < 12) {
+        img.src = "../../Pics/chicken.jpg";
+        div.innerHTML = "上午好，好好写代码";
+      } else if (time < 18) {
+        img.src = "../../Pics/wangji-rabit.JPG";
+        div.innerHTML = "下午好，好好写代码";
+      } else {
+        img.src = "../../Pics/wifi-rabit.JPG";
+        div.innerHTML = "晚上好，好好写代码";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>操作元素</title>
+  </head>
+  <style>
+    div {
+      margin-top: 10px;
+      height: 20px;
+      width: 300px;
+      color: aliceblue;
+      background-color: pink;
+    }
+  </style>
+  <body>
+    <button>显示当前系统该事件</button>
+    <div>某个时间</div>
+    <p id="p1"></p>
+    <p id="p2"></p>
+    <p id="p3">
+      一段文字
+      <span> 123</span>
+    </p>
+
+    <!-- 改变元素内容 element.innerText、 element.innerHTML(使用更多)  这两个内容是可读写的-->
+    <script>
+      //点击按钮，div里面文字发生变化
+      //innerText: 起始到终止位置的内容，但除去html标签，同时空格和换行也会去掉
+      //innerHTML: ..,包括html标签，保留空格和换行
+      var btn = document.querySelector("button");
+      var div = document.querySelector("div");
+      btn.onclick = function () {
+        div.innerText = getDate();
+      };
+
+      var p1 = document.querySelector("#p1");
+      var p2 = document.querySelector("#p2");
+      //innerText不识别html标签
+      p1.innerText = "这是：<strong>2020</strong>  年";
+      p2.innerHTML = "这是：<strong>11</strong>  月";
+
+      var p3 = document.querySelector("#p3");
+      console.log(p3.innerHTML); // 识别html标签 保留换行和空格
+      console.log(p3.innerText); // 不识别标签， 不保留换行和空格
+
+      function getDate() {
+        var date = new Date();
+        var arr = [
+          "星期日",
+          "星期一",
+          "星期二",
+          "星期三",
+          "星期四",
+          "星期五",
+          "星期六",
+        ];
+
+        return (
+          "今天是" +
+          date.getFullYear() +
+          "年 " +
+          (date.getMonth() + 1) +
+          "月 " +
+          date.getDate() +
+          "日 " +
+          arr[date.getDay()]
+        );
+      }
+    </script>
+  </body>
+</html>

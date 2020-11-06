@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动态倒计时</title>
+  </head>
+  <!-- 分析:  1.倒计时不断变化,设定定时器来自动变化  setInterval()
+             2. 三个黑色盒子 存放时分秒
+             2.利用 innerHTML放入计算的小时分钟秒数
+    -->
+
+  <style>
+    div {
+      float: left;
+      margin: 50px 50px;
+    }
+    .hour,
+    .minite,
+    .second {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      background-color: #333;
+      color: #fff;
+      line-height: 50px;
+      text-align: center;
+      font-size: 16px;
+    }
+  </style>
+  <body>
+    <div>
+      <div class="hour">1</div>
+      <div class="minite">2</div>
+      <div class="second">3</div>
+    </div>
+  </body>
+  <script>
+    //1.获取元素
+    var hour = document.querySelector(".hour");
+    var minite = document.querySelector(".minite");
+    var second = document.querySelector(".second");
+    var inputTime = +new Date("2020-11-11 0:0:0"); //获得用户输入时间总的毫秒数
+    //先调用函数,防止第一次刷新页面有空白
+    countDown();
+    //2.开启定时器
+    var timer1 = setInterval(countDown, 1000);
+
+    //倒计时函数
+    function countDown() {
+      var nowTime = +new Date(); //获得当前总毫秒数
+      var times = (inputTime - nowTime) / 1000; //time剩余时间总秒数
+      var h = parseInt(times / 60 / 60); //时
+      h = h < 10 ? "0" + h : h;
+      hour.innerHTML = h; //把剩余的小时给黑色盒子
+      var m = parseInt((times / 60) % 60); //分
+      m = m < 10 ? "0" + m : m;
+      minite.innerHTML = m;
+      var s = parseInt(times % 60); //秒
+      s = s < 10 ? "0" + s : s;
+      second.innerHTML = s;
+    }
+  </script>
+</html>
