@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>offset系列</title>
+  </head>
+
+  <!-- 
+      offset（偏移量）系列： 可以动态的得到该元素的位置、大小等。
+                1. 获得元素距离 ！带有定位父元素！ 的位置             Element.offsetTop、offsetLeft 
+                2. 获得元素自身的大小（宽度高度=width+padding+border） offsetWidth、offsetHeight
+                3. ps：返回数值都不带单位
+                4. 返回元素带有定位的父级元素 ，没有返回body       offsetParent
+   -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .father {
+      width: 100px;
+      height: 100px;
+      background-color: pink;
+      margin: 100px;
+      position: relative;
+    }
+    .son {
+      width: 50px;
+      height: 50px;
+      background-color: skyblue;
+      margin-left: 40px;
+    }
+    .w {
+      width: 100px;
+      height: 100px;
+      background-color: yellow;
+      margin: 0 auto 200px;
+      padding: 10px;
+      border: 15px solid greenyellow;
+    }
+  </style>
+  <body>
+    <div class="father">
+      <div class="son">小盒子</div>
+    </div>
+    <div class="w" style="width: 100px; height: 100px; padding: 10px"></div>
+  </body>
+  <script>
+    //offset系列
+    var father = document.querySelector(".father");
+    var son = document.querySelector(".son");
+    var w = document.querySelector(".w");
+    //1. 得到元素的偏移量 位置 返回的不带单位的数值  只有 top和left的属性
+    console.log(father.offsetTop); //100
+    console.log(father.offsetLeft); //100
+
+    //注意是 距离 ！带有定位父元素！ 的位置，如果没有父亲或父亲没有定位，以body为准
+    console.log(son.offsetLeft);
+
+    //2. 可以得到元素的大小 宽度和高度= padding + border + width 只读属性
+    console.log(w.offsetWidth);
+    console.log(w.offsetHeight);
+    console.log(w.style.width); //style 只能获取内联样式表中样式 ，且不包括border、padding， 可读写
+
+    //3.返回带有定位的父亲 否则返回body
+    console.log(son.offsetParent);
+    console.log(son.parentNode); //返回父亲 最近一级的父亲 不管有没有定位
+  </script>
+</html>

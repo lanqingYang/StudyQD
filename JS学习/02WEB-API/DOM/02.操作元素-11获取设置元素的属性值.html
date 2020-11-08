@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>获取元素属性</title>
+  </head>
+  <body>
+    <div id="demo" data-index="1" data-list-name="lisa"></div>
+    <script>
+      var div = document.querySelector("div");
+      //(1). element.属性   获取内置属性值（元素本身自带的属性）
+      console.log(div.id);
+      console.log(div.index); //undefined
+
+      //赋值
+      div.id = "demo1";
+      div.className = "navs";
+
+      console.log(div.id);
+
+      //(2). element.getAttribute('属性') ; （主要获取自定义属性：自己添加的属性）
+      console.log(div.getAttribute("id"));
+      console.log(div.getAttribute("data-index")); //1
+
+      //赋值 element.Attribute('属性','值') （主要获取自定义属性：自己添加的属性）
+      div.setAttribute("index", "2");
+      console.log(div.getAttribute("data-index"));
+
+      //class特殊 这里写的是class 不是calssName
+      div.setAttribute("class", "footer");
+      console.log(div.getAttribute("class"));
+
+      //(3) 移除属性  removeAttribute(属性)
+      div.removeAttribute("index");
+      console.log(div.getAttribute("index"));
+
+      //(4) H5新增获取/设置 自定义属性的方法  element.dataset.属性名 或者 element.dataset['属性名']
+      //dataset是一个集合
+      console.log(div.dataset);
+      //设置
+      div.dataset["getTime"] = 20;
+      //H5新增的自定义属性获取方法
+      console.log(div.dataset.getTime);
+      console.log(div.dataset["getTime"]);
+
+      //对于长名字 data-list-name ，有多个短横线连接的单词，需要用驼峰命名法 ，但getAttribute不需要
+      console.log(div.dataset.listName);
+      console.log(div.getAttribute("data-list-name"));
+    </script>
+  </body>
+</html>

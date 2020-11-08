@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>仿京东放大镜效果</title>
+  </head>
+  <!-- 
+      案例分析： 1.鼠标经过小盒子，白色遮挡层和图片大盒子显示，离开隐藏两个盒子
+                2.白色的遮挡层跟随鼠标移动
+                3.移动白色遮挡层，大图片跟随移动
+   -->
+  <style>
+    .bg {
+      width: 400px;
+      height: 300px;
+      background-color: pink;
+      position: relative;
+    }
+    .mask {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 200px;
+      background-color: #ffffff;
+      opacity: 0.5;
+      border: 1px solid #ccc;
+      cursor: move;
+    }
+    .big {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 410px;
+      width: 500px;
+      height: 500px;
+      background-color: skyblue;
+      overflow: hidden;
+      z-index: 999;
+    }
+    .big img {
+      width: 600px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+  <body>
+    <div class="bg">
+      <img src="../Pics/chicken.jpg" alt="" style="width: 300px" />
+      <div class="mask"></div>
+      <div class="big">
+        <img src="../Pics/chicken.jpg" alt="" class="bigimg" />
+      </div>
+    </div>
+  </body>
+  <script>
+    var bg = document.querySelector(".bg");
+    var mask = document.querySelector(".mask");
+    var big = document.querySelector(".big");
+    //    1. 鼠标经过小盒子，白色遮挡层和图片大盒子显示，离开隐藏两个盒子
+    bg.addEventListener("mouseover", function () {
+      mask.style.display = "block";
+      big.style.display = "block";
+    });
+    bg.addEventListener("mouseout", function () {
+      mask.style.display = "none";
+      big.style.display = "none";
+    });
+    //  2.  白色的遮挡层跟随鼠标移动 把鼠标在盒子内的坐标给白色遮挡层
+    bg.addEventListener("mousemove", function (e) {
+      var x = e.pageX - bg.offsetLeft;
+      var y = e.pageY - bg.offsetTop;
+      //盒子高度 200的一半 100
+      //mask 移动的距离
+      var maskX = x - mask.offsetWidth / 2;
+      var maskY = y - mask.offsetHeight / 2;
+      //遮挡层最大移动距离
+      var maskMaxX = bg.offsetWidth - mask.offsetWidth;
+      var maskMaxY = bg.offsetHeight - mask.offsetHeight;
+
+      if (maskX <= 0) {
+        //如果x 坐标小于0 就让它停在0的位置
+        mask.style.left = "0px";
+      } else if (maskX >= maskMaxX) {
+        //遮挡层最大移动距离  小盒子宽度-遮挡层盒子宽度
+        mask.style.left = maskMaxX + "px";
+      } else {
+        mask.style.left = maskX + "px";
+      }
+
+      //高度同理
+      if (maskY <= 0) {
+        mask.style.top = "0px";
+      } else if (maskY >= maskMaxY) {
+        mask.style.top = maskMaxY + "px";
+      } else {
+        mask.style.top = maskY + "px";
+      }
+
+      // 3.  大图片移动距离
+      // = 遮挡层移动距离/遮挡层最大移动距离 *大图片最大移动距离
+      //大图
+      var bigimg = document.querySelector(".bigimg");
+      //大图片最大移动距离
+      var bigMaxX = bigimg.offsetWidth - big.offsetWidth;
+      var bigMaxY = bigimg.offsetHeight - big.offsetHeight;
+      //大图片移动距离
+      var bigX = (maskX / maskMaxX) * bigMaxX;
+      var bigY = (maskY / maskMaxY) * bigMaxY;
+
+      bigimg.style.left = -bigX + "px";
+      bigimg.style.top = -bigY + "px";
+    });
+  </script>
+</html>

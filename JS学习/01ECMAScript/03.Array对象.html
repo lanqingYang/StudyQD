@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array对象</title>
+  </head>
+  <body>
+    <!-- 1.两种方式创建  字面量、new Array()-->
+    <script>
+      console.log("----------------1-----------");
+
+      //1.字面量
+      var arr = [1, 2, 3];
+      //2. new Array()
+      var arr1 = new Array(2); //数组长度为2 ，里面两个空数组元素
+      var arr2 = new Array(2, 3, 4); //数组长度为3 ，里面三个元素  值为：2，3，4
+    </script>
+
+    <!-- 2.检测是否为数组 instanceof  、 Array.isArray(参数) H5新增  ie9以上可行 -->
+    <script>
+      console.log("----------------2-----------");
+
+      var arr1 = [1, 2, 3];
+      var obj = {};
+      //instanceof 运算符
+      console.log(arr1 instanceof Array); //true
+      console.log(obj instanceof Array); //false
+      // Array.isArray(参数)  H5新增  ie9以上可行
+      console.log(Array.isArray(arr1)); //true
+      console.log(Array.isArray(obj)); //false
+    </script>
+
+    <!-- 3.添加删除数组元素！！！！！ -->
+    <script>
+      console.log("----------------3-----------");
+
+      var arr = [1, 2, 3];
+      //1. push(参数),在数组！！末尾！！添加一个或多个元素
+      console.log(arr.push(4, "push")); //参数直接写数组元素即可，返回新数组的长度
+      console.log(arr); //原数组也会发生变化
+
+      //2. unshift(参数) 数组！！开头！！添加一个或多个元素
+      arr.unshift("unshift", 5);
+      console.log(arr); //原数组也会发生变化
+
+      //3. pop() 它可以删除数组！最后 一个！ 元素
+      console.log(arr.pop()); //返回值为 删除的元素的值
+      console.log(arr); //原数组也会发生变化
+
+      //4. shift() 它可以删除数组！第 一个！ 元素
+      console.log(arr.shift()); //返回值为 删除的元素的值
+      console.log(arr); //原数组也会发生变化
+    </script>
+
+    <!-- 4.数组排序 颠倒reverse()、sort()元素排序-->
+    <script>
+      console.log("----------------4-----------");
+
+      //翻转数组
+      var arr = [13, 4, 7, 77];
+      arr.reverse(); //返回现数组
+      console.log(arr);
+      //元素排序 sort()
+      //按照unicode值进行排序的。如果需要升序或降序排序，需要添加函数参数
+      arr.sort(); //返回现数组,但是 对于三位以上的数组，结果会不正确
+      console.log(arr);
+      //完整写法（冒泡排序）
+      arr.sort(function (a, b) {
+        // return a - b; //按照升序排列
+        return b - a; //按照降序排列
+      });
+      console.log(arr);
+    </script>
+
+    <!-- 5. 数组索引 indexOf('要查找的元素',[起始位]) 返回给定元素第一个索引、 lastIndexOf()在数组中最后一个索引 -->
+    <script>
+      console.log("----------------5-----------");
+
+      //indexOf(数组元素)
+      var arr = ["red", "green", "gray", "red"];
+      console.log(arr.indexOf("red", 2)); //返回该数组元素的第一个索引号 机制：从第一个元素开始查找
+      console.log(arr.indexOf("blue")); //没有返回-1
+
+      //lastIndexOf(数组元素)
+      console.log(arr.lastIndexOf("red")); //返回该数组元素的第一个索引号  机制：从最后一个元素开始查找
+      console.log(arr.lastIndexOf("blue")); //没有返回-1
+    </script>
+
+    <!-- 6. 数组转换为字符串 toString()、join('分隔符') -->
+    <script>
+      console.log("----------------6-----------");
+
+      var arr = ["green", "red", "blue", "gray"];
+
+      //toString()
+      console.log(arr.toString()); //green, red, blue, gray
+      //join('分隔符')
+      console.log(arr.join("-")); //green-red-blue-gray ;不写 默认是逗号分割
+    </script>
+
+    <!-- 7. ！！！！删除 splice(开始位置,个数)!！ 返回删除项目的新数组 会影响原数组！
+        数组拼接 concat() 不影响原数组; 截取 slice(begin,end) 返回被截取项目的新数组 [);  -->
+    <script>
+      console.log("----------------7-----------");
+
+      var arr1 = [1, 2, 3, 4];
+      var arr2 = ["pink", "red", "grey"];
+      //拼接 concat
+      var arr3 = arr1.concat(arr2);
+      console.log(arr3);
+
+      //截取 slice(begin,end)
+      var arr4 = arr1.slice(0, 2); //[0,2)
+      console.log(arr4);
+
+      //删除 splice(开始位置,个数)
+      arr1.splice(0, 2);
+      console.log(arr1); //影响原数组
+    </script>
+  </body>
+</html>

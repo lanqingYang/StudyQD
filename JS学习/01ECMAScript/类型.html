@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据类型</title>
+</head>
+
+<body>
+   <p id="one"></p>
+   <p id="two"></p>
+</body>
+<script>
+    /*基本数据类型 6种*/
+    var UN=undefined;/* 未定义 */
+    var Null=null;/* 对空 */
+    var symbol=Symbol /*  新类型，表示独一无二的值*/
+    var string=new String;
+    var number=new Number;
+    var boolean=new Boolean;
+    /* 引用书类型  对象 函数 数组*/
+     
+     var cars=new Array();
+     var person1=new Object();
+
+    var cars2=[];  //创建空数组
+     /* 赋值 */
+     cars[0]="saab";
+     cars[1]="BWM";    //数组赋值
+     var car2=['saab2','BWM2'];
+     var cars3=new Array('saab3','BWM3')
+
+     person1={firstname:'Jone',lastname:'Doe',id:1};/* 对象是键值对的容器 */
+     var person2={                         
+        firstname:'Jone',
+        lastname:'Doe',
+        id:1,
+        fullname:function(){
+            return this.firstname+" "+this.lastname;
+        }
+     };   /* 注意这种写法不要忘记分号 */
+
+    document.getElementById("one").innerHTML=" 不加括号输出"+person2.fullname;  /* 函数属性作为一个属性访问 */
+    document.getElementById("two").innerHTML="加括号输出"+person2.fullname();  /* 函数属性作为一个方法访问 */
+
+
+     /* 对象属性寻址方式 */
+     var name1=person1['lastname'];
+     var name2=person1.lastname;
+
+     /* null与undefined相等，但不全等。 null表示没有对象，undifined表示没有值*/
+     console.log(null==undefined); /* true undefined是派生自null的。null代表空值，空对象指针，typeof后是object，可认为特使的对象值。*/
+     console.log(null===undefined);/* false */
+
+
+</script>
+</html>

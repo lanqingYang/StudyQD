@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>节点</title>
+  </head>
+  <body>
+    <!-- 通过 父子兄弟关系来获取元素,比DOM获取更加简便,但逻辑性更强 
+        节点: 元素节点 属性节点 文本节点
+        节点至少拥有: nodeType(节点类型) nodeName(名称) nodeValue(值)
+        nodeType: 1  元素节点
+                  2  属性节点
+                  3  文本节点(包含文字 空格 换行等)
+        但在开发中 主要操作元素节点-->
+    <div>div</div>
+    <span>span</span>
+    <ul>
+      <li>li1</li>
+      <li>li2</li>
+      <li>li3</li>
+      <li>li4</li>
+    </ul>
+    <div class="box">
+      <span class="erweima">×</span>
+    </div>
+  </body>
+  <script>
+    //(1). 父节点 parentNode
+    var erweima = document.querySelector(".erweima");
+    // var box = document.querySelector(".box");  //以前要获取box
+    //在得到了erweima后,现在要获取box , 得到是离元素最近的父节点,找不到返回 null
+    console.log(erweima.parentNode);
+
+    //(2). 所有子节点    .childNodes 包括文本和元素节点 .children 元素子节点 !!!!
+    var ul = document.querySelector("ul");
+    console.log(ul.childNodes);
+    for (var i = 0; i < ul.childNodes.length; i++) {
+      //如果为元素节点
+      if (ul.childNodes[i].nodeType == 1) {
+        console.log(ul.childNodes[i]);
+      }
+    }
+    //或者用  !!!!!!parentnode.children (非标准)
+    console.log(ul.children);
+
+    //(3).第一个子节点和最后一个子节点  parentnode.firstChild/lastChild  不管是文本还是元素节点
+
+    console.log(ul.firstChild);
+    console.log(ul.lastChild);
+    //第一个元素子节点和最后一个   parentNode.firstElementChild/lastElementChild  //ie9 以上支持
+
+    console.log(ul.firstElementChild);
+    console.log(ul.lastElementChild);
+    //实际开发写法,既没有兼容性问题又返回第一个子元素 利用 .children
+    console.log(ul.children[0]);
+    console.log(ul.children[ul.children.length - 1]);
+
+    //(4)兄弟节点 .nextSibling .previousSibling  下一个/上一个 不管是文本还是元素节点  .nextElementSibling
+    var div = document.querySelector("div");
+    console.log(div.nextSibling);
+    console.log(div.previousSibling);
+    //下/上一个兄弟元素节点 ie9以上
+    console.log(div.nextElementSibling);
+    console.log(div.previousElementSibling);
+    //解决兼容性 自己封装 ,利用nextSibling,判断节点类型
+    function getNextElementSibling(Element) {
+      var el = Element;
+      while (el == el.nextSibling) {
+        if (el.nodeType == 1) {
+          return el;
+        }
+      }
+      return null;
+    }
+  </script>
+</html>

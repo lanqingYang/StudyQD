@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模态框的拖拽</title>
+  </head>
+  <!-- 
+      分析： 1. 点击弹出层，弹出模态框，并且显示灰色半透明遮挡层
+            2. 点击关闭，关闭模态框，同时关闭遮挡层
+            3. 鼠标放到模态框最上一行，可以按住鼠标拖拽模态框在页面上移动。
+            4. 鼠标松开，停驶拖动模态框移动
+   -->
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    a {
+      text-decoration: none;
+      color: #000000;
+    }
+    .login-header {
+      text-align: center;
+    }
+    .login-header a {
+      color: skyblue;
+    }
+    .login {
+      display: none;
+      width: 512px;
+      height: 280px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      background-color: #ffffff;
+      transform: translate(-50%, -50%);
+      border: #ebebeb solid 1px;
+      box-shadow: 0px 0px 20px #ddd;
+      z-index: 9999;
+    }
+    .login-title {
+      width: 100%;
+      margin: 10px 0 0 0;
+      text-align: center;
+      line-height: 40px;
+      height: 40px;
+      position: relative;
+      font-size: 14px;
+      cursor: move;
+      position: relative;
+      font-size: 24px;
+    }
+
+    .login-title span {
+      position: absolute;
+      font-size: 12px;
+      right: -20px;
+      top: -30px;
+      background-color: #ffffff;
+      border: #ebebeb solid 1px;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+    }
+    .login-input-content {
+      margin-top: 20px;
+    }
+    .login-button {
+      width: 50%;
+      margin: 30px auto 0px auto;
+      line-height: 40px;
+      font-size: 14px;
+      border: 1px solid #ebebeb;
+      text-align: center;
+    }
+    .login-bg {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0px;
+      left: 0px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+    .login-button a {
+      display: block;
+    }
+    .login-input input.list-input {
+      float: left;
+      line-height: 35px;
+      height: 35px;
+      width: 350px;
+      border: 1px solid #ebebeb;
+      text-indent: 5px;
+    }
+    .login-input {
+      overflow: hidden;
+      margin: 0 0 20px 0;
+    }
+    .login-input label {
+      float: left;
+      width: 90px;
+      padding-right: 10px;
+      text-align: right;
+      line-height: 35px;
+      height: 35px;
+      font-size: 14px;
+    }
+  </style>
+  <body>
+    <div class="login-header">
+      <a href="javascript:;" id="link">点击，弹出登录框</a>
+    </div>
+    <div class="login" id="login">
+      <div id="title" class="login-title">
+        登陆
+        <span
+          ><a href="javascript:void(0);" id="closeBtn" class="close-login"
+            >关闭</a
+          ></span
+        >
+      </div>
+      <div class="login-input-content">
+        <div class="login-input">
+          <label for="">用户名：</label>
+          <input
+            type="text"
+            placeholder="请输入用户名"
+            name="info[username]"
+            id="username"
+            class="list-input"
+          />
+        </div>
+        <div class="login-input">
+          <label for="">登陆密码：</label>
+          <input
+            type="password"
+            placeholder="请输入登陆密码"
+            name="info[password]"
+            id="password"
+            class="list-input"
+          />
+        </div>
+      </div>
+      <div id="loginBtn" class="login-button">
+        <a href="javascript:;" id="login-button-submit">登陆</a>
+      </div>
+    </div>
+    <!-- 遮盖层 -->
+    <div id="bg" class="login-bg"></div>
+  </body>
+  <script>
+    var link = document.querySelector("#link"); //登陆连接
+    var login = document.querySelector("#login"); //登陆模态框
+    var bg = document.querySelector("#bg"); //遮盖层
+    var closeBtn = document.querySelector("#closeBtn"); //关闭按钮
+    var title = document.querySelector("#title");
+    //1.点击登陆框 出现 遮盖层和登陆模态框
+    link.addEventListener("click", function () {
+      login.style.display = "block";
+      bg.style.display = "block";
+    });
+    //2. 点击关闭按钮， 隐藏遮盖层和登陆模态框
+    closeBtn.addEventListener("click", function () {
+      login.style.display = "none";
+      bg.style.display = "none";
+    });
+    //3. 按住鼠标拖拽模态框在页面上移动  onmousedown
+    title.addEventListener("mousedown", function (e) {
+      //鼠标在盒子内部的坐标
+      var x = e.pageX - login.offsetLeft;
+      var y = e.pageY - login.offsetTop;
+
+      //移动 ,把鼠标在页面中的坐标-鼠标在盒子内部的坐标 =模态框的位置
+      document.addEventListener("mousemove", move);
+
+      //4. 松开鼠标，模态框固定位置 移除移动事件
+      document.addEventListener("mouseup", function () {
+        document.removeEventListener("mousemove", move);
+      });
+
+      function move(e) {
+        // !!+px
+        login.style.left = e.pageX - x + "px";
+        login.style.top = e.pageY - y + "px";
+      }
+    });
+  </script>
+</html>

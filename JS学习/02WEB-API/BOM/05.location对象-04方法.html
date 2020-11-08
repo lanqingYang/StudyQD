@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>方法</title>
+  </head>
+  <!-- 
+    location.assign()  ：跳转页面（页面重定向），记录即使，可以后退页面
+            .replace() : 替换当前页面，不记录历史，不能后退页面
+            .reload()  : 重新加载页面，相当于刷新，参数为true强制刷新
+ -->
+  <body>
+    <button class="assign">跳转页面按钮</button>
+    <button class="replace">替换页面按钮</button>
+    <button class="reload">刷新页面按钮</button>
+  </body>
+  <script>
+    var btns = document.querySelectorAll("button");
+    //1. .assgn() 跳转，可回退页面
+    btns[0].addEventListener("click", function () {
+      location.assign("index.html");
+    });
+
+    //2. .replace() 替换页面 不回退
+    btns[1].addEventListener("click", function () {
+      location.replace("index.html");
+    });
+
+    //3. .reload()  刷新页面 参数为true 强制刷新
+    btns[2].addEventListener("click", function () {
+      // location.reload();
+      location.reload();
+      console.log("点击了");
+    });
+  </script>
+</html>

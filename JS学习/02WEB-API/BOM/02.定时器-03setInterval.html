@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>定时器 setInterval</title>
+  </head>
+  <!-- 
+      1.setInterval  每个一段时间执行一次!
+      // 语法规范 : window.setInterval(调用函数,延时时间)
+      2.停止定时器 (window.)clearInterval(定时器名字)
+   -->
+  <button>点击停止定时器</button>
+  <body>
+    <script>
+      //1. setInterval (调用函数,延时时间)
+      //延时时间:单位毫秒.可以省略,为0,即立即执行
+      //调用函数: 可以直接写函数也可以写函数名 (或 '函数名()' 不推荐)
+      //可能有很多定时器,给定时器加标识符(名字)
+
+      var timer1 = setInterval(callback, 1000);
+
+      var btn = document.querySelector("button");
+
+      //2. clearInterval(定时器名称)
+      btn.addEventListener("click", function () {
+        clearInterval(timer1);
+      });
+
+      function callback() {
+        console.log("setInterval时间到了");
+      }
+    </script>
+  </body>
+</html>

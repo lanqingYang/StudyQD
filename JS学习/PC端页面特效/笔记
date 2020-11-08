@@ -1,0 +1,22 @@
+问题：  
+     .1 常见的offset系列属性的作用
+     .2 常见的client系列属性的作用
+     .3 常见的scroll系列属性的作用
+     .4 封装简单动画函数
+     .5 页面轮播图
+
+
+1. offset系列 （偏移量）
+     offset： 可以动态的得到该元素的位置、大小等。
+                1. 获得元素距离 ！带有定位父元素！ 的位置             Element.offsetTop、offsetLeft 
+                2. 获得元素自身的大小（宽度高度=width+padding+border） offsetWidth、offsetHeight
+                3. ps：返回数值都不带单位
+                4. 返回元素带有定位的父级元素 ，没有返回body       offsetParent
+
+   offset与style区别:
+            offset                                   style
+    可以得到任意样式表中的值                   只能得到行内样式表中的值
+    获取的数值无单位                           获取带单位字符串
+    offsetWidth包括padding、border、width     不含padding、boder
+    offsetWidth只读，不能赋值                  style.width可读写属性
+总结：  用于获取！元素大小位置更好                  用于更改！元素值更好！！

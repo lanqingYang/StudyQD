@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js执行机制</title>
+  </head>
+  <!-- 
+      执行机制:
+        1.先执行 执行栈(主线程) 中的同步任务
+        2.异步任务(回调函数)放入队列中.  (中途经过 异步进程处理 处理完成的放入 队列中)
+        3.执行栈中所有同步任务执行完毕,系统就按照次序读取 任务队列 中的异步任务,
+          于是被读取的异步任务结束等待状态,进入执行栈,开始执行.
+        4.事件循环: 主线程不断的重复获得任务再执行任务(去任务队列里拿任务到主线程执行)的机制,称为事件循环(event loop)
+   -->
+  <body>
+    <script>
+      console.log(1);
+      document.onclick = function () {
+        console.log("click");
+      };
+      console.log("2");
+      setTimeout(function () {
+        console.log(3);
+      }, 3000);
+
+      //顺序   3s之前点击:  12 click 3  之后: 123 click
+    </script>
+  </body>
+</html>

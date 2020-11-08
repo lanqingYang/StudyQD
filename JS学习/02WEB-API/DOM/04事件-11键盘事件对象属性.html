@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>键盘事件对象属性</title>
+  </head>
+  <body>
+    <!-- 
+        键盘事件对象: keybordEvent
+        keyCode属性  得到相应ASCII值
+     -->
+    <script>
+      document.addEventListener("keyup", function (e) {
+        // console.log(e);
+        // 1 -->ASCII 49  回车 13
+        //!!!keyup和keydown 事件A,a 65 不区分大小写
+        console.log("up:" + e.keyCode);
+      });
+
+      //2. keypress 区分大小写
+      document.addEventListener("keypress", function (e) {
+        console.log("--------------");
+        console.log("press:" + e.keyCode);
+      });
+    </script>
+  </body>
+</html>

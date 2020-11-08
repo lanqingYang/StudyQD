@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自动聚焦</title>
+  </head>
+  <body>
+    <!-- 
+        核心思路: 检测用户是否按下了s键 ,如果按下了就把光标定位到搜索框中 
+        .1 keyCode判断是否是s键
+        .2 搜索框获取焦点: js里面的 focus()方法 
+     -->
+    <input type="text" placeholder="请输入一些内容....." />
+  </body>
+  <script>
+    var input = document.querySelector("input");
+    //用keydown 会有bug  按下时间长 就会在聚焦之后往搜索框中加s字符s
+    document.addEventListener("keyup", function (e) {
+      //   console.log(e.keyCode);  //  s--83
+      if (e.keyCode == 83) {
+        input.focus();
+      }
+    });
+  </script>
+</html>

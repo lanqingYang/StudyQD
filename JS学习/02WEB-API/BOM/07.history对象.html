@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>history对象</title>
+  </head>
+  <!-- 
+      history对象： 与浏览器历史记录进行交互，该对象包含用户访问过的url  
+            方法: back() 后退      浏览器后退按钮
+                  forword() 前进   浏览器前进按钮b
+                  go(参数) 前进后退功能 ， 1：前进一个页面，-1：后退一个页面
+   -->
+  <body>
+    <a href="index.html">去首页</a>
+    <button>前进</button>
+    <script>
+      console.log(history);
+      var btn = document.querySelector("button");
+      btn.addEventListener("click", function () {
+        // history.forward();
+        //或者
+        history.go(1);
+      });
+    </script>
+  </body>
+</html>

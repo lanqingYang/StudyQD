@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单验证，非正则表达式模式</title>
+</head>
+<body>
+    <input type="number" min="100" max="300" id="one" required><span id="tipnum"></span><br />
+    <button onclick="pdNumber()">验证</button>
+    <p>输入小于100 大于300的就会提示错误</p>
+</body>
+<script>
+    function pdNumber(){
+        var num=document.getElementById("one");
+        //chekValidaty() 判断input元素数据是否合法
+        if(num.checkValidity()==false){
+            // 用setCustomValidity("")来设置自定义提示
+            num.setCustomValidity("错误");
+          //validationMessage属性，返回错误信息提示，设置了自定义提示的话就显示自定义提示 input的其他属性要用的时候再查找吧
+
+            document.getElementById("tipnum").innerHTML=num.validationMessage;
+           
+        }else{
+            num.setCustomValidity=("正确");
+            document.getElementById("tipnum").innerHTML=num.validationMessage;
+        }
+    }
+</script>
+</html>
