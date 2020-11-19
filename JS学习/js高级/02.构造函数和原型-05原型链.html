@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>construtor构造函数</title>
+  </head>
+  <body>
+    <script>
+      function Student(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      Student.prototype = {
+        //2.所以需要自己写constructor 重新指回我们的构造函数
+        constructor: Student,
+        study: function () {
+          console.log("在学了在学了");
+        },
+        play: function () {
+          console.log("在玩了在玩了");
+        },
+      };
+      var Tanghao = new Student("唐昊", 1);
+      var Lanqing = new Student("澜庆", 2);
+
+      //1. 只要是对象就有__proto__原型，指向原型对象
+      console.log(Student.prototype);
+      //2. Student原型对象里面的__proto__原型指向Object.prototype
+      console.log(Student.prototype.__proto__ === Object.prototype); //true
+      //3. Object.prototype原型对象里面的__proto__原型 指向null
+      console.log(Object.prototype.__proto__);
+
+      //3.
+    </script>
+  </body>
+</html>

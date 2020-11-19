@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES5-新增数组方法</title>
+  </head>
+  <!-- 
+      迭代（遍历）方法： ！！forEach()、！！filter()、!!some()、map()、every()
+   -->
+  <body>
+    <script>
+      //1.！！ forEach
+      console.log("----------!!!forEach-------------");
+      var arr = [1, 2, 3];
+      var sum = 0;
+      arr.forEach(function (value, index, array) {
+        console.log("每个数组元素：" + value);
+        console.log("每个数组元素的索引号：" + index);
+        console.log("数组本身：" + array);
+        sum += value;
+      });
+      console.log("和为：" + sum);
+
+      // 2.！！ filter 返回一个新的数组，元素为所有符合条件的所有元素， 主要用于筛选数组
+      console.log("----------!!!filter-------------");
+      var arr1 = [101, 22, 11, 2, 5];
+      //选出大于20的所有元素
+      var newArr = arr1.filter(function (value, index, array) {
+        return value >= 20;
+      });
+      console.log(newArr);
+
+      //3.！！ some 查找数组中是否有满足条件的元素，找到一个就返回ture，终止循环，否则返回false
+      console.log("----------!!!some-------------");
+      var arr2 = [1, 2, 30];
+      var flag = arr.some(function (value, index, array) {
+        return value > 30; //false
+      });
+      console.log(flag);
+      var arr3 = ["red", "pink", "blue"];
+      var flag1 = arr3.some(function (value) {
+        return value == "pink"; //true
+      });
+      console.log(flag1);
+
+      //filter 也是查找满足条件的元素，但是它返回的数组，而且是把所有满足条件的元素返回回来
+      //some  查找满足条件的元素是否存在。返回一个布尔值，如果查找到第一个满足条件的元素，就终止循环
+
+      //4.. map 与forEach 相似 ，返回一个新数组，新数组为原始函数调用函数处理后的值
+      console.log("----------map-------------");
+
+      var arr4 = [9, 16, 64];
+      var newArr4 = arr4.map(function (value, index, arr) {
+        return value + 2; //[11,18,66]
+      });
+      console.log(newArr4);
+
+      //5. every 与some 相反 ，有一个不满足查询条件返回false， 全部满足条件 返回true
+      console.log("----------every-------------");
+
+      var arr5 = [3, 5, 20, 6];
+      var flag2 = arr5.every(function (value, index, arr) {
+        return value > 1; //全部大于1 true
+      });
+      console.log(flag2);
+
+      var flag3 = arr5.every(function (value, index, arr) {
+        return value > 5; //false
+      });
+      console.log(flag3);
+    </script>
+  </body>
+</html>

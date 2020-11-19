@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>深浅拷贝</title>
+  </head>
+  <!-- 
+    浅拷贝只拷贝一层，更胜层次对象级别的只拷贝引用  
+    深拷贝拷贝多层，每一级别的数据都会拷贝
+ -->
+  <body>
+    <script>
+      var obj = {
+        id: 1,
+        name: "andy",
+        msg: {
+          age: 17,
+        },
+        color: ["pink", "red"],
+      };
+      var o = {};
+      //ES6  新增浅拷贝方法 Object.assign(target,...,sources)
+      for (var k in obj) {
+        //k属性名 obj[k]属性值
+        o[k] = obj[k];
+        //1. 浅拷贝， 对象那个属性拷贝的是地址，此时 obj.msg和o.msg指向的是一个地址，随便谁修改，另一个的值也会修改
+      }
+      console.log(o);
+      obj.msg.age = 20;
+      console.log(o.msg.age); //20 因为obj.omsg和o.msg指向同一块地址
+
+      console.log(
+        "-------es6 新增浅拷贝方法 Object.assign(target,...,sources)------"
+      );
+      var o1 = {};
+      Object.assign(o1, obj);
+      console.log(o1);
+
+      //2.!!!深拷贝 内存空间里面的数据重新复制一份再给新对象，所以修改不会对原来的对象产生影响
+      //利用递归， 简单数据类型直接赋值，那么对象属性就继续遍历里面的普通数据再进行浅拷贝
+      // 封装函数
+      function deepCopy(newObj, oldObj) {
+        for (const k in oldObj) {
+          //判断属性值数据哪种数据类型
+          //1.获取属性值 oldObj[k]
+          var item = oldObj[k];
+          //2.判断这个是是否是数组
+          if (item instanceof Array) {
+            //instanceof:  Array.prototype是在item的原型链上 如果是那么item是数组
+            //注意这里Array要写在上面，因为数组也是对象
+            // console.log(Array instanceof Object); //true
+            newObj[k] = [];
+            deepCopy(newObj[k], item);
+          } //3.判断这个值是否是对象
+          else if (item instanceof Object) {
+            newObj[k] = {};
+            deepCopy(newObj[k], item);
+          }
+          //4.数据见到那数据类型
+          else {
+            newObj[k] = item;
+          }
+        }
+      }
+
+      var o2 = {};
+      deepCopy(o2, o);
+      console.log(o2);
+      o2.msg.age = 100;
+      console.log(obj.msg.age); //20  obj里面得age不受影响
+    </script>
+  </body>
+</html>

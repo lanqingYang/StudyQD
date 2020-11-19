@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>let</title>
+  </head>
+  <!-- 
+      ES6新增块级作用域
+    1. let声明的变量只在所处的块级有效 ,var是不具有的!!!!!!!!!
+    2. let关键字  防止循环变量变成全局变量  !!!
+    3. 不存在变量提升 (必须先声明再使用)
+    4. 暂时性死区特性: let声明的变量和该块级整体进行绑定,不会向上一级去找该变量
+ -->
+  <body>
+    <script>
+      /* 1. let声明的变量只在所处的块级有效 ,var是不具有的!!!!!!!!! */
+      if (true) {
+        let a = 10; //只在if这个块中能够被访问到
+        var num = 0;
+        console.log(a);
+        if (true) {
+          console.log(a); //10
+          let c = 20;
+          var mm = 10;
+          //   console.log(b); //报错 无法被访问到
+          console.log(num); //可访问
+        }
+        // console.log(c); //报错 无法被访问到
+        console.log(mm); //报错 无法被访问到
+      }
+      //   console.log(a); //报错 无法被访问到
+
+      /* -------------------------------------------------------------- */
+
+      /*    2. let关键字  防止循环变量变成全局变量!!!! */
+      for (var i = 0; i < 2; i++) {}
+      console.log(i); //2
+      //循环结束之后,i不应该继续被访问到才合理 所有用let更合理
+      for (let q = 0; q < 2; q++) {}
+      //   console.log(q); //报错
+
+      /* -------------------------------------------------------------- */
+
+      /* 使用let关键字声明的变量没有声明提升 */
+      //   console.log(sm); //报错
+      let sm = "shengming";
+      console.log(sm); //"shengming"
+
+      /* -------------------------------------------------------------- */
+
+      /* 使用let关键字声明的变量有暂时性死区特性 */
+      var sq = "siqv";
+      if (true) {
+        // console.log(sq); //报错
+        let sq = 20;
+      }
+      //因为这个块级 用let声明 了便来给你sq  那么这个块级就和sq整体进行了绑定, 不会向上一级去查找,
+      //而这个又是先使用后声明,所以报错变量没有定义
+    </script>
+  </body>
+</html>

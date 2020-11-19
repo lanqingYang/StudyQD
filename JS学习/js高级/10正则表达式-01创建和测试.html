@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>正则表达式</title>
+  </head>
+  <!-- 
+    正则表达式： 用于匹配字符串中字符组合的模式  正则表达式也是对象！
+    作用： 1.匹配文本
+           2.文本替换
+           3.获取特定部分文本
+    本阶段主要是完成一些表单的验证
+    实际开发一般是复制写好的正则表达式，但是要会根据实际情况进行修改
+ -->
+  <body>
+    <script>
+      //1. 创建的两种方式
+      //1.1 RegExp(/表达式/)
+      var regexp = new RegExp(/123/); //要求输入的必须是123
+      console.log(regexp); //  /123/
+      //1.2 字面量创建
+      var rg = /123/;
+      console.log(rg); // /123/
+
+      //2. !!  测试正则表达式test  检测字符串是否符合规范
+      // regexp.test(str)
+      console.log(rg.test("123")); //true
+      console.log(regexp.test("124")); //flase
+    </script>
+  </body>
+</html>

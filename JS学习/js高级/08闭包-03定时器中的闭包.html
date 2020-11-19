@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>定时器中的闭包</title>
+  </head>
+  <!-- 
+      案例： 3秒之后，打印所有li元素的内容
+   -->
+  <body>
+    <ul>
+      <li>菠萝</li>
+      <li>荔枝</li>
+      <li>冬枣</li>
+      <li>橘子</li>
+    </ul>
+  </body>
+  <script>
+    var lis = document.querySelectorAll("li");
+
+    //1.for循环放里面 先延时再循环
+    // setTimeout(function () {
+    //   for (var i = 0; i < lis.length; i++) {
+    //     console.log(lis[i].innerHTML);
+    //   }
+    // }, 3000);
+
+    //2. for循环放外面 先循环再延时
+    for (var i = 0; i < lis.length; i++) {
+      /* //错误写法
+       setTimeout(function () {
+        console.log(lis[i].innerHTML); //这里 lis[4]是undefined ，异步任务放到同步任务完成后执行
+      }, 3000); 
+      */
+
+      //正确写法
+      (function (i) {
+        setTimeout(function () {
+          console.log(lis[i].innerHTML);
+        }, 3000);
+      })(i);
+    }
+  </script>
+</html>

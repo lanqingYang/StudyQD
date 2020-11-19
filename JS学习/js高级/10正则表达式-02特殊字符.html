@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>正则表达式-特殊字符</title>
+  </head>
+  <!-- 
+      正则表达式可以由简单字符构成:/abc/ ，也可以是简单的特殊字符的组合，比如/ab*c/
+      特殊字符也成为元字符，是特殊意义的符号： ^、$、+等
+
+      正则表达式不需要加引号，不管是数字型还是字符串型
+   -->
+  <body>
+    <script>
+      /*     1.边界符 ^:以..开头    $:以..结尾   */
+      var rg = /abc/; //只要包含有abc（连续） 就是true
+      console.log(rg.test("abc")); //true
+      console.log(rg.test("aabcdd")); //true
+      console.log("-------------");
+
+      var reg = /^abc/; //必须以abc开头
+      console.log(reg.test("abcd")); //true
+      console.log(reg.test("aabcd")); //false
+      console.log("-------------");
+
+      // ^$在一起 表示必须是精确匹配
+      var reg1 = /^abc$/; // 必须式abc这三个字符串      必须以abc开头 abc结尾
+      console.log(reg1.test("abc")); //false
+      console.log(reg1.test("abcd")); //false
+      console.log(reg1.test("abcabc")); //false
+
+      console.log("-------------");
+      /* 2.字符类：[] 表示有一些列字符可供选择，只要匹配其中的一个就可以了 
+                    注意：[^]表示取反
+       */
+
+      var rg2 = /[abc]/; //只要包含有a或b或c就可以
+      console.log(rg2.test("andy")); //true
+      console.log(rg2.test("baby")); //true
+      console.log(rg2.test("red")); //false
+      console.log("-------------");
+
+      var rg3 = /^[abc]$/; //三选一 a或b或c
+      console.log(rg3.test("c")); //true
+      console.log(rg3.test("aa")); //false
+      console.log(rg3.test("abc")); //false
+      console.log("-------------");
+
+      var rg4 = /^[a-z]$/; //a-z 选一个字母 都是true
+      console.log(rg4.test("m")); //true
+      console.log(rg4.test("M")); //false
+      console.log("-------------");
+      //字符组合
+      var rg5 = /^[a-zA-Z0-9_-]$/; //a-z,A-Z 大小写字母数字_-任选一个都可以 true 多选一
+      console.log(rg5.test("n")); //true
+      console.log(rg5.test("N")); //true
+      console.log(rg5.test("1")); //true
+      console.log(rg5.test("_")); //true
+      console.log(rg5.test("-")); //true
+      console.log(rg5.test("！")); //false
+      console.log("-------------");
+
+      //[]里面的^表示取反，和边界符要区分
+      var rg6 = /^[^a-zA-Z0-9_-]$/; //不能包含a-z,A-Z 大小写字母数字_-任选一个
+      console.log(rg6.test("-")); //false
+      console.log(rg6.test("！！")); //false  只能一个字符
+      console.log(rg6.test("！")); //true
+    </script>
+  </body>
+</html>

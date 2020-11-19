@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>扩展内置对象</title>
+  </head>
+  <!-- 
+    可以通过原型对象，对原来的内置对象进行扩展自定义的方法。比如给数组增加自定义求偶数和的功能
+ -->
+  <body>
+    <script>
+      // 原型对象的应用，扩展内置对象方法
+      Array.prototype.sum = function () {
+        var sum = 0;
+        for (var i = 0; i < this.length; i++) {
+          sum += this[i];
+        }
+        return sum;
+      };
+
+      // 不能用下面这种方法  会把以前的所有东西给替换掉(其实：这里在系统中根本不会被覆盖，相当于没用，所以会在用下面代码再执行arr.sum()的时候会报错，因为找不到sum)
+      //   Array.prototype = {
+      //     sum: function () {
+      //       var sum = 0;
+      //       for (var i = 0; i < this.length; i++) {
+      //         sum += this[i];
+      //       }
+      //       return sum;
+      //     },
+      //   };
+
+      //应用求和
+      var arr = [1, 2, 3];
+      console.log(arr.sum());
+      console.log(Array.prototype);
+    </script>
+  </body>
+</html>

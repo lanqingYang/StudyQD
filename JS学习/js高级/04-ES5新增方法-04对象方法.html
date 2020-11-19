@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>对象方法</title>
+  </head>
+  <body>
+    <script>
+      /* Object.keys(obj) 用于获取对象自身所有的属性 类似for..in.. 返回一个由属性名组成的数组
+        Object.defineProperty(obj,prop,descriptor) 定义对象中新属性或修改原有的属性
+      */
+      var obj = {
+        name: "唐昊",
+        age: 21,
+        id: 1,
+      };
+
+      //1. Object.keys(obj)返回一个由属性名组成的数组
+      var arr = Object.keys(obj);
+      console.log(arr);
+      arr.forEach(function (value) {
+        console.log(value);
+      });
+
+      // 以前的对象添加和修改属性的方式
+      //   obj.Ename = "David";
+      //   obj.age = 1;
+
+      //2. Object.defineProperty(obj,prop,descriptor)
+
+      /*  descript说明： 一对象形式{}书写
+      value：设置属性值 默认undefined，
+      writable：值是否可以重写。true|false 默认false，
+      enumerable：目标属性是否可以被枚举。true|false 默认为false
+      configurable： 目标属性是否可以被删除或者是否可以再次修改 特性(不允许再修改第三个参数descriptor里面的特性) true|false 默认false */
+
+      //2.1 value
+      Object.defineProperty(obj, "Ename", {
+        value: "David",
+      });
+      console.log(obj); //添加了 Ename属性
+
+      Object.defineProperty(obj, "age", {
+        value: 1, //修改年龄为1
+      });
+      console.log(obj);
+
+      //2.2 writable  有些属性很重要。可以设置它不允许被重写
+      Object.defineProperty(obj, "id", {
+        writable: false, //不允许修改
+      });
+      obj.id = 2;
+      console.log(obj.id); //id=1 ,不会被修改
+      obj.Ename = "sydney";
+      console.log(obj.Ename); // 因为默认false ，所以这个Ename属性也不会被修改到
+
+      //2.3 enumerable ：false不允许被遍历
+      Object.defineProperty(obj, "address", {
+        value: "渝北",
+        writable: false, //不允许修改
+        //enumerable为false不允许遍历，默认值为false
+        enumerable: false,
+      });
+      console.log(Object.keys(obj));
+
+      //2.4 configurable
+      delete obj.Ename;
+      console.log(obj); //未删除
+      delete obj.name; //未规定不能被删除
+      console.log(obj.name); //undefined
+      //下面报错，因为不允许再次修改 descriptor里面的特性
+      Object.defineProperty(obj, "address", {
+        writable: true,
+        enumerable: true,
+      });
+    </script>
+  </body>
+</html>

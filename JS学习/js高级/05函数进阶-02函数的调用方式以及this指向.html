@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>函数的调用方式</title>
+  </head>
+  <body>
+    <script>
+      //函数的调用方式
+
+      //1. 普通函数
+      function fn() {
+        console.log("学习了！");
+        console.log(this); //window
+      }
+      fn();
+      //   fn()或者fn.call()
+
+      //2. 对象方法
+      var o = {
+        sayHi: function () {
+          console.log("在学了");
+          console.log(this); //o
+        },
+      };
+      o.sayHi();
+
+      //3. 构造函数  this指向实例对象 原型对象里面的this指向的也是实例对象
+      function Student() {}
+      new Student();
+
+      //4. 绑定事件函数  this指向函数的调用者 也就是btn这个对象
+      //   btn.onclick = function () {}; //点击按钮调用
+
+      //5. 定时器函数 this指向window
+      //   window.setInterval(function () {}, 1000); //定时器自动1s钟调用一次
+
+      //6. 立即执行函数  是自动调用 this指向window
+      (function () {
+        console.log("在学了");
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>const</title>
+  </head>
+  <!-- 
+      const: .1声明常量 , 也具有块级作用域
+            .2 必须赋初始值
+            .3 赋值后,值(内存地址)不能修改
+   -->
+  <body>
+    <script>
+      //* .1声明常量 , 也具有块级作用域 */
+      if (true) {
+        const a = 10;
+        console.log(a); //10
+        if (true) {
+          const a = 20;
+          console.log(a); //20
+        }
+      }
+      //   console.log(a); //报错 没有声明a
+
+      /* .2 必须赋初始值 */
+      //   const PI; //报错 必须赋初始值
+      const pi = 3.14;
+
+      /* .3 赋值后,值不能修改 */
+      //   pi = 100; //报错  不能更改
+
+      //.3例子
+      const arr = [100, 200];
+      arr[0] = "a";
+      arr[1] = "b";
+      //上面的赋值是可以的,因为没有改变arr在内存中的存储地址
+      console.log(arr); //[a,b]
+      //   arr = ["a", "b"]; //报错  修改了地址
+    </script>
+  </body>
+</html>

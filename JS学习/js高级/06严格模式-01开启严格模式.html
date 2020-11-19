@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>严格模式</title>
+  </head>
+  <!-- 
+      严格模式（strict model）:  
+      1.  消除了js语法不合理，不严谨处，减少了怪异行为
+      2. 消除了代码运行不安全的地方。
+      3. 提高编译器效率，增加运行速度
+      4. 禁用了ECMAScript未来可能会定义的语法，比如一些保留字 class、enum、extend不能做变量
+
+      开启： 为整个脚本： 在开头写 'use strict'  ie10以上识别
+   -->
+  <body>
+    <script>
+      //1.整个脚本开启严格模式
+      "use strict";
+
+    </script>
+    <script>
+      //这里只有fn函数开启严格模式
+      function fn() {
+        "use  strict";
+        //下面的代码按照严格模式执行
+      }
+      function fn2() {
+        //这里的普通模式执行
+      }
+    </script>
+  </body>
+</html>

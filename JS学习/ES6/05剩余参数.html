@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>剩余参数</title>
+  </head>
+  <!-- 
+      当函数 实参个数>形参个数时,剩下的实参个数就是剩余参数
+      剩余参数语法允许我们将一个不定数量的参数表示为一个数组
+      剩余参数和解构配合使用
+   -->
+  <body>
+    <script>
+      function sum(first, ...args) {
+        //...args 代表剩余的实参它都接受了 args是个数组
+        console.log(first); //10
+        console.log(args); //[2,30,23]
+      }
+      sum(10, 2, 40, 23);
+
+      //例子:实参求和
+      const sum1 = (...args) => {
+        let total = 0;
+        args.forEach((item) => (total += item));
+        return total;
+      };
+      console.log(sum1(10, 20, 30));
+
+      //与解构配合使用
+      //数组解构与剩余参数
+      let student = ["tanghao", "lanqing", "dudu"];
+      let [s1, ...s2] = student;
+      console.log(s1); //'tanghao'
+      console.log(s2); //['lanqing','dudu']
+
+      //对象解构与剩余参数
+      let fruits = { apple: 1, peach: 4, banana: 6 };
+      let { apple, ...other } = fruits;
+      console.log(apple); //1
+      console.log(other); //{ peach: 4, banana: 6}
+    </script>
+  </body>
+</html>

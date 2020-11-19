@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组解构赋值</title>
+  </head>
+  <!-- 
+    ES6中允许从数组中提取值,按照对应位置,对变量赋值.对象也可以实现解构
+ -->
+  <body>
+    <script>
+      let [a, b, c, d, e] = [1, 2, 3]; //左边的[]代表解构,代表从数组当中提取值,可以直接写变量的名字, 左右一一对应,然后赋值给变量
+      console.log(a); //1
+      console.log(b); //2
+      console.log(c); //3
+
+      //   如果解构不成功 变量的值为undefined
+      console.log(d); //undefined
+      console.log(e); //undefined
+    </script>
+  </body>
+</html>

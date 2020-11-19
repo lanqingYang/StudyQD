@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>construtor构造函数</title>
+  </head>
+  <!-- 
+        construcor 构造函数 ： 它指回回构造函数本身
+                    目的： 记录该对象引用于哪个构造函数，它可以让原型对象重新指向原来的构造函数
+            
+ -->
+  <body>
+    <script>
+      function Student(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      /* !!!!很多情况下，我们需要手动的利用constructor这个属性指回 原来的构造函数 */
+
+      //   Student.prototype.study = function () {
+      //     console.log("在学了在学了");
+      //   };
+      //   Student.prototype.play = function () {
+      //     console.log("在玩了在玩了");
+      //   };E
+
+      //   1. 将原型对象赋值操作之后，constructor不再指回原来的构造函数
+      //   因为：原来的写法是在 prototype原来的对象上加属性，
+      //   而现在给prototype赋值之后将prototype里的东西全部覆盖掉了，就没有constructor属性了
+      Student.prototype = {
+        //2.所以需要自己写constructor 重新指回我们的构造函数
+        constructor: Student,
+        study: function () {
+          console.log("在学了在学了");
+        },
+        play: function () {
+          console.log("在玩了在玩了");
+        },
+      };
+      var Tanghao = new Student("唐昊", 1);
+      var Lanqing = new Student("澜庆", 2);
+
+      //   console.log(Student.prototype);
+      //   console.log(Tanghao.__proto__);
+      console.log(Student.prototype.constructor);
+      console.log(Tanghao.__proto__.constructor);
+
+      //Student.prototype.__proto__ 为Object.__proto__
+      //Student原型对象里面的__proto__原型指向Object.prototype
+      console.log(Student.prototype.__proto__ === Object.prototype); //true
+    </script>
+  </body>
+</html>

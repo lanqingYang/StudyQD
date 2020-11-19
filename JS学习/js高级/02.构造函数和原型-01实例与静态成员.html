@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>构造函数和原型</title>
+  </head>
+  <body>
+    <script>
+      //es6之前 构造函数
+      function Student(name, age) {
+        this.name = name;
+        this.age = age;
+        this.study = function () {
+          console.log("在学了在学了");
+        };
+        console.log(arguments);
+      }
+
+      var Tanghao = new Student("Tanghao", 21);
+      //1. 实例成员：就是构造函数内部通过this添加的成员 name\age\study
+      //实例成员只能通过实例化的对象来访问呢
+      console.log(Tanghao.age); //21
+      console.log(Student.age); //undefined
+      //2. 静态成员： 在构造函数本身上添加的成员，sex 就是静态成员
+      Student.sex = "男";
+      //静态成员只能通过构造函数来访问
+      console.log(Student.sex); //男
+      console.log(Tanghao.sex); //undefined 不能通过对象来访问
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+1. js的异步加载
+ <script src:''  defer/async> 
+
+
+2.promise
+  是异步编程语法上的改进，把异步api的执行和结果进行分离，解决回调地狱
+
+3.js执行机制，任务队列中有哪两种任务 
+    promise 和 setTimeout()的例子   （01）
+    微任务和宏任务
+
+    宏任务： I/O，setInterval，setTimeout，
+            setImmediate（浏览器没有，node有），requestAnimationFrame（浏览器有，node没有）
+
+    微任务： Promise.then catch finally !!!
+            process.nextTick (浏览器没有，node有)
+            MutationObserver(浏览器有，node没有) ..这个用不大着
+        
+    event loop事件循环： 
+    先执行主任务，再执行宏任务，执行完后看有无微任务， 有则执行微任务，执行完再去执行下一个宏任务。（主线程优先级更高）
+    （主线程也可以当一个宏任务，主线程执行完也要去看有没有它对应的微任务要执行，执行完再去执行下一个宏任务）
+    

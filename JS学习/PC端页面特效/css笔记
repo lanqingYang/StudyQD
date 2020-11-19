@@ -1,0 +1,14 @@
+1. css样式优先级
+    .1行内样式，直接写在标签的style属性中。<p class="in" style="background: indigo;"></p>。
+    .2内部样式，写在头部的style标签中
+    .3外链样式， 通过link标签来引用css文件。<link rel="stylesheet" type="text/css" href="index.css"/>。
+    行业样式>内部样式>外联样式
+    但是有!important的样式除外
+    
+    通用选择器（*） < 元素(类型)选择器 < 类选择器 < 属性选择器 < 伪类 < ID 选择器 < 内联样式
+
+    通配选择符、关系选择符                    --->0
+    标签选择器                               --->10
+    class选择器、属性选择器、伪类选择器        --->100
+    id选择器                                 --->1000
+    ！important                             --->无穷大

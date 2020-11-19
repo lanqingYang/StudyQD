@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>原型</title>
+  </head>
+  <body>
+    <script>
+      //   构造函数原型，为了解决资源浪费的问题
+      //   构造函数原型 prototype
+      //   构造函数通过原型分配的函数是所有对象所共享的(只用开辟一个空间)
+      function Student(name, age) {
+        this.name = name;
+        this.age = age;
+        // this.study = function () {
+        //   console.log("在学了在学了");
+        // };
+      }
+      //在原型上写构造函数的方法
+      Student.prototype.study = function () {
+        console.log("在学了在学了");
+      };
+      console.dir(Student);
+      console.log(Student.prototype);
+      //   每个构造函数都有一个prototype属性，指向另一个对象。prototype就是一个对象，这个对象的所有属性和方法，都会被构造函数所拥有
+      //   所以可以把不变的方法，直接电一在prototype对象上，这样所有对象的实例就可以共享这些方法
+      var Tanghao = new Student();
+      var Lanqing = new Student();
+      Tanghao.study(); //在学了在学了
+      console.log(Tanghao.study === Lanqing.study); //true ,如果不是放到原型上的方法，就会开辟不同的空间去存储，结果为false
+      //   一般情况下 公共属性定义到构造函数里面，公共方法放到原型对象上
+    </script>
+  </body>
+</html>

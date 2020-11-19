@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>localStorage</title>
+  </head>
+  <!-- 
+      localStorage： 1. 生命周期永久，除非手动删除
+                      2. 可以多窗口(页面)共享(同一浏览器可以共享)
+                      3. 以键值对的形式存储使用
+   -->
+  <body>
+      <h2>localStorage</h2>
+    <input type="text"></input>
+    <button class="set">存储数据</button>
+    <button class="get">获取数据</button>
+    <button class="remove">删除数据</button>
+    <button class="del">清空所有数据</button>
+  </body>
+   <script>
+    var input=document.querySelector('input');
+    var set=document.querySelector('.set');
+    var get=document.querySelector('.get');
+    var remove=document.querySelector('.remove');
+    var del=document.querySelector('.del');
+
+     
+    // 1. 存储、设置   localStorage.setItem(键,值)
+    set.addEventListener('click',function(){
+      //点击后，存储表单里面的值
+      var val=input.value;
+      //localStorage.setItem(键,值)
+      localStorage.setItem('uname',val);
+      localStorage.setItem('pwd',val);
+    })
+
+    //2. 获取  localStorage.getItem(键)
+    get.addEventListener('click',function(){
+      var val=localStorage.getItem('uname');
+      input.value=val;
+    })
+
+    //3. 移除 localStorage.removeItem(键)
+    remove.addEventListener('click',function(){
+      localStorage.removeItem('uname')
+    })
+
+    //4. 清空所有 localStorage.clear()
+    del.addEventListener('click',function(){
+      localStorage.clear()
+    })
+  </script>
+</html>

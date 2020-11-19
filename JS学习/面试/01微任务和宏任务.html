@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>微任务和宏任务</title>
+  </head>
+  <body>
+    <script>
+      /* 核心: 先执行主任务，执行完看任务队列中有无微任务， 执行完微任务再去执行下一个宏任务。（主线程优先级更高）
+        微任务包括： Promise.then catch finally !!! 主要记这个
+        宏任务： I/O，setInterval，setTimeout，
+            setImmediate（浏览器没有，node有），requestAnimationFrame（浏览器有，node没有）
+
+      */
+      // 例子一：
+      setTimeout(function () {
+        console.log(1);
+      });
+
+      new Promise(function (resolve) {
+        console.log(2);
+        resolve();
+      }).then(function () {
+        console.log(3);
+      });
+
+      console.log(4);
+
+      //   打印顺序 2，4 ，3，1
+
+      //例子二
+      new promise((resolve, reject) => {
+        console.log(666);
+        resolve();
+      }).then((data) => {
+        console.log(999);
+      });
+      console.log(888);
+
+      //666,888,999
+
+      // 例子三
+      setTimeout(function () {
+        console.log(1);
+      });
+
+      new Promise(function (resolve) {
+        console.log(2);
+        setTimeout(() => {
+          console.log(5); //打印了5才执行resolve() 所以先打印3
+          resolve();
+        });
+      }).then(function () {
+        console.log(3);
+      });
+
+      console.log(4);
+
+      //2,4,1,5,3
+    </script>
+  </body>
+</html>

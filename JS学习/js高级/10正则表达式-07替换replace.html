@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>正则表达式-替换</title>
+  </head>
+  <!-- 
+      replace()方法，可以实现替换字符串操作，用来替换的参数可以是一个字符串或者是一个正则表达式
+      stringObject.replace(regexp/substr,replacement)
+      但 replace 只替换第一个
+
+      正则表达式参数：  /表达式/[switch]
+      g:全局匹配
+      i：忽略大小写
+      gi：全局匹配+忽略大小写
+      
+   -->
+  <body>
+    <!-- 案例:替换文本框中的敏感词 -->
+    <textarea
+      name=""
+      id=""
+      cols="30"
+      rows="10"
+      placeholder="关键词喜欢，可爱会被屏蔽"
+    ></textarea
+    ><button>提交</button>
+    <div></div>
+
+    <script>
+      // 1. 小例子
+      //   var str = "andy和pink";
+      //   var newstr = str.replace("andy", "baby");
+      //   console.log(newstr); //"baby和pink"
+      //   //正则表达式来做
+      //   newstr = newstr.replace(/baby/, "green");
+      //   console.log(newstr); //"green和pink"
+
+      //2. 案例
+      var textarea = document.querySelector("textarea");
+      var btn = document.querySelector("button");
+      var div = document.querySelector("div");
+
+      btn.onclick = function () {
+        div.innerHTML = textarea.value.replace(/喜欢|可爱/g, "**");
+      };
+    </script>
+  </body>
+</html>

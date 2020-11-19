@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>递归概念</title>
+  </head>
+  <!-- 
+    递归： 一个函数在内部可以调用自己，那么这个函数就是递归函数 （自己调自己 套娃）
+ -->
+  <body>
+    <script>
+      //   递归容易发生 栈溢出 错误，所以 必须要加退出条件return
+
+      var num = 1;
+      function fn() {
+        console.log("打印6句话");
+        if (num == 6) {
+          return; //必须加退出条件
+        }
+        num++;
+        fn();
+      }
+      fn();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>表单案例</title>
+  </head>
+  <style>
+    .wrong {
+      color: red;
+      font-size: 14px;
+    }
+    .right {
+      color: green;
+    }
+  </style>
+  <body>
+    <div>
+      <form action="">
+        <ul>
+          <li>
+            <label for="tel">手机号:</label>
+            <input type="text" class="inp" id="tel" />
+            <span></span>
+          </li>
+          <li>
+            <label for="tel">QQ:</label>
+            <input type="text" class="inp" id="qq" />
+            <span></span>
+          </li>
+          <li>
+            <label for="tel">昵称:</label>
+            <input type="text" class="inp" id="uname" />
+            <span></span>
+          </li>
+          <li>
+            <label for="tel">短信验证码:</label>
+            <input type="text" class="inp" id="mes" />
+            <span></span>
+          </li>
+          <li>
+            <label for="password">登陆密码：</label>
+            <input type="text" class="inp" id="pwd"" />
+            <span></span>
+          </li>
+          <li>
+            <label for="surepwd">确认密码：</label>
+            <input type="text" class="inp" id="surepwd" />
+            <span></span>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </body>
+  <script>
+    window.onload = function () {
+      var regtel = /^1[3|4|5|7|8]\d{9}$/; //手机号码的正则表达式
+      var regqq = /^[1-9]\d{4,}$/; //qq号从10000开始
+      var reguname = /^[\u4e00-\u9fa5]{2,8}$/; //昵称是中文： ^[\u4e00-\u9fa5]{2,8}$
+      var regmes = /^\d{6}$/; //短信验证码是6位数字
+      var regpwd = /^[a-zA-Z\d_-]{6,16}$/; //密码验证： [a-zA-Z\d_-]6到16位之间
+
+      var tel = document.querySelector("#tel");
+      var qq = document.querySelector("#qq");
+      var uname = document.querySelector("#uname");
+      var mes = document.querySelector("#mes");
+      var pwd = document.querySelector("#pwd");
+      var surepwd = document.querySelector("#surepwd");
+
+      regexp(regtel, tel);
+      regexp(regqq, qq);
+      regexp(reguname, uname);
+      regexp(regmes, mes);
+      regexp(regpwd, pwd);
+
+      //确认密码
+      surepwd.onblur = function () {
+        if (this.value == pwd.value) {
+          this.nextElementSibling.innerHTML = "√";
+          this.nextElementSibling.className = "right";
+        } else {
+          this.nextElementSibling.innerHTML =
+            "<i>两次输入密码不同，请重新输入</i>";
+          this.nextElementSibling.className = "wrong";
+        }
+      };
+
+      //验证函数
+      function regexp(reg, element) {
+        element.onblur = function () {
+          if (reg.test(this.value)) {
+            this.nextElementSibling.innerHTML = "√";
+            this.nextElementSibling.className = "right";
+          } else {
+            this.nextElementSibling.innerHTML = "<i>格式不正确，请重新输入</i>";
+            this.nextElementSibling.className = "wrong";
+          }
+        };
+      }
+    };
+  </script>
+</html>

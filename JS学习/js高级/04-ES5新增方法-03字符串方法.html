@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>字符串方法新增</title>
+  </head>
+  <body>
+    <input type="text" /><button>点击</button>
+    <div></div>
+    <script>
+      //   str.trim() 去除字符串两侧空格
+      var str = "   andy  ";
+      console.log(str);
+      console.log(str.trim());
+
+      var btn = document.querySelector("button");
+      var input = document.querySelector("input");
+      var div = document.querySelector("div");
+
+      btn.addEventListener("click", function () {
+        var str = input.value.trim();
+        if (str == "") {
+          //如果输入的值为空  包括只输入了空格
+          alert("请输入内容");
+        } else {
+          console.log(str.length);
+          div.innerHTML = str;
+        }
+      });
+    </script>
+  </body>
+</html>

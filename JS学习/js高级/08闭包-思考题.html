@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>闭包思考题</title>
+  </head>
+  <body>
+    <script>
+      // 思考题1
+      var name = "Window";
+      var obj = {
+        name: "Object",
+        getNameFunc: function () {
+          return function () {
+            return this.name;
+          };
+        },
+      };
+      console.log(obj.getNameFunc()()); //window
+      /* 
+    解析：
+        var f=obj.getNameFunc();
+      类似于：
+      var f=function () {
+            return this.name;
+          };
+
+    obj.getNameFunc()()  == f() 
+    function(){this.name}()   //立即执行函数  里面的this指向window 所以结果为 Window
+
+     */
+    </script>
+    <script>
+      //思考题2
+      var name = "Window";
+      var obj = {
+        name: "Object",
+        getNameFunc: function () {
+          var that = this;
+          return function () {
+            return that.name;
+          };
+        },
+      };
+      console.log(obj.getNameFunc()()); //Object
+      /* 
+    解析:
+    obj.getNameFunc(){this}  //this指向obj  所以这里that为obj
+    
+    var f=function () {
+            return that.name; 
+          };
+    function(){that}()   //向上找that ，在上一层that是 obj  ，这里产生了闭包,闭包函数是getNameFunc！   所以答案是 Object
+    
+     */
+    </script>
+  </body>
+</html>

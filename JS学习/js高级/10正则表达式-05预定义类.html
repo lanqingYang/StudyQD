@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>预定义类</title>
+  </head>
+  <!-- 
+      \d:[0-9]
+      \D:[^0-9]
+      \w:[a-zA-Z0-9_-]
+      \W:[^a-zA-Z0-9_-]
+      \s:匹配空格(包括换行符、制表符、空格符等) [\t\r\n\v\f]
+      \S:[^\t\r\n\v\f]
+
+   -->
+  <body>
+    <script>
+      //        \d:[0-9]
+      var reg1 = /^\d$/;
+      console.log(reg1.test("1")); //true
+      console.log(reg1.test("a")); //false
+      console.log("-------------");
+
+      //    \D:[^0-9]
+      var reg2 = /^\D$/;
+      console.log(reg2.test("1")); //false
+      console.log(reg2.test("a")); //true
+      console.log("-------------");
+
+      //    \w:[a-zA-Z0-9_-]
+      var reg3 = /^\w$/;
+      console.log(reg3.test("A")); //true
+      console.log(reg3.test("!")); //false
+      console.log("-------------");
+
+      //    \W:[^a-zA-Z0-9_-]
+      var reg4 = /^\W$/;
+      console.log(reg4.test("A")); //false
+      console.log(reg4.test("!")); //true
+      console.log("-------------");
+
+      //    \s:匹配空格(包括换行符、制表符、空格符等) [\t\r\n\v\f]
+      var reg5 = /^\s$/;
+      console.log(reg5.test(" ")); //true
+      console.log(reg5.test("!")); //false
+      console.log("-------------");
+
+      //    \S:[^\t\r\n\v\f]
+      var reg6 = /^\S$/;
+      console.log(reg6.test(" ")); //false
+      console.log(reg6.test("!")); //true
+      console.log("-------------");
+
+      //座机号码验证 两种格式 010-12345678 或者 0630-1234567
+      // 正则里面的或者符号 | 注意式一根
+      var reg = /^\d{3}-\d{8}|\d{4}-\d{7}$/;
+      console.log(reg.test("010-92049101")); //true
+      console.log(reg.test("0101-9204910")); //true
+    </script>
+  </body>
+</html>

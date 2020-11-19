@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>对象解构</title>
+  </head>
+  <!-- 
+      对象解构:使用变量的名字匹配对象中属性,如果匹配成功,就将对象属性的值赋给变量
+   -->
+  <body>
+    <script>
+      //变量名和属性名一样时:
+      let person = { uname: "zhangsan", age: 21 };
+      let { uname, age } = person;
+      console.log(uname); //zhangsan
+      console.log(age); //21
+
+      //变量名和属性名不一样时:
+      let person2 = { uname: "lisi", age: 1 };
+      // :左边的名字来匹配对象中的属性名,属性的值赋给变量名为 :右边的变量
+      let { uname: Name, age: Age } = person2;
+      console.log(Name); //lisi
+      console.log(Age); //1
+    </script>
+  </body>
+</html>

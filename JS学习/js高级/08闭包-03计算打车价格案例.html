@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计算打车价格</title>
+  </head>
+  <!-- 
+      闭包应用：
+    案例： 1.打车起步13(3公里),之后每多1公里 + 5块。 
+          2. 拥堵情况，总价格多收取10块
+ -->
+  <body>
+    <script>
+      var car = (function () {
+        var start = 13; //起步价
+        var total = 0; //总价
+        return {
+          //正常的总价
+          price: function (n) {
+            if (n <= 3) {
+              total = start;
+            } else {
+              total = (n - 3) * 5 + start;
+            }
+            return total;
+          },
+          //拥堵的费用
+          yd: function (flag) {
+            return flag ? total + 10 : total;
+          },
+        };
+      })();
+
+      console.log(car.yd(true)); //10
+      console.log(car.price(5)); //23
+      console.log(car.yd(true)); //33
+    </script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>scroll系列</title>
+  </head>
+  <!-- 
+    scroll: 
+               ! element.scrollTop   返回被卷去的上册距离，返回数值不带单位 = 加上内容总高度-盒子的高度
+               ! element.scrollLeft  ···左册距离
+                .scrollWidth        自身实际的宽度，不含边框，返回值不带单位
+                .scrollHeight       ··高度(包含文字超出的部分)
+    
+   -->
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      border: 10px solid skyblue;
+      background-color: pink;
+      padding: 10px;
+      margin-top: 100px;
+      overflow: auto;
+    }
+  </style>
+  <body>
+    <div>
+      我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容
+      我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容
+      我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容我是内容
+    </div>
+  </body>
+  <script>
+    var div = document.querySelector("div");
+    console.log(div.scrollWidth);
+    //scroll 滚动事件
+    div.addEventListener("scroll", function () {
+      console.log(div.scrollTop); //超出边框盒子的部分
+    });
+  </script>
+</html>

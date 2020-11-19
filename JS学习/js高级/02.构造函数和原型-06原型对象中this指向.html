@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>原型对象中this指向</title>
+  </head>
+  <body>
+    <script>
+      function Student(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      //定义一个全局变量
+      var that;
+      Student.prototype.study = function () {
+        that = this;
+        console.log("在学了在学了");
+      };
+      var Tanghao = new Student("唐昊", 1);
+
+      //1. 在构造函数中，this指向的是对象实例  Tanghao
+      Tanghao.study();
+      console.log(that === Tanghao); //true
+      //2. 原型对象函数里面的this 指向的是 实例对象 Tanghao
+    </script>
+  </body>
+</html>

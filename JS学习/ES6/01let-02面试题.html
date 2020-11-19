@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>面试题</title>
+  </head>
+  <body>
+    <script>
+      //   面试题1
+      var arr = [];
+      for (var i = 0; i < 2; i++) {
+        arr[i] = function () {
+          console.log(i);
+        };
+      }
+
+      arr[0](); //2
+      arr[1](); //2
+
+      /* 解析:
+    arr[0]存储了 function () { console.log(i);}
+    arr[1]存储了 function () { console.log(i);}
+    他们在自己的作用域下没有定义i 所以找不到i值,根据作用域链查找原则查找,而这里,上一级作用域就是全局作用域 
+    而全局作用域的i早已变成2了,
+     */
+
+      //   面试题2
+      var arr = [];
+      for (let i = 0; i < 2; i++) {
+        arr[i] = function () {
+          console.log(i);
+        };
+      }
+
+      arr[0](); //0
+      arr[1](); //1
+      /* 
+      解析: 
+            核心: 关键在于每次循环都会产生一个块级作用域,每个块级作用域的变量都是不同的,函数执行时输出的是自己上一级(循环产生的块级作用域)作用域下的i值
+            在循环中 产生了两个块级作用域
+            而在这两个块级作用域中都有自己的变量i
+            同样函数在自己这里找不到i 向上一级寻找,分别向自己对应的块级作用域中查找对应i的值,
+            所以数组中第一个函数在执行时,输出的是第一个块级作用域中i的值 也就是0
+       */
+    </script>
+  </body>
+</html>

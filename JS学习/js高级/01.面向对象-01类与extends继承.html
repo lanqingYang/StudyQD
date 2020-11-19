@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>继承</title>
+  </head>
+  <body>
+    <button>点击</button>
+  </body>
+  <script>
+    //1.类的继承
+    //2. super 关键字:用于访问和调用对象父类上的构造函数，也可以调用父类的普通函数,
+    // constructor里面的this指向的时 创建的实例对象
+    //类里面的属性和方法一定要加this使用！！！！！
+    //constractor 里面的this指向实例对象，方法里面的this指向这个方法的调用者
+
+    var that;
+
+    class Father {
+      constructor(x, y) {
+        that = this; //that 指向的是constructor里面的this
+        console.log(that);
+        // constructor里面的this指向的时 创建的实例对象
+        this.x = x;
+        this.y = y;
+        this.btn = document.querySelector("button");
+        this.btn.onclick = this.sing;
+      }
+      sum() {
+        console.log(this.x + this.y);
+      }
+      money() {
+        console.log(100);
+      }
+      sing() {
+        //谁调用sing，this指向的就是谁 所以这里的this指向btn ，
+        console.log(this.x); //undefined 因为btn没有x值
+        console.log(that.x);
+      }
+    }
+    class Son extends Father {
+      constructor(x, y) {
+        // super 必须在子类this之前调用
+        super(x, y);
+        //这里的this 指向实例化对象son
+        this.x = x;
+        this.y = y;
+      }
+      substract() {
+        //   这里的this指向实例化对象son，因为是son调用了这个函数
+        console.log(this.x - this.y); //这里的 this指向子类
+      }
+      sum() {
+        //调用父类的普通函数
+        super.sum();
+      }
+    }
+
+    var father = new Father(40, 60);
+    var son = new Son(11, 22);
+    console.log(that);
+    son.money();
+    son.sum();
+    son.substract();
+  </script>
+</html>

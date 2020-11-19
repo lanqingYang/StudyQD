@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>箭头函数</title>
+  </head>
+  <!-- 
+      箭头函数:()=>{}
+      用来简化函数定义语法
+      1. 函数体只有一句代码,且执行结果就是返回值,可以省略{}
+      2. 如果形参只有一个,可以忽略小括号
+      3. this: 箭头函数不绑定this关键字,箭头函数中的this,指向的是函数定义位置的上下文this
+      4. 面试题
+   -->
+  <body>
+    <script>
+      const fn = () => {
+        console.log("箭头函数");
+      };
+      fn();
+
+      //1. 函数体只有一句代码,且执行结果就是返回值,可以省略{}
+      const sum = (a, b) => a + b;
+      console.log(sum(1, 2)); //3
+
+      //2. 如果形参只有一个,可以忽略小括号
+      const fn1 = (v) => v; //这里的小括号是它自动加的 不要也可以执行
+      console.log(fn1(2)); //2
+
+      //   3. this: 箭头函数不绑定this关键字,箭头函数中的this,指向的是函数定义位置的上下文this
+      const obj = { name: "tanghao" };
+      function fn3() {
+        console.log(this);
+        return () => {
+          console.log(this);
+        };
+      }
+      const resFn = fn3.call(obj);
+      resFn();
+      /* 解析:
+      call()调用函数改变函数中this指向,这里让 fn中的this指向了obj
+      所以 输出的this就问obj
+       */
+
+      //面试题
+      var obj1 = {
+        age: 2,
+        say: () => {
+          //   console.log(this);  //window,因为obj1是一个对象,它不能产生作用域,所以this指向了window
+          console.log(this.age);
+        },
+      };
+      obj1.say(); //undefined
+      /* 解析:
+            当前函数定义在了obj1这个对象里面,但obj1是一个对象,他不能产生作用域, 
+            所以这个箭头函数其实被定义在了全局作用域下,所以在调用say方法的时候,this指向了window
+            而window下面没有this属性,所以是undefined
+       */
+    </script>
+  </body>
+</html>

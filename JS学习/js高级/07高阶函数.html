@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>高阶函数</title>
+  </head>
+  <!-- 
+    定义： 是对其他函数进行操作的函数，它 接收函数作为参数 或 将函数作为返回值输出
+
+   -->
+  <body>
+    <script>
+      //1.接收函数作为参数
+      function fn(callback) {
+        callback && callback();
+      }
+      fn(function () {
+        alert("hi");
+      });
+      //2.将函数作为返回值输出
+      function fn2() {
+        return function () {};
+      }
+      fn2();
+    </script>
+  </body>
+</html>

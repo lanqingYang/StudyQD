@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>__proto__对象原型</title>
+  </head>
+  <!-- 
+      对象都会有一个属性 __proto__: 指向构造函数的prototype原型对象。
+                                之所以能够使用构造函数prototype原型对象的属性和方法，就是因为对象有__proto__原型的存在
+                                
+        对象原型指向原型对象
+   -->
+  <body>
+    <script>
+      function Student(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      //在原型上写构造函数的方法
+      Student.prototype.study = function () {
+        console.log("在学了在学了");
+      };
+      var Tanghao = new Student("唐昊", 1);
+      var Lanqing = new Student("澜庆", 2);
+      Tanghao.study();
+      console.log(Tanghao); //对象身上系统自己添加一个__proto__指向构造函数的原型对象 prototype
+
+      console.log(Tanghao.__proto__ === Student.prototype); //true
+      //   方法的查找规则：首先看实例对象身上是否有study方法，如果有就执行对象上的study方法
+      //   没有该方法，因为有__proto__的存在，就去构造函数prototype身上去查找该方法
+
+      /*    __proto__对象原型的意义在于为对象查找机制提供一个方向，但他是一个非标准属性，所以实际开发不可以使用这个属性。
+    他只是内部指向原型对象prototype */
+    </script>
+  </body>
+</html>

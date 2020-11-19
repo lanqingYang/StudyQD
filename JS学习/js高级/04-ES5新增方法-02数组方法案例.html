@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>查询商品</title>
+  </head>
+  <!-- 
+    案例分析：   1.把数据渲染到页面中  (forEach)
+                2. 根据价格显示数据   (filter)
+                3. 根据商品名称显示数据 
+ -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      text-align: center;
+    }
+    .search {
+      margin: 20px auto;
+    }
+    .search input {
+      width: 50px;
+    }
+    table {
+      width: 400px;
+      text-align: center;
+      margin: 0 auto;
+      border-collapse: collapse;
+      font-size: 16px;
+    }
+    thead tr {
+      height: 30px;
+      background-color: skyblue;
+    }
+    tbody tr {
+      height: 26px;
+    }
+
+    tbody td {
+      border-bottom: 1px solid #d7d7d7;
+      font-size: 12px;
+      color: steelblue;
+    }
+  </style>
+  <body>
+    <div class="search">
+      按照价格查询：<input type="text" class="start" />-
+      <input type="text" class="end" />
+      <button class="search-price">搜索</button>
+      按照商品名称查询：<input type="text" class="product" />
+      <button class="search-pro">查询</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>产品名称</th>
+          <th>价格</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </body>
+  <script>
+    var products = [
+      { name: "小米", price: 5000 },
+      { name: "iphone12", price: 7000 },
+      { name: "iphone7", price: 4000 },
+      { name: "iphone11", price: 6000 },
+    ];
+
+    //1.根据价格查询
+    //  .1获取元素
+    var tbody = document.querySelector("tbody");
+    var start = document.querySelector(".start");
+    var end = document.querySelector(".end");
+    var searchPrice = document.querySelector(".search-price");
+
+    //一开始就绘制表格
+    reTable(products);
+
+    //  1.2创建事件
+    searchPrice.addEventListener("click", function () {
+      //创建查询返回的数组
+      var newSearch = [];
+      // 1.3查询是否符合条件，返回数组 filter
+      newSearch = products.filter(function (value) {
+        // console.log(value);  //拿到每个对象
+        return value.price >= start.value && value.price <= end.value;
+      });
+      //   console.log(searchByPrice);
+
+      // 1.4重新绘制图表
+      reTable(newSearch);
+    });
+
+    //2.根据价格查询
+    // 2.1 获取元素
+    var product = document.querySelector(".product");
+    var searchPro = document.querySelector(".search-pro");
+
+    //2.2添加事件
+    searchPro.addEventListener("click", function () {
+      //创建查询返回的数组
+      var newSearch = [];
+      //条件查询 filter
+      newSearch = products.filter(function (value) {
+        return value.name.includes(product.value); //包含名字就行
+        // return value.name==product.value        //名字相等的返回, 如果是查找唯一的一个，最好用some 效率更高
+      });
+      //重绘表格
+      reTable(newSearch);
+    });
+
+    //绘制表格
+    function reTable(array) {
+      //提高效率用innerHTML的数组拼接
+      var arr = [];
+      //   for (var i = 0; i < array.length; i++) {
+      //     arr.push(
+      //       "<tr>" +
+      //         "<td>" +
+      //         (i + 1) +
+      //         "</td>" +
+      //         "<td>" +
+      //         array[i].name +
+      //         "</td>" +
+      //         "<td>" +
+      //         array[i].price +
+      //         "</td>" +
+      //         "</tr>"
+      //     );
+      //   }
+
+      //运用foreach
+      array.forEach(function (value, index) {
+        arr.push(
+          "<tr>" +
+            "<td>" +
+            (index + 1) +
+            "</td>" +
+            "<td>" +
+            value.name +
+            "</td>" +
+            "<td>" +
+            value.price +
+            "</td>" +
+            "</tr>"
+        );
+      });
+      tbody.innerHTML = arr.join("");
+    }
+  </script>
+</html>

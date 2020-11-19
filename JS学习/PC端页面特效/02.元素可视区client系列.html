@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>client</title>
+  </head>
+  <!-- 
+      client: 
+                element.clientTop 返回元素上边框 border 的大小
+                element.clientLeft 左边框
+                .clientWidth       包括padding，内容width，不带boder的宽度，返回值不带单位
+                .clientHeight       高度
+   -->
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      border: 10px solid skyblue;
+      background-color: pink;
+      padding: 10px;
+      margin-top: 200px;
+    }
+  </style>
+  <body>
+    <div></div>
+  </body>
+  <script>
+    var div = document.querySelector("div");
+    console.log(div.clientWidth);
+    console.log(div.clientTop); //border 大小
+  </script>
+</html>

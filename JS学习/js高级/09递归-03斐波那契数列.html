@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>递归求斐波那契数列</title>
+  </head>
+  <!-- 
+      递归求斐波那契数列(兔子序列):1,1,2,3,5,8,13,21...  (后一个数为前两个数相加的和)
+      用户输入一个数字,可以求出 这个数字对应的兔子序列值
+   -->
+  <body>
+    <script>
+      //用户只要知道 n 的前面两项(n-1)和(n-2)就可以算出n 对应的序列值
+      function fn(n) {
+        if (n == 1 || n == 2) {
+          return 1;
+        }
+        return fn(n - 1) + fn(n - 2);
+      }
+
+      console.log(fn(1)); //1
+      console.log(fn(2)); //2
+      console.log(fn(3)); //3
+      console.log(fn(8)); //21
+    </script>
+  </body>
+</html>
